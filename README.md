@@ -6,14 +6,14 @@ Beyond90 turns synthetic football match events into explainable statistics and a
 
 ## Project status
 
-The solution scaffold, event validation, reproducible synthetic match, deterministic analytics, read-only match API, and demo insight endpoint are implemented. A live AI provider and replay UI are later milestones.
+The solution scaffold, event validation, reproducible synthetic match, deterministic analytics, read-only match API, demo insight endpoint, and first match dashboard are implemented. A live AI provider and richer replay controls are later milestones.
 
 ## Stack
 
 - Frontend: React, TypeScript, Vite, Tailwind CSS, SVG
 - Backend: ASP.NET Core Web API (.NET 10)
 - Data: synthetic JSON events using real club/player names, explicitly labeled as an illustrative scenario
-- AI: optional Microsoft Foundry inference through a backend-only provider; the demo must work without credentials
+- Insights: audience-specific demo response; external AI integration is a later milestone
 
 ## Run locally
 
@@ -41,6 +41,8 @@ cd frontend
 npm install
 npm run dev
 ```
+
+The frontend requests match data through the Vite `/api` proxy, which expects the API at `http://127.0.0.1:5089`.
 
 Run backend tests:
 
