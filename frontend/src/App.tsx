@@ -48,6 +48,15 @@ type MatchData = {
   metrics: MatchMetrics
   keyMoments: KeyMoment[]
 }
+type Audience = 'Player' | 'Coach' | 'Fan'
+type GeneratedInsight = {
+  insightId: string
+  audience: Audience
+  eventIds: string[]
+  metricEvidence: { metricKey: string; value: number | null; eventIds: string[] }[]
+  text: string
+  caveats: string[]
+}
 
 async function getJson<T>(url: string, signal: AbortSignal): Promise<T> {
   const response = await fetch(url, { signal })
@@ -61,6 +70,11 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [reload, setReload] = useState(0)
+  const [audience, setAudience] = useState<Audience>('Fan')
+  const [insight, setInsight] = useState<GeneratedInsight | null>(null)
+  const [insightEventId, setInsightEventId] = useState<string | null>(null)
+  const [insightLoading, setInsightLoading] = useState(false)
+  const [insightError, setInsightError] = useState<string | null>(null)
 
   useEffect(() => {
     const controller = new AbortController()
@@ -90,6 +104,29 @@ function App() {
 
   const playerNames = useMemo(() => new Map(data?.details.players.map((player) => [player.id, player.name])), [data])
   const selectedEvent = data?.events.find((event) => event.eventId === selectedEventId) ?? null
+
+  async function generateInsight() {
+    if (!selectedEventId) return
+    setInsightLoading(true)
+    setInsightError(null)
+    setInsight(null)
+    const requestedEventId = selectedEventId
+    try {
+      const response = await fetch('/api/insights/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ matchId, eventIds: [requestedEventId], audience }),
+      })
+      if (!response.ok) throw new Error(`Server returned ${response.status}`)
+      const result = await response.json() as GeneratedInsight
+      setInsightEventId(requestedEventId)
+      setInsight(result)
+    } catch {
+      setInsightError('Ne mogu generisati uvid. Provjeri backend i pokušaj ponovo.')
+    } finally {
+      setInsightLoading(false)
+    }
+  }
 
   if (loading) return <LoadingScreen />
   if (error || !data) {
@@ -148,6 +185,25 @@ function App() {
               <span className="coordinate">X {selectedEvent.x} / Y {selectedEvent.y}</span>
             </> : <span>Select an event on the pitch to inspect it.</span>}
           </div>
+          <section className="insight-tool" aria-labelledby="insight-heading">
+            <div className="insight-controls">
+              <div><span className="eyebrow">AI / MATCH EXPLANATION</span><h3 id="insight-heading">Demo insight</h3></div>
+              <label className="audience-picker">VIEW AS
+                <select value={audience} onChange={(event) => { setAudience(event.target.value as Audience); setInsight(null) }}>
+                  <option value="Fan">Fan</option><option value="Player">Player</option><option value="Coach">Coach</option>
+                </select>
+              </label>
+            </div>
+            <button className="pixel-button insight-button" onClick={generateInsight} disabled={!selectedEvent || insightLoading}>
+              {insightLoading ? 'GENERATING…' : 'GENERATE INSIGHT FOR SELECTED EVENT'}
+            </button>
+            {insightError && <p className="insight-error" role="alert">{insightError}</p>}
+            {insight && insightEventId === selectedEventId && <div className="insight-result" aria-live="polite">
+              <p>{insight.text}</p>
+              <div className="insight-evidence">{insight.metricEvidence.map((evidence) => <span key={evidence.metricKey}>{evidence.metricKey}: {evidence.value ?? '—'}</span>)}</div>
+              {insight.caveats.map((caveat) => <small className="insight-caveat" key={caveat}>{caveat}</small>)}
+            </div>}
+          </section>
         </section>
 
         <section className="panel moments-panel" aria-labelledby="moments-heading">

@@ -6,7 +6,7 @@ Beyond90 turns synthetic football match events into explainable statistics and a
 
 ## Project status
 
-The solution scaffold, event validation, reproducible synthetic match, deterministic analytics, read-only match API, demo insight endpoint, and first match dashboard are implemented. A live AI provider and richer replay controls are later milestones.
+The solution scaffold, event validation, reproducible synthetic match, deterministic analytics, read-only match API, audience-specific demo insight endpoint, and interactive match dashboard are implemented. The dashboard can request a demo explanation for the selected event as a fan, player, or coach. A live AI provider and richer replay controls are later milestones.
 
 ## Stack
 
@@ -22,6 +22,8 @@ Start the API:
 ```powershell
 dotnet run --project backend/Beyond90.Api
 ```
+
+In Visual Studio, open `backend/Beyond90.sln`, set `Beyond90.Api` as the startup project, and run the `http` profile. Keep the API running while using the frontend.
 
 The API serves the bundled synthetic match through these read-only routes:
 
@@ -41,6 +43,8 @@ cd frontend
 npm install
 npm run dev
 ```
+
+Open the local URL printed by Vite (usually `http://localhost:5173`). The match dashboard and its **Generate insight** control are available there.
 
 The frontend requests match data through the Vite `/api` proxy, which expects the API at `http://127.0.0.1:5089`.
 

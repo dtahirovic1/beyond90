@@ -99,6 +99,21 @@
 .readout-copy small { display: block; margin-top: 3px; overflow: hidden; color: #8ba8c7; font-size: .68rem; text-overflow: ellipsis; white-space: nowrap; }
 .coordinate { margin-left: auto; color: #6388aa; font-size: .64rem; white-space: nowrap; }
 
+.insight-tool { margin-top: 12px; padding: 13px; border: 1px solid #17466b; background: rgba(3, 15, 29, .84); }
+.insight-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 11px; }
+.insight-controls h3 { margin: 3px 0 0; color: var(--ink); font-size: .87rem; }
+.audience-picker { display: flex; align-items: center; gap: 8px; color: #7195b8; font-size: .58rem; letter-spacing: .08em; }
+.audience-picker select { padding: 6px 8px; border: 1px solid #24618a; color: var(--ink); background: #071a2d; font: inherit; }
+.audience-picker select:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.insight-button { width: 100%; min-height: 38px; }
+.insight-button:disabled { cursor: wait; opacity: .66; }
+.insight-result { margin-top: 11px; padding: 11px; border-left: 2px solid var(--cyan); background: rgba(8, 39, 62, .62); }
+.insight-result p { margin: 0; color: #d8ebff; font-size: .73rem; line-height: 1.55; }
+.insight-evidence { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+.insight-evidence span { padding: 4px 6px; border: 1px solid #1a5578; color: #83dff4; font-size: .6rem; }
+.insight-caveat { display: block; margin-top: 8px; color: #a99158; font-size: .61rem; line-height: 1.45; }
+.insight-error { margin: 9px 0 0; color: #ff8a88; font-size: .69rem; }
+
 .moments-panel { min-height: 355px; }
 .count-badge { display: grid; width: 31px; height: 31px; place-items: center; border: 1px solid #23577b; color: var(--cyan); font-size: .73rem; }
 .moment-list { display: grid; gap: 3px; margin: 0; padding: 0; list-style: none; }
