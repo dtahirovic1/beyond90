@@ -6,7 +6,7 @@ Beyond90 turns synthetic football match events into explainable statistics and a
 
 ## Project status
 
-The solution scaffold, event validation, reproducible synthetic match, and deterministic analytics are implemented. The match API, insights, and replay UI are the next milestones.
+The solution scaffold, event validation, reproducible synthetic match, deterministic analytics, and read-only match API are implemented. Insight generation and the replay UI are the next milestones.
 
 ## Stack
 
@@ -22,6 +22,14 @@ Start the API:
 ```powershell
 dotnet run --project backend/Beyond90.Api
 ```
+
+The API serves the bundled synthetic match through these read-only routes:
+
+- `GET /api/matches` — list available matches
+- `GET /api/matches/{id}` — match details, teams, players, and data-status label
+- `GET /api/matches/{id}/events` — ordered synthetic events
+- `GET /api/matches/{id}/metrics` — calculated match metrics
+- `GET /api/matches/{id}/recap` — key moments with supporting events
 
 Start the frontend in another terminal:
 
