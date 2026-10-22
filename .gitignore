@@ -1,0 +1,21 @@
+# .NET build output
+**/bin/
+**/obj/
+.vs/
+*.user
+
+# Node / Vite output
+**/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.vitest/
+npm-debug.log*
+
+# Secrets and local runtime caches
+.env
+.env.*
+!.env.example
+.dotnet-home/
+.nuget/
+.npm-cache/
+.superpowers/

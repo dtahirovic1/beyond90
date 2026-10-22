@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://beyond90.example/schemas/match-events-v1.json",
+  "title": "Beyond90 Synthetic Match Events",
+  "type": "object",
+  "required": ["matchId", "events"],
+  "properties": {
+    "matchId": { "type": "string", "minLength": 1 },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["matchId", "eventId", "sequence", "minute", "second", "teamId", "playerId", "type", "x", "y"],
+        "properties": {
+          "matchId": { "type": "string", "minLength": 1 },
+          "eventId": { "type": "string", "minLength": 1 },
+          "sequence": { "type": "integer", "minimum": 0 },
+          "minute": { "type": "integer", "minimum": 0 },
+          "second": { "type": "integer", "minimum": 0, "maximum": 59 },
+          "teamId": { "type": "string", "minLength": 1 },
+          "playerId": { "type": "string", "minLength": 1 },
+          "type": { "type": "string", "enum": ["Pass", "Shot", "Tackle", "Pressure", "PossessionChange"] },
+          "x": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "y": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "outcome": { "type": ["string", "null"] },
+          "underPressure": { "type": ["boolean", "null"] },
+          "receiverOptions": { "type": ["array", "null"], "items": { "type": "string" } }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
