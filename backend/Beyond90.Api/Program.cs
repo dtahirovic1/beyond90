@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using Beyond90.Ai;
 using Beyond90.Api;
 using Microsoft.AspNetCore.Http.Json;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +11,20 @@ builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializ
 builder.Services.AddOpenApi();
 builder.Services.AddSingleton(MatchStore.Load(Path.Combine(AppContext.BaseDirectory, "match-demo.json")));
 builder.Services.AddSingleton<DemoInsightProvider>();
-builder.Services.AddSingleton<IInsightProvider>(services => services.GetRequiredService<DemoInsightProvider>());
+builder.Services.AddOptions<FoundryOptions>()
+    .BindConfiguration("Foundry")
+    .Validate(options => options.IsValid(), "When Foundry is enabled, configure its Azure Responses endpoint, deployment, and API key in User Secrets.")
+    .ValidateOnStart();
+builder.Services.AddHttpClient("Foundry", client => client.Timeout = TimeSpan.FromSeconds(30))
+    .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false });
+builder.Services.AddTransient<IInsightProvider>(services =>
+{
+    var options = services.GetRequiredService<IOptions<FoundryOptions>>().Value;
+    return options.Enabled
+        ? new FoundryInsightProvider(services.GetRequiredService<IHttpClientFactory>().CreateClient("Foundry"),
+            options.Endpoint, options.ApiKey, options.Deployment)
+        : services.GetRequiredService<DemoInsightProvider>();
+});
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

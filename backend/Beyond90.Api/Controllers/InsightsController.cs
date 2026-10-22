@@ -6,7 +6,8 @@ namespace Beyond90.Api.Controllers;
 
 [ApiController]
 [Route("api/insights")]
-public sealed class InsightsController(MatchStore store, IInsightProvider provider) : ControllerBase
+public sealed class InsightsController(MatchStore store, IInsightProvider provider, DemoInsightProvider demo,
+    ILogger<InsightsController> logger) : ControllerBase
 {
     [HttpPost("generate")]
     public async Task<IActionResult> Generate([FromBody] GenerateInsightRequest request, CancellationToken cancellationToken)
@@ -36,7 +37,20 @@ public sealed class InsightsController(MatchStore store, IInsightProvider provid
             metrics[$"turnovers.{zone.Key.ToString().ToLowerInvariant()}"] = zone.Value;
 
         var providerRequest = new InsightRequest(store.Id, selectedIds, request.Audience, metrics, selectedEvents);
-        var insight = await provider.GenerateAsync(providerRequest, cancellationToken);
+        Insight insight;
+        try
+        {
+            insight = await provider.GenerateAsync(providerRequest, cancellationToken);
+        }
+        catch (Exception exception) when (exception is InsightProviderException or HttpRequestException ||
+            (exception is OperationCanceledException && !cancellationToken.IsCancellationRequested))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            logger.LogWarning("Insight generation unavailable ({FailureType}); returning a labeled demo response.", exception.GetType().Name);
+            insight = await demo.GenerateAsync(providerRequest, cancellationToken);
+            insight.Source = "DemoFallback";
+            insight.Caveats.Add("Azure AI was unavailable or returned an incomplete response. This explanation is a local demo fallback.");
+        }
 
         var validation = EvidenceValidator.Validate(
             insight,
@@ -44,6 +58,10 @@ public sealed class InsightsController(MatchStore store, IInsightProvider provid
             metrics.Keys.ToHashSet(StringComparer.Ordinal));
         if (insight.Audience != request.Audience)
             return UnprocessableEntity(new { errors = new[] { "Insight audience does not match the requested audience." } });
+        if (insight.Caveats is null || insight.MetricEvidence is null || insight.MetricEvidence.Count == 0 ||
+            insight.MetricEvidence.Any(evidence => evidence is null || evidence.MetricKey is null ||
+                !metrics.TryGetValue(evidence.MetricKey, out var value) || value != evidence.Value))
+            return UnprocessableEntity(new { errors = new[] { "Insight evidence does not match the verified metrics." } });
         return validation.IsValid ? Ok(insight) : UnprocessableEntity(new { errors = validation.Errors });
     }
 }

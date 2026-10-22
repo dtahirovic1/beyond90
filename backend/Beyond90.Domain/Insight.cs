@@ -2,6 +2,7 @@ namespace Beyond90.Domain;
 
 public sealed class Insight
 {
+    public string Source { get; set; } = "Demo";
     public string InsightId { get; set; } = string.Empty;
     public Audience Audience { get; set; }
     public List<string> EventIds { get; set; } = [];

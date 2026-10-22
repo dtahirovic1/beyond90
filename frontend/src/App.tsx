@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 
 const matchId = 'b90-demo-001'
@@ -50,6 +50,7 @@ type MatchData = {
 }
 type Audience = 'Player' | 'Coach' | 'Fan'
 type GeneratedInsight = {
+  source?: 'Demo' | 'Foundry' | 'DemoFallback'
   insightId: string
   audience: Audience
   eventIds: string[]
@@ -75,6 +76,15 @@ function App() {
   const [insightEventId, setInsightEventId] = useState<string | null>(null)
   const [insightLoading, setInsightLoading] = useState(false)
   const [insightError, setInsightError] = useState<string | null>(null)
+  const insightRequest = useRef<AbortController | null>(null)
+
+  useEffect(() => {
+    insightRequest.current?.abort()
+    setInsightLoading(false)
+    setInsight(null)
+    setInsightError(null)
+    return () => insightRequest.current?.abort()
+  }, [selectedEventId, audience])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -107,24 +117,29 @@ function App() {
 
   async function generateInsight() {
     if (!selectedEventId) return
+    insightRequest.current?.abort()
+    const controller = new AbortController()
+    insightRequest.current = controller
     setInsightLoading(true)
     setInsightError(null)
     setInsight(null)
     const requestedEventId = selectedEventId
     try {
       const response = await fetch('/api/insights/generate', {
+        signal: controller.signal,
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ matchId, eventIds: [requestedEventId], audience }),
       })
       if (!response.ok) throw new Error(`Server returned ${response.status}`)
       const result = await response.json() as GeneratedInsight
+      if (controller.signal.aborted) return
       setInsightEventId(requestedEventId)
       setInsight(result)
     } catch {
-      setInsightError('Ne mogu generisati uvid. Provjeri backend i pokušaj ponovo.')
+      if (!controller.signal.aborted) setInsightError('Ne mogu generisati uvid. Provjeri backend i pokušaj ponovo.')
     } finally {
-      setInsightLoading(false)
+      if (!controller.signal.aborted) setInsightLoading(false)
     }
   }
 
@@ -187,7 +202,7 @@ function App() {
           </div>
           <section className="insight-tool" aria-labelledby="insight-heading">
             <div className="insight-controls">
-              <div><span className="eyebrow">AI / MATCH EXPLANATION</span><h3 id="insight-heading">Demo insight</h3></div>
+              <div><span className="eyebrow">AI / MATCH EXPLANATION</span><h3 id="insight-heading">Event insight</h3></div>
               <label className="audience-picker">VIEW AS
                 <select value={audience} onChange={(event) => { setAudience(event.target.value as Audience); setInsight(null) }}>
                   <option value="Fan">Fan</option><option value="Player">Player</option><option value="Coach">Coach</option>
@@ -198,7 +213,8 @@ function App() {
               {insightLoading ? 'GENERATING…' : 'GENERATE INSIGHT FOR SELECTED EVENT'}
             </button>
             {insightError && <p className="insight-error" role="alert">{insightError}</p>}
-            {insight && insightEventId === selectedEventId && <div className="insight-result" aria-live="polite">
+            {insight && insightEventId === selectedEventId && insight.audience === audience && <div className="insight-result" aria-live="polite">
+              <span className="eyebrow">{insight.source === 'Foundry' ? 'AZURE AI' : insight.source === 'DemoFallback' ? 'DEMO FALLBACK — AI UNAVAILABLE' : 'LOCAL DEMO'}</span>
               <p>{insight.text}</p>
               <div className="insight-evidence">{insight.metricEvidence.map((evidence) => <span key={evidence.metricKey}>{evidence.metricKey}: {evidence.value ?? '—'}</span>)}</div>
               {insight.caveats.map((caveat) => <small className="insight-caveat" key={caveat}>{caveat}</small>)}
