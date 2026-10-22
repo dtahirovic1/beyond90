@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beyond90.Api", "Beyond90.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beyond90.Domain.Tests", "Beyond90.Domain.Tests\Beyond90.Domain.Tests.csproj", "{55B552C5-503A-45E9-868D-91F607D99CED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beyond90.Analytics.Tests", "Beyond90.Analytics.Tests\Beyond90.Analytics.Tests.csproj", "{DA48CB41-CE04-431C-9E71-0A5D93BEF606}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{55B552C5-503A-45E9-868D-91F607D99CED}.Release|x64.Build.0 = Release|Any CPU
 		{55B552C5-503A-45E9-868D-91F607D99CED}.Release|x86.ActiveCfg = Release|Any CPU
 		{55B552C5-503A-45E9-868D-91F607D99CED}.Release|x86.Build.0 = Release|Any CPU
+		{DA48CB41-CE04-431C-9E71-0A5D93BEF606}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA48CB41-CE04-431C-9E71-0A5D93BEF606}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA48CB41-CE04-431C-9E71-0A5D93BEF606}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DA48CB41-CE04-431C-9E71-0A5D93BEF606}.Debug|x64.Build.0 = Debug|Any CPU
+		{DA48CB41-CE04-431C-9E71-0A5D93BEF606}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DA48CB41-CE04-431C-9E71-0A5D93BEF606}.Debug|x86.Build.0 = Debug|Any CPU
+		{DA48CB41-CE04-431C-9E71-0A5D93BEF606}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA48CB41-CE04-431C-9E71-0A5D93BEF606}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA48CB41-CE04-431C-9E71-0A5D93BEF606}.Release|x64.ActiveCfg = Release|Any CPU
+		{DA48CB41-CE04-431C-9E71-0A5D93BEF606}.Release|x64.Build.0 = Release|Any CPU
+		{DA48CB41-CE04-431C-9E71-0A5D93BEF606}.Release|x86.ActiveCfg = Release|Any CPU
+		{DA48CB41-CE04-431C-9E71-0A5D93BEF606}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

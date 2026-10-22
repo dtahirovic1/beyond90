@@ -1,11 +1,39 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://beyond90.example/schemas/match-events-v1.json",
-  "title": "Beyond90 Synthetic Match Events",
+  "$id": "https://beyond90.example/schemas/match-v1.json",
+  "title": "Beyond90 Synthetic Match",
   "type": "object",
-  "required": ["matchId", "events"],
+  "required": ["matchId", "homeTeamId", "awayTeamId", "teams", "players", "events"],
   "properties": {
     "matchId": { "type": "string", "minLength": 1 },
+    "homeTeamId": { "type": "string", "minLength": 1 },
+    "awayTeamId": { "type": "string", "minLength": 1 },
+    "teams": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "players": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "teamId", "name"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "teamId": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 },
+          "position": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
     "events": {
       "type": "array",
       "items": {

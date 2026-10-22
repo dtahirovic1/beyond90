@@ -6,7 +6,7 @@ Beyond90 turns fictional, synthetic football match events into explainable stati
 
 ## Project status
 
-The initial solution scaffold and event-validation contract are in progress. The replay UI, analytics, API, and AI provider will be added in the next milestones.
+The solution scaffold, event validation, reproducible synthetic match, and deterministic analytics are implemented. The match API, insights, and replay UI are the next milestones.
 
 ## Stack
 
