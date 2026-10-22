@@ -10,11 +10,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Beyond90.Domain\Beyond90.Domain.csproj" />
     <ProjectReference Include="..\Beyond90.Analytics\Beyond90.Analytics.csproj" />
+    <ProjectReference Include="..\Beyond90.Ai\Beyond90.Ai.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\data\synthetic\match-demo.json" Link="match-demo.json" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Controllers\InsightsController.cs" />
   </ItemGroup>
 </Project>

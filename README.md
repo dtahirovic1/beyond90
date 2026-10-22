@@ -6,7 +6,7 @@ Beyond90 turns synthetic football match events into explainable statistics and a
 
 ## Project status
 
-The solution scaffold, event validation, reproducible synthetic match, deterministic analytics, and read-only match API are implemented. Insight generation and the replay UI are the next milestones.
+The solution scaffold, event validation, reproducible synthetic match, deterministic analytics, read-only match API, and demo insight endpoint are implemented. A live AI provider and replay UI are later milestones.
 
 ## Stack
 
@@ -30,6 +30,9 @@ The API serves the bundled synthetic match through these read-only routes:
 - `GET /api/matches/{id}/events` — ordered synthetic events
 - `GET /api/matches/{id}/metrics` — calculated match metrics
 - `GET /api/matches/{id}/recap` — key moments with supporting events
+- `POST /api/insights/generate` — audience-specific demo insight for selected event IDs
+
+The insight request body contains a `matchId`, an `eventIds` array, and an `audience` (`Player`, `Coach`, or `Fan`). The endpoint derives metrics from the fixture and rejects unknown event IDs. Its current provider returns a clearly labeled demo explanation and requires no external AI credentials.
 
 Start the frontend in another terminal:
 
