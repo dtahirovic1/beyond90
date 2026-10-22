@@ -1,33 +1,263 @@
 {
   "matchId": "b90-demo-001",
-  "homeTeamId": "northbridge",
-  "awayTeamId": "harbor-city",
+  "homeTeamId": "arsenal",
+  "awayTeamId": "chelsea",
   "teams": [
-    { "id": "northbridge", "name": "Northbridge FC" },
-    { "id": "harbor-city", "name": "Harbor City" }
+    {
+      "id": "arsenal",
+      "name": "Arsenal"
+    },
+    {
+      "id": "chelsea",
+      "name": "Chelsea"
+    }
   ],
   "players": [
-    { "id": "nb-10", "teamId": "northbridge", "name": "Alex Rowan", "position": "Midfielder" },
-    { "id": "nb-9", "teamId": "northbridge", "name": "Jamie Cole", "position": "Forward" },
-    { "id": "nb-7", "teamId": "northbridge", "name": "Morgan Lee", "position": "Winger" },
-    { "id": "hc-6", "teamId": "harbor-city", "name": "Taylor Quinn", "position": "Midfielder" },
-    { "id": "hc-4", "teamId": "harbor-city", "name": "Riley Park", "position": "Defender" }
+    {
+      "id": "ars-8",
+      "teamId": "arsenal",
+      "name": "Martin Ødegaard",
+      "position": "Midfielder"
+    },
+    {
+      "id": "ars-14",
+      "teamId": "arsenal",
+      "name": "Viktor Gyökeres",
+      "position": "Forward"
+    },
+    {
+      "id": "ars-7",
+      "teamId": "arsenal",
+      "name": "Bukayo Saka",
+      "position": "Winger"
+    },
+    {
+      "id": "che-25",
+      "teamId": "chelsea",
+      "name": "Moisés Caicedo",
+      "position": "Midfielder"
+    },
+    {
+      "id": "che-24",
+      "teamId": "chelsea",
+      "name": "Reece James",
+      "position": "Defender"
+    }
   ],
   "events": [
-    { "matchId": "b90-demo-001", "eventId": "evt-001", "sequence": 1, "minute": 2, "second": 8, "teamId": "northbridge", "playerId": "nb-10", "type": "Pass", "x": 38, "y": 48, "outcome": "Completed", "underPressure": false },
-    { "matchId": "b90-demo-001", "eventId": "evt-002", "sequence": 2, "minute": 2, "second": 14, "teamId": "northbridge", "playerId": "nb-7", "type": "Pass", "x": 64, "y": 30, "outcome": "Completed", "underPressure": true },
-    { "matchId": "b90-demo-001", "eventId": "evt-003", "sequence": 3, "minute": 3, "second": 1, "teamId": "northbridge", "playerId": "nb-9", "type": "Shot", "x": 88, "y": 52, "outcome": "Saved", "underPressure": true },
-    { "matchId": "b90-demo-001", "eventId": "evt-004", "sequence": 4, "minute": 7, "second": 22, "teamId": "harbor-city", "playerId": "hc-6", "type": "Pass", "x": 44, "y": 57, "outcome": "Incomplete", "underPressure": true },
-    { "matchId": "b90-demo-001", "eventId": "evt-005", "sequence": 5, "minute": 7, "second": 24, "teamId": "northbridge", "playerId": "nb-10", "type": "PossessionChange", "x": 54, "y": 51, "outcome": "Turnover", "underPressure": true },
-    { "matchId": "b90-demo-001", "eventId": "evt-006", "sequence": 6, "minute": 8, "second": 5, "teamId": "northbridge", "playerId": "nb-10", "type": "Pass", "x": 49, "y": 47, "outcome": "Completed", "underPressure": false },
-    { "matchId": "b90-demo-001", "eventId": "evt-007", "sequence": 7, "minute": 11, "second": 30, "teamId": "harbor-city", "playerId": "hc-6", "type": "Pass", "x": 35, "y": 61, "outcome": "Completed", "underPressure": false },
-    { "matchId": "b90-demo-001", "eventId": "evt-008", "sequence": 8, "minute": 12, "second": 2, "teamId": "harbor-city", "playerId": "hc-4", "type": "PossessionChange", "x": 29, "y": 40, "outcome": "Won", "underPressure": false },
-    { "matchId": "b90-demo-001", "eventId": "evt-009", "sequence": 9, "minute": 16, "second": 44, "teamId": "northbridge", "playerId": "nb-7", "type": "Pass", "x": 69, "y": 25, "outcome": "Completed", "underPressure": true },
-    { "matchId": "b90-demo-001", "eventId": "evt-010", "sequence": 10, "minute": 17, "second": 10, "teamId": "northbridge", "playerId": "nb-9", "type": "Shot", "x": 91, "y": 48, "outcome": "OffTarget", "underPressure": true },
-    { "matchId": "b90-demo-001", "eventId": "evt-011", "sequence": 11, "minute": 26, "second": 55, "teamId": "harbor-city", "playerId": "hc-6", "type": "Pass", "x": 47, "y": 49, "outcome": null, "underPressure": null },
-    { "matchId": "b90-demo-001", "eventId": "evt-012", "sequence": 12, "minute": 27, "second": 2, "teamId": "northbridge", "playerId": "nb-10", "type": "PossessionChange", "x": 48, "y": 50, "outcome": "Turnover", "underPressure": true },
-    { "matchId": "b90-demo-001", "eventId": "evt-013", "sequence": 13, "minute": 33, "second": 11, "teamId": "northbridge", "playerId": "nb-7", "type": "Pass", "x": 73, "y": 32, "outcome": "Completed", "underPressure": false },
-    { "matchId": "b90-demo-001", "eventId": "evt-014", "sequence": 14, "minute": 34, "second": 49, "teamId": "northbridge", "playerId": "nb-9", "type": "Shot", "x": 94, "y": 51, "outcome": "Blocked", "underPressure": true },
-    { "matchId": "b90-demo-001", "eventId": "evt-015", "sequence": 15, "minute": 45, "second": 0, "teamId": "harbor-city", "playerId": "hc-4", "type": "PossessionChange", "x": 31, "y": 50, "outcome": "Won", "underPressure": false }
-  ]
+    {
+      "matchId": "b90-demo-001",
+      "eventId": "evt-001",
+      "sequence": 1,
+      "minute": 2,
+      "second": 8,
+      "teamId": "arsenal",
+      "playerId": "ars-8",
+      "type": "Pass",
+      "x": 38,
+      "y": 48,
+      "outcome": "Completed",
+      "underPressure": false
+    },
+    {
+      "matchId": "b90-demo-001",
+      "eventId": "evt-002",
+      "sequence": 2,
+      "minute": 2,
+      "second": 14,
+      "teamId": "arsenal",
+      "playerId": "ars-7",
+      "type": "Pass",
+      "x": 64,
+      "y": 30,
+      "outcome": "Completed",
+      "underPressure": true
+    },
+    {
+      "matchId": "b90-demo-001",
+      "eventId": "evt-003",
+      "sequence": 3,
+      "minute": 3,
+      "second": 1,
+      "teamId": "arsenal",
+      "playerId": "ars-14",
+      "type": "Shot",
+      "x": 88,
+      "y": 52,
+      "outcome": "Saved",
+      "underPressure": true
+    },
+    {
+      "matchId": "b90-demo-001",
+      "eventId": "evt-004",
+      "sequence": 4,
+      "minute": 7,
+      "second": 22,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "Pass",
+      "x": 44,
+      "y": 57,
+      "outcome": "Incomplete",
+      "underPressure": true
+    },
+    {
+      "matchId": "b90-demo-001",
+      "eventId": "evt-005",
+      "sequence": 5,
+      "minute": 7,
+      "second": 24,
+      "teamId": "arsenal",
+      "playerId": "ars-8",
+      "type": "PossessionChange",
+      "x": 54,
+      "y": 51,
+      "outcome": "Turnover",
+      "underPressure": true
+    },
+    {
+      "matchId": "b90-demo-001",
+      "eventId": "evt-006",
+      "sequence": 6,
+      "minute": 8,
+      "second": 5,
+      "teamId": "arsenal",
+      "playerId": "ars-8",
+      "type": "Pass",
+      "x": 49,
+      "y": 47,
+      "outcome": "Completed",
+      "underPressure": false
+    },
+    {
+      "matchId": "b90-demo-001",
+      "eventId": "evt-007",
+      "sequence": 7,
+      "minute": 11,
+      "second": 30,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "Pass",
+      "x": 35,
+      "y": 61,
+      "outcome": "Completed",
+      "underPressure": false
+    },
+    {
+      "matchId": "b90-demo-001",
+      "eventId": "evt-008",
+      "sequence": 8,
+      "minute": 12,
+      "second": 2,
+      "teamId": "chelsea",
+      "playerId": "che-24",
+      "type": "PossessionChange",
+      "x": 29,
+      "y": 40,
+      "outcome": "Won",
+      "underPressure": false
+    },
+    {
+      "matchId": "b90-demo-001",
+      "eventId": "evt-009",
+      "sequence": 9,
+      "minute": 16,
+      "second": 44,
+      "teamId": "arsenal",
+      "playerId": "ars-7",
+      "type": "Pass",
+      "x": 69,
+      "y": 25,
+      "outcome": "Completed",
+      "underPressure": true
+    },
+    {
+      "matchId": "b90-demo-001",
+      "eventId": "evt-010",
+      "sequence": 10,
+      "minute": 17,
+      "second": 10,
+      "teamId": "arsenal",
+      "playerId": "ars-14",
+      "type": "Shot",
+      "x": 91,
+      "y": 48,
+      "outcome": "OffTarget",
+      "underPressure": true
+    },
+    {
+      "matchId": "b90-demo-001",
+      "eventId": "evt-011",
+      "sequence": 11,
+      "minute": 26,
+      "second": 55,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "Pass",
+      "x": 47,
+      "y": 49,
+      "outcome": null,
+      "underPressure": null
+    },
+    {
+      "matchId": "b90-demo-001",
+      "eventId": "evt-012",
+      "sequence": 12,
+      "minute": 27,
+      "second": 2,
+      "teamId": "arsenal",
+      "playerId": "ars-8",
+      "type": "PossessionChange",
+      "x": 48,
+      "y": 50,
+      "outcome": "Turnover",
+      "underPressure": true
+    },
+    {
+      "matchId": "b90-demo-001",
+      "eventId": "evt-013",
+      "sequence": 13,
+      "minute": 33,
+      "second": 11,
+      "teamId": "arsenal",
+      "playerId": "ars-7",
+      "type": "Pass",
+      "x": 73,
+      "y": 32,
+      "outcome": "Completed",
+      "underPressure": false
+    },
+    {
+      "matchId": "b90-demo-001",
+      "eventId": "evt-014",
+      "sequence": 14,
+      "minute": 34,
+      "second": 49,
+      "teamId": "arsenal",
+      "playerId": "ars-14",
+      "type": "Shot",
+      "x": 94,
+      "y": 51,
+      "outcome": "Blocked",
+      "underPressure": true
+    },
+    {
+      "matchId": "b90-demo-001",
+      "eventId": "evt-015",
+      "sequence": 15,
+      "minute": 45,
+      "second": 0,
+      "teamId": "chelsea",
+      "playerId": "che-24",
+      "type": "PossessionChange",
+      "x": 31,
+      "y": 50,
+      "outcome": "Won",
+      "underPressure": false
+    }
+  ],
+  "dataStatus": "Sintetička simulacija — nije stvarna utakmica",
+  "rosterSeason": "2026/27",
+  "rosterSource": "Premier League squad lists",
+  "rosterSourceUrl": "https://www.premierleague.com/en/news/4706139/see-all-the-202627-premier-league-squad-lists"
 }

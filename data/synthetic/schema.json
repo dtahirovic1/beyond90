@@ -3,19 +3,48 @@
   "$id": "https://beyond90.example/schemas/match-v1.json",
   "title": "Beyond90 Synthetic Match",
   "type": "object",
-  "required": ["matchId", "homeTeamId", "awayTeamId", "teams", "players", "events"],
+  "required": [
+    "matchId",
+    "homeTeamId",
+    "awayTeamId",
+    "dataStatus",
+    "rosterSeason",
+    "rosterSource",
+    "rosterSourceUrl",
+    "teams",
+    "players",
+    "events"
+  ],
   "properties": {
-    "matchId": { "type": "string", "minLength": 1 },
-    "homeTeamId": { "type": "string", "minLength": 1 },
-    "awayTeamId": { "type": "string", "minLength": 1 },
+    "matchId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "homeTeamId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "awayTeamId": {
+      "type": "string",
+      "minLength": 1
+    },
     "teams": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "name"],
+        "required": [
+          "id",
+          "name"
+        ],
         "properties": {
-          "id": { "type": "string", "minLength": 1 },
-          "name": { "type": "string", "minLength": 1 }
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          }
         },
         "additionalProperties": false
       }
@@ -24,12 +53,30 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "teamId", "name"],
+        "required": [
+          "id",
+          "teamId",
+          "name"
+        ],
         "properties": {
-          "id": { "type": "string", "minLength": 1 },
-          "teamId": { "type": "string", "minLength": 1 },
-          "name": { "type": "string", "minLength": 1 },
-          "position": { "type": ["string", "null"] }
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "teamId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "position": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
         },
         "additionalProperties": false
       }
@@ -38,24 +85,107 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["matchId", "eventId", "sequence", "minute", "second", "teamId", "playerId", "type", "x", "y"],
+        "required": [
+          "matchId",
+          "eventId",
+          "sequence",
+          "minute",
+          "second",
+          "teamId",
+          "playerId",
+          "type",
+          "x",
+          "y"
+        ],
         "properties": {
-          "matchId": { "type": "string", "minLength": 1 },
-          "eventId": { "type": "string", "minLength": 1 },
-          "sequence": { "type": "integer", "minimum": 0 },
-          "minute": { "type": "integer", "minimum": 0 },
-          "second": { "type": "integer", "minimum": 0, "maximum": 59 },
-          "teamId": { "type": "string", "minLength": 1 },
-          "playerId": { "type": "string", "minLength": 1 },
-          "type": { "type": "string", "enum": ["Pass", "Shot", "Tackle", "Pressure", "PossessionChange"] },
-          "x": { "type": "integer", "minimum": 0, "maximum": 100 },
-          "y": { "type": "integer", "minimum": 0, "maximum": 100 },
-          "outcome": { "type": ["string", "null"] },
-          "underPressure": { "type": ["boolean", "null"] },
-          "receiverOptions": { "type": ["array", "null"], "items": { "type": "string" } }
+          "matchId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "eventId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sequence": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minute": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "second": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 59
+          },
+          "teamId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "playerId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Pass",
+              "Shot",
+              "Tackle",
+              "Pressure",
+              "PossessionChange"
+            ]
+          },
+          "x": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "outcome": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "underPressure": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "receiverOptions": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
         },
         "additionalProperties": false
       }
+    },
+    "dataStatus": {
+      "type": "string",
+      "const": "Sintetička simulacija — nije stvarna utakmica"
+    },
+    "rosterSeason": {
+      "type": "string",
+      "const": "2026/27"
+    },
+    "rosterSource": {
+      "type": "string"
+    },
+    "rosterSourceUrl": {
+      "type": "string",
+      "format": "uri"
     }
   },
   "additionalProperties": false

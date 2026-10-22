@@ -2,7 +2,7 @@
 
 **The Game Doesn't End at Full Time.**
 
-Beyond90 turns fictional, synthetic football match events into explainable statistics and audience-specific match insights. The MVP demonstrates one reproducible match through Player, Coach, and Fan/Broadcast views. It does not analyze video or use real Premier League footage, clubs, or player identities.
+Beyond90 turns synthetic football match events into explainable statistics and audience-specific match insights. The demo uses real Arsenal and Chelsea player names from the 2026/27 squads, but every event and statistic is invented for illustration; it is not a replay or claim about an actual match. It does not analyze video or use Premier League footage, club crests, or player images.
 
 ## Project status
 
@@ -12,7 +12,7 @@ The solution scaffold, event validation, reproducible synthetic match, and deter
 
 - Frontend: React, TypeScript, Vite, Tailwind CSS, SVG
 - Backend: ASP.NET Core Web API (.NET 10)
-- Data: fictional synthetic JSON/JSONL events
+- Data: synthetic JSON events using real club/player names, explicitly labeled as an illustrative scenario
 - AI: optional Microsoft Foundry inference through a backend-only provider; the demo must work without credentials
 
 ## Run locally
@@ -46,7 +46,7 @@ npm run build --prefix frontend
 
 ## Data and safety
 
-All match, player, and club names are fictional. No footage or unlicensed sports data is included. Numbers are computed by the backend; generated insight text must refer to event IDs and verified metric evidence. API credentials belong in backend environment configuration and must never be committed.
+Player and club names identify real Premier League participants; all match events, outcomes, and statistics in the demo are synthetic and are not actual performance records. No logos, footage, or player images are included. Numbers are computed by the backend; generated insight text must refer to event IDs and verified metric evidence. API credentials belong in backend environment configuration and must never be committed. The roster reference is the Premier League 2026/27 squad list.
 
 ## License
 
