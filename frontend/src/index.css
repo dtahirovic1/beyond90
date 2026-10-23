@@ -1,42 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  font-family: "Courier New", "Lucida Console", monospace;
-  color: #e5f1ff;
-  background: #030a16;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #f2f0e9;
+  background: #111315;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-kerning: none;
-  font-size: 16px;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  --ink: #e5f1ff;
-  --muted: #8ca8ca;
-  --quiet: #5f83aa;
-  --cyan: #43d8ff;
-  --blue: #1d7ff0;
-  --red: #ff514f;
-  --gold: #ffd44f;
-  --line: #123354;
-  --panel: rgba(3, 14, 30, .94);
+  --ink: #f2f0e9;
+  --muted: #a0a4a7;
+  --quiet: #82878a;
+  --cyan: #d8f779;
+  --blue: #78a7fa;
+  --red: #ec5b64;
+  --gold: #e4c786;
+  --line: #333639;
+  --panel: #1a1d20;
 }
-
 * { box-sizing: border-box; }
-
-body {
-  min-width: 320px;
-  min-height: 100vh;
-  margin: 0;
-  background-color: #030a16;
-  background-image:
-    linear-gradient(rgba(21, 65, 104, .2) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(21, 65, 104, .2) 1px, transparent 1px),
-    radial-gradient(ellipse at 50% 5%, rgba(9, 63, 104, .3), transparent 52%);
-  background-size: 32px 32px, 32px 32px, auto;
-}
-
-button, a { font: inherit; }
+body { min-width: 320px; margin: 0; background: #111315; }
+button, select, a { font: inherit; }
 button { color: inherit; }
-::selection { color: #030a16; background: var(--cyan); }
+button, a, select { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, select:focus-visible { outline: 2px solid #d8f779; outline-offset: 5px; }
+::selection { color: #111315; background: #d8f779; }
+#root { min-height: 100vh; }
