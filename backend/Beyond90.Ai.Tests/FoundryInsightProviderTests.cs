@@ -9,9 +9,7 @@ public sealed class FoundryInsightProviderTests
 {
     private const string Endpoint = "https://example.services.ai.azure.com/openai/v1/responses";
     private const string InsightJson = """
-        {"insightId":"test","audience":"Fan","eventIds":["evt-003"],
-         "metricEvidence":[{"metricKey":"events.selected","value":1,"eventIds":["evt-003"]}],
-         "text":"The synthetic shot was saved.","caveats":["Synthetic events only."]}
+        {"text":"The synthetic shot was saved."}
         """;
 
     [Fact]
@@ -42,8 +40,29 @@ public sealed class FoundryInsightProviderTests
         Assert.Equal("json_schema", body.GetProperty("text").GetProperty("format").GetProperty("type").GetString());
         Assert.True(body.GetProperty("text").GetProperty("format").GetProperty("strict").GetBoolean());
         Assert.False(body.TryGetProperty("messages", out _));
-        Assert.Contains("evt-003", body.GetProperty("input").GetString());
+        using var input = JsonDocument.Parse(body.GetProperty("input").GetString()!);
+        var context = input.RootElement;
+        Assert.Equal("Fan", context.GetProperty("audience").GetString());
+        var selectedEvent = context.GetProperty("selectedEvents")[0];
+        Assert.Equal("Arsenal", selectedEvent.GetProperty("teamName").GetString());
+        Assert.Equal("Martin Ødegaard", selectedEvent.GetProperty("playerName").GetString());
+        Assert.False(context.TryGetProperty("matchTotals", out _));
+        Assert.False(context.TryGetProperty("selectionMetrics", out _));
+        var schema = body.GetProperty("text").GetProperty("format").GetProperty("schema");
+        Assert.Equal(new[] { "text" }, schema.GetProperty("required").EnumerateArray().Select(item => item.GetString()));
+        Assert.True(schema.GetProperty("additionalProperties").GetBoolean() == false);
+        Assert.True(schema.GetProperty("properties").TryGetProperty("text", out _));
+        Assert.False(schema.GetProperty("properties").TryGetProperty("metricEvidence", out _));
         Assert.DoesNotContain("test-secret", sentBody);
+
+        Assert.Equal("Foundry", insight.Source);
+        Assert.Equal(Audience.Fan, insight.Audience);
+        Assert.Equal("evt-003", Assert.Single(insight.EventIds));
+        var evidence = Assert.Single(insight.MetricEvidence);
+        Assert.Equal("events.selected", evidence.MetricKey);
+        Assert.Equal(1, evidence.Value);
+        Assert.Equal("evt-003", Assert.Single(evidence.EventIds));
+        Assert.Contains(insight.Caveats, caveat => caveat.Contains("synthetic", StringComparison.OrdinalIgnoreCase));
     }
 
     [Theory]
@@ -72,7 +91,11 @@ public sealed class FoundryInsightProviderTests
 
     internal static InsightRequest Request() => new("demo", ["evt-003"], Audience.Fan,
         new Dictionary<string, decimal?> { ["events.selected"] = 1 },
-        [new MatchEvent { EventId = "evt-003", Type = "Shot", Outcome = "saved", Minute = 3 }]);
+        [new MatchEvent { EventId = "evt-003", Type = "Shot", Outcome = "saved", Minute = 3, TeamId = "arsenal", PlayerId = "ars-8" }])
+    {
+        Players = [new MatchPlayer { Id = "ars-8", TeamId = "arsenal", Name = "Martin Ødegaard" }],
+        Teams = [new MatchTeam { Id = "arsenal", Name = "Arsenal" }]
+    };
 
     internal static string Envelope(string text, string status = "completed") => JsonSerializer.Serialize(new
     {
