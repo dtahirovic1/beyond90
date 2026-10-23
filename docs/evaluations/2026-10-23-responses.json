@@ -1,0 +1,1097 @@
+{
+  "startedAt": "2026-10-23T12:31:19.9446022+02:00",
+  "deployment": "gpt-4.1-mini",
+  "fixtureSha256": "1ECE160B3F8BB702935AEBA86DEC31414E38065C0ADDB3F5E7F2188DAA0F4EE5",
+  "totalCalls": 21,
+  "inputTokens": 14616,
+  "outputTokens": 3606,
+  "rows": [
+    {
+      "number": 1,
+      "variant": "baseline-752ef02",
+      "scenario": "identity-and-total-scope",
+      "eventIds": [
+        "evt-001"
+      ],
+      "audience": "Fan",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 3081,
+      "usage": {
+        "input_tokens": 393,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 174,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 567
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "88FB64DB897E8D4E32C5B9A6E31A1760ABAF244F077D6F131FD2FF5CBED2D6CB",
+      "generatedInsight": {
+        "audience": "Fan",
+        "eventIds": [
+          "evt-001"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "events.selected",
+            "value": 1,
+            "eventIds": [
+              "evt-001"
+            ]
+          }
+        ],
+        "text": "Early in the match at 2 minutes and 8 seconds, Arsenal's player ars-8 successfully completed a pass. This pass was one of several, with the team showing a strong passing performance overall, completing 6 out of 8 attempts with an 85.7% success rate. The player was not under pressure during this pass. This summary is based on a synthetic scenario and does not reflect a real game or player performance.",
+        "caveats": [
+          "This is a synthetic scenario, not an actual match or real player performance.",
+          "Only a single event involving player ars-8 is provided, without further context about the rest of the match or player actions."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": null,
+      "reviewNotes": "FAIL: attributes both-team totals to Arsenal; says 6 out of 8 with an 85.7 percent rate. No supplied player name."
+    },
+    {
+      "number": 2,
+      "variant": "baseline-752ef02",
+      "scenario": "identity-and-total-scope",
+      "eventIds": [
+        "evt-001"
+      ],
+      "audience": "Player",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 2724,
+      "usage": {
+        "input_tokens": 393,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 144,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 537
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "88FB64DB897E8D4E32C5B9A6E31A1760ABAF244F077D6F131FD2FF5CBED2D6CB",
+      "generatedInsight": {
+        "audience": "Player",
+        "eventIds": [
+          "evt-001"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "events.selected",
+            "value": 1,
+            "eventIds": [
+              "evt-001"
+            ]
+          }
+        ],
+        "text": "In this synthetic scenario, you completed a pass successfully at 2 minutes and 8 seconds without pressure. This is one event from the match where you attempted 8 passes and completed 6, resulting in an 85.7% completion rate. You also faced 8 pressure events and had 2 turnovers in the middle area.",
+        "caveats": [
+          "This is a synthetic match scenario, not an actual match or real player performance.",
+          "Only one selected event is described, which limits detailed context on overall involvement."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": null,
+      "reviewNotes": "FAIL: attributes eight passes, six completions, eight pressure events and two turnovers to the player."
+    },
+    {
+      "number": 3,
+      "variant": "baseline-752ef02",
+      "scenario": "identity-and-total-scope",
+      "eventIds": [
+        "evt-001"
+      ],
+      "audience": "Coach",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 2207,
+      "usage": {
+        "input_tokens": 393,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 163,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 556
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "88FB64DB897E8D4E32C5B9A6E31A1760ABAF244F077D6F131FD2FF5CBED2D6CB",
+      "generatedInsight": {
+        "audience": "Coach",
+        "eventIds": [
+          "evt-001"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "events.selected",
+            "value": 1,
+            "eventIds": [
+              "evt-001"
+            ]
+          }
+        ],
+        "text": "In this synthetic match scenario, the selected event shows Player ars-8 from Arsenal completing a pass early in the game at 2 minutes and 8 seconds without facing pressure. Overall, the player attempted 8 passes with a high completion percentage of 85.7%. Additionally, the player experienced 8 pressure events and committed 2 turnovers in the middle of the pitch, indicating areas to monitor in terms of ball security under pressure.",
+        "caveats": [
+          "This is a synthetic scenario; events do not reflect a real match or real player performance.",
+          "Limited context on overall match dynamics and player positioning is available."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": null,
+      "reviewNotes": "FAIL: attributes match-sample passing, pressure and turnover totals to the player; unsupported monitoring conclusion."
+    },
+    {
+      "number": 4,
+      "variant": "scoped-context-v2",
+      "scenario": "identity-and-total-scope",
+      "eventIds": [
+        "evt-001"
+      ],
+      "audience": "Fan",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 2597,
+      "usage": {
+        "input_tokens": 733,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 134,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 867
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Fan",
+        "eventIds": [
+          "evt-001"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "passes.completed",
+            "value": 6,
+            "eventIds": [
+              "evt-001"
+            ]
+          }
+        ],
+        "text": "In the second minute of the synthetic match, Martin Ødegaard of Arsenal completed a pass without being under pressure. This was one of six successful passes out of seven with known outcomes in the recorded sample, indicating a high pass completion rate.",
+        "caveats": [
+          "This is a synthetic scenario and not real match data or player performance.",
+          "The recorded sample covers only part of the match and includes both teams.",
+          "Information about pass recipients or overall match context is not available."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": true,
+      "reviewNotes": "Correct actor and event; denominator 6/7 is correct. Both-team scope appears only in caveats; omits required events.selected evidence."
+    },
+    {
+      "number": 5,
+      "variant": "scoped-context-v2",
+      "scenario": "identity-and-total-scope",
+      "eventIds": [
+        "evt-001"
+      ],
+      "audience": "Player",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 2017,
+      "usage": {
+        "input_tokens": 733,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 141,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 874
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Player",
+        "eventIds": [
+          "evt-001"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "passes.completed",
+            "value": 6,
+            "eventIds": [
+              "evt-001"
+            ]
+          }
+        ],
+        "text": "At 2 minutes and 8 seconds, Martin Ødegaard from Arsenal made a completed pass without being under pressure. Consider how maintaining calm and accuracy when not pressured can help you control the game's tempo under different match conditions.",
+        "caveats": [
+          "This is a synthetic scenario, not actual match data or real player performance.",
+          "Only one pass event is selected, and other contextual details like recipient and subsequent actions are unavailable.",
+          "The sample covers only a portion of the match and includes incomplete overall player statistics."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": false,
+      "reviewNotes": "Correct actor and event. Generic calm/tempo advice is weak adaptation; caveat suggests incomplete player statistics although none were supplied. Omits events.selected."
+    },
+    {
+      "number": 6,
+      "variant": "scoped-context-v2",
+      "scenario": "identity-and-total-scope",
+      "eventIds": [
+        "evt-001"
+      ],
+      "audience": "Coach",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 3476,
+      "usage": {
+        "input_tokens": 733,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 212,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 945
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Coach",
+        "eventIds": [
+          "evt-001"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "passes.completed",
+            "value": 6,
+            "eventIds": [
+              "evt-001"
+            ]
+          }
+        ],
+        "text": "The synthetic event sample records a completed pass by Martin Ødegaard of Arsenal early in the match under no pressure, according to event evt-001 at 2 minutes and 8 seconds. This pass contributes to a total completion rate of 85.7% on passes with known outcomes within the recorded sample covering both teams. Given the synthetic nature of the data and limited context, how might the team review this pass to understand the spatial and situational factors that contributed to its success in this scenario?",
+        "caveats": [
+          "This is a synthetic scenario, not actual match data or true player performance.",
+          "The dataset covers only a partial sample of recorded events, not a full match.",
+          "No receiver information or video context is available to assess pass difficulty or decision making.",
+          "No data on shirt numbers, comprehensive player stats, or causal links between events are provided."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": true,
+      "reviewNotes": "Correct actor, event and explicitly scoped both-team percentage. Useful review question; omits events.selected."
+    },
+    {
+      "number": 7,
+      "variant": "scoped-context-v2",
+      "scenario": "missing-outcome-and-pressure",
+      "eventIds": [
+        "evt-011"
+      ],
+      "audience": "Fan",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 2126,
+      "usage": {
+        "input_tokens": 734,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 159,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 893
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Fan",
+        "eventIds": [
+          "evt-011"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "passes.attempted",
+            "value": 8,
+            "eventIds": [
+              "evt-011"
+            ]
+          }
+        ],
+        "text": "At the 26th minute and 55th second of the synthetic match, Moisés Caicedo from Chelsea attempted a pass. The outcome and pressure situation of this pass are unknown. In the recorded sample for both teams, 8 passes were attempted with a completion rate of about 85.7%.",
+        "caveats": [
+          "This is a synthetic event and does not reflect actual match or player performance.",
+          "Key details such as pass outcome and pressure situation for this specific event are missing.",
+          "The sample covers only part of the match and both teams together, not complete statistics."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": true,
+      "reviewNotes": "Correctly acknowledges unknown outcome and pressure. Adds unnecessary totals without explaining known-outcome denominator in prose; omits events.selected."
+    },
+    {
+      "number": 8,
+      "variant": "scoped-context-v2",
+      "scenario": "missing-outcome-and-pressure",
+      "eventIds": [
+        "evt-011"
+      ],
+      "audience": "Player",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 1818,
+      "usage": {
+        "input_tokens": 734,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 141,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 875
+      },
+      "apiStatus": 422,
+      "automaticEvidencePass": false,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Player",
+        "eventIds": [
+          "evt-011"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "passes.attempted",
+            "value": 1,
+            "eventIds": [
+              "evt-011"
+            ]
+          }
+        ],
+        "text": "Moisés Caicedo from Chelsea attempted a pass at the 26:55 minute mark. The outcome of this pass and whether he was under pressure at the time are not recorded. Considering this, how might you assess your decision-making in situations with unclear defensive pressure?",
+        "caveats": [
+          "This is a synthetic scenario and does not represent actual match data or real player performance.",
+          "Some key details like the pass outcome and pressure status are missing in this event, limiting full analysis."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": false,
+      "reviewNotes": "REJECTED: passes.attempted=1 conflicts with sample total 8. Unknown fields acknowledged. Reflection question conflates missing data with uncertain on-pitch pressure."
+    },
+    {
+      "number": 9,
+      "variant": "scoped-context-v2",
+      "scenario": "missing-outcome-and-pressure",
+      "eventIds": [
+        "evt-011"
+      ],
+      "audience": "Coach",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 2816,
+      "usage": {
+        "input_tokens": 734,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 225,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 959
+      },
+      "apiStatus": 422,
+      "automaticEvidencePass": false,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Coach",
+        "eventIds": [
+          "evt-011"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "passes.attempted",
+            "value": 1,
+            "eventIds": [
+              "evt-011"
+            ]
+          }
+        ],
+        "text": "The selected event is a single pass attempted by Moisés Caicedo of Chelsea at the 27th minute mark. The pass outcome is unknown and there is no information on whether Caicedo was under pressure when making the pass. Given that the recorded sample includes 8 attempted passes with 6 completions and an overall completion rate of 85.7%, this particular pass's outcome could influence understanding of passing effectiveness. A relevant review question might be: How does Caicedo's decision-making process vary under different pressure conditions during passing situations?",
+        "caveats": [
+          "This analysis is based on synthetic match data and a limited recorded event sample, not a full match.",
+          "No information is available on the pass recipient, pressure status, or full context of the play.",
+          "Player and team identifiers do not correspond to shirt numbers or real-world data.",
+          "This event alone cannot inform about possession continuity or tactical intention."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": false,
+      "reviewNotes": "REJECTED: passes.attempted=1 conflicts with 8. Unknown fields acknowledged; generic review question and insufficiently explicit both-team scope."
+    },
+    {
+      "number": 10,
+      "variant": "scoped-context-v2",
+      "scenario": "saved-shot",
+      "eventIds": [
+        "evt-003"
+      ],
+      "audience": "Fan",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 2111,
+      "usage": {
+        "input_tokens": 735,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 177,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 912
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Fan",
+        "eventIds": [
+          "evt-003"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "events.selected",
+            "value": 1,
+            "eventIds": [
+              "evt-003"
+            ]
+          }
+        ],
+        "text": "In this recorded synthetic sample, Viktor Gyökeres from Arsenal took a shot under pressure early in the match, which was saved by the opposing team. This is the only selected event shown here. The sample includes a total of 15 recorded events for both teams combined, but this specific shot ended without a goal.",
+        "caveats": [
+          "This is a synthetic scenario and does not reflect real match data or actual player performance.",
+          "Only a partial sample of events is recorded, not a complete match.",
+          "No information about the shooter’s shirt number, the goalkeeper, or the receiving players is available.",
+          "There is no video or tracking data to provide context for the shot or subsequent play."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": true,
+      "reviewNotes": "Correct named actor, saved outcome, pressure and synthetic limitations. Clear fan summary."
+    },
+    {
+      "number": 11,
+      "variant": "scoped-context-v2",
+      "scenario": "saved-shot",
+      "eventIds": [
+        "evt-003"
+      ],
+      "audience": "Player",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 1926,
+      "usage": {
+        "input_tokens": 735,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 138,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 873
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Player",
+        "eventIds": [
+          "evt-003"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "events.selected",
+            "value": 1,
+            "eventIds": [
+              "evt-003"
+            ]
+          }
+        ],
+        "text": "At 3 minutes and 1 second, Viktor Gyökeres of Arsenal took a shot while under pressure, but the attempt was saved by the opposing goalkeeper. Considering the pressure situation, how might you adjust your positioning or timing to increase the chance of scoring in similar moments?",
+        "caveats": [
+          "This is a synthetic scenario, not actual match data or real player performance.",
+          "Information like player shirt numbers, aggregate statistics, video, or causal links between events is not available."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": true,
+      "reviewNotes": "Correct event and pressure; positioning/timing question is hypothetical and audience-appropriate."
+    },
+    {
+      "number": 12,
+      "variant": "scoped-context-v2",
+      "scenario": "saved-shot",
+      "eventIds": [
+        "evt-003"
+      ],
+      "audience": "Coach",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 2458,
+      "usage": {
+        "input_tokens": 735,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 168,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 903
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Coach",
+        "eventIds": [
+          "evt-003"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "events.selected",
+            "value": 1,
+            "eventIds": [
+              "evt-003"
+            ]
+          }
+        ],
+        "text": "In the synthetic scenario at the 3rd minute and 1 second, Arsenal's Viktor Gyökeres took a shot that was saved while under pressure. This is the only selected event from the recorded sample, which includes eight pressure events and a total of fifteen events overall. Considering this, a useful review question might be: How might Viktor Gyökeres improve his shot execution under defensive pressure in similar match situations?",
+        "caveats": [
+          "This is a synthetic scenario and does not reflect actual match data or real player performance.",
+          "The provided data lacks detailed tactical context, player positioning, and video analysis, limiting comprehensive evaluation."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": false,
+      "reviewNotes": "Correct event. Unnecessary sample totals omit explicit both-team scope. Improve-shot-execution question is generic."
+    },
+    {
+      "number": 13,
+      "variant": "scoped-context-v2",
+      "scenario": "incomplete-pass",
+      "eventIds": [
+        "evt-004"
+      ],
+      "audience": "Fan",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 2935,
+      "usage": {
+        "input_tokens": 734,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 227,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 961
+      },
+      "apiStatus": 422,
+      "automaticEvidencePass": false,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Fan",
+        "eventIds": [
+          "evt-004"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "passes.attempted",
+            "value": 8,
+            "eventIds": [
+              "evt-004"
+            ]
+          },
+          {
+            "metricKey": "underPressure",
+            "value": 1,
+            "eventIds": [
+              "evt-004"
+            ]
+          },
+          {
+            "metricKey": "passes.completionPercentage",
+            "value": 85.7,
+            "eventIds": [
+              "evt-004"
+            ]
+          }
+        ],
+        "text": "At 7 minutes and 22 seconds, Moisés Caicedo of Chelsea attempted a pass while under pressure, but it was incomplete. In this recorded synthetic sample, there were 8 total passes attempted with a completion rate of 85.7%, and 8 events involved pressure. This data represents only part of a simulated scenario, not a full match.",
+        "caveats": [
+          "This is synthetic data and does not reflect actual match performance.",
+          "Only partial events are recorded; many details about players, outcomes, and context are missing.",
+          "Completion percentages exclude passes with unknown outcomes, and receivers of passes are not identified.",
+          "The scenario is simulated, so no assumptions about tactics, possession, or player form should be made."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": true,
+      "reviewNotes": "REJECTED: invents metric key underPressure. Main event description is correct, but evidence contract is invalid and events.selected is omitted."
+    },
+    {
+      "number": 14,
+      "variant": "scoped-context-v2",
+      "scenario": "incomplete-pass",
+      "eventIds": [
+        "evt-004"
+      ],
+      "audience": "Player",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 2179,
+      "usage": {
+        "input_tokens": 734,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 159,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 893
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Player",
+        "eventIds": [
+          "evt-004"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "events.selected",
+            "value": 1,
+            "eventIds": [
+              "evt-004"
+            ]
+          }
+        ],
+        "text": "Moisés Caicedo from Chelsea attempted a pass at 7 minutes and 22 seconds into the match, but the pass was incomplete. Notably, he was under pressure when making this pass. Considering this, how might you adjust your passing technique or decision-making when facing pressure to improve completion rates?",
+        "caveats": [
+          "This explanation is based on a synthetic scenario and does not reflect real match data or player performance.",
+          "Only one selected event is described; broader player actions or outcomes are not included.",
+          "Details such as intended receiver or cause of the incomplete pass are not available."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": true,
+      "reviewNotes": "Correct incomplete pass and pressure, with a relevant hypothetical technique/decision-making question."
+    },
+    {
+      "number": 15,
+      "variant": "scoped-context-v2",
+      "scenario": "incomplete-pass",
+      "eventIds": [
+        "evt-004"
+      ],
+      "audience": "Coach",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 3102,
+      "usage": {
+        "input_tokens": 734,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 198,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 932
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Coach",
+        "eventIds": [
+          "evt-004"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "passes.completionPercentage",
+            "value": 85.7,
+            "eventIds": [
+              "evt-004"
+            ]
+          }
+        ],
+        "text": "In this synthetic scenario, Moisés Caicedo of Chelsea attempted a pass at 7 minutes and 22 seconds while under pressure, which was incomplete. The sample data shows an overall pass completion rate of 85.7% for passes with known outcomes in the recorded events. Given this, a relevant review question might be: How can players maintain passing accuracy under pressure to reduce turnovers in the midfield?",
+        "caveats": [
+          "This is a synthetic football scenario and not actual match data or real player performance.",
+          "Data covers only a partial, recorded sample, not a full 90-minute match.",
+          "There is no information on pass receivers or detailed context around the pressure situation.",
+          "No video or tracking data is available to assess the physical or tactical context of the pass."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": false,
+      "reviewNotes": "Correct event; scope of percentage is not explicitly both teams. Turnover-prevention question is generic and not grounded in a recorded turnover for this selection. Omits events.selected."
+    },
+    {
+      "number": 16,
+      "variant": "scoped-context-v2",
+      "scenario": "turnover",
+      "eventIds": [
+        "evt-005"
+      ],
+      "audience": "Fan",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 1960,
+      "usage": {
+        "input_tokens": 736,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 143,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 879
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Fan",
+        "eventIds": [
+          "evt-005"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "events.selected",
+            "value": 1,
+            "eventIds": [
+              "evt-005"
+            ]
+          }
+        ],
+        "text": "At 7 minutes and 24 seconds into the match, Martin Ødegaard of Arsenal lost possession of the ball while under pressure. This turnover happened near the middle of the field, specifically at coordinates (54,51).",
+        "caveats": [
+          "This is a synthetic scenario and not actual match data or real player performance.",
+          "Only selected and limited events are recorded, so this does not represent a full match context.",
+          "Shirt numbers, complete player statistics, and video data are not available for further detail."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": true,
+      "reviewNotes": "Correct player, turnover, pressure and central coordinates. Clear fan summary."
+    },
+    {
+      "number": 17,
+      "variant": "scoped-context-v2",
+      "scenario": "turnover",
+      "eventIds": [
+        "evt-005"
+      ],
+      "audience": "Player",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 7158,
+      "usage": {
+        "input_tokens": 736,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 150,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 886
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Player",
+        "eventIds": [
+          "evt-005"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "turnovers.middle",
+            "value": 2,
+            "eventIds": [
+              "evt-005"
+            ]
+          }
+        ],
+        "text": "At 7 minutes and 24 seconds, Martin Ødegaard from Arsenal lost possession due to a turnover while under pressure near the middle of the pitch. Considering this pressure, how might you anticipate and prepare to maintain control better during tight situations?",
+        "caveats": [
+          "This explanation is based on a synthetic football scenario and is not derived from actual match footage or player performance.",
+          "Some contextual information such as the exact nature of the pressure and following play is not available.",
+          "Data provided does not include complete match statistics or full player performance metrics."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": false,
+      "reviewNotes": "Correct event. Tautological lost-possession-due-to-turnover phrasing; generic advice. Global turnover count cited against one selected event; omits events.selected."
+    },
+    {
+      "number": 18,
+      "variant": "scoped-context-v2",
+      "scenario": "turnover",
+      "eventIds": [
+        "evt-005"
+      ],
+      "audience": "Coach",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 1975,
+      "usage": {
+        "input_tokens": 736,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 162,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 898
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Coach",
+        "eventIds": [
+          "evt-005"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "events.selected",
+            "value": 1,
+            "eventIds": [
+              "evt-005"
+            ]
+          }
+        ],
+        "text": "At 7 minutes and 24 seconds, Martin Ødegaard of Arsenal lost possession under pressure, resulting in a turnover. This event occurred near the middle of the pitch. Considering this, what strategies could be reviewed to help players maintain possession better under pressure in similar situations?",
+        "caveats": [
+          "This analysis is based on a synthetic scenario, not an actual match or player performance.",
+          "Only 15 events were recorded in this sample, covering both teams; the data is partial and does not represent a full game.",
+          "No information is available on players involved subsequently or the precise circumstances leading to this turnover."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": false,
+      "reviewNotes": "Correct event and explicit partial both-team coverage. Review question about strategies is too generic for the usefulness threshold."
+    },
+    {
+      "number": 19,
+      "variant": "scoped-context-v2",
+      "scenario": "multiple-events-no-proven-assist",
+      "eventIds": [
+        "evt-002",
+        "evt-003"
+      ],
+      "audience": "Fan",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 2349,
+      "usage": {
+        "input_tokens": 807,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 159,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 966
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Fan",
+        "eventIds": [
+          "evt-002",
+          "evt-003"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "passes.completionPercentage",
+            "value": 85.7,
+            "eventIds": [
+              "evt-002"
+            ]
+          }
+        ],
+        "text": "Early in the game, Bukayo Saka from Arsenal successfully completed a pressured pass. Shortly after, teammate Viktor Gyökeres took a shot that was saved by the opposing goalkeeper while also under pressure. These moments highlight Arsenal's early attacking efforts under defensive pressure.",
+        "caveats": [
+          "The data comes from a synthetic scenario and does not represent actual match events or player performance.",
+          "Only a limited number of events are recorded, so this is not a full match summary.",
+          "No information is available about the pass receiver or shot details beyond outcome and pressure."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": true,
+      "reviewNotes": "Correct two actors and outcomes, no explicit assist claim. Attacking-efforts interpretation is stronger than the sparse facts; cites a sample percentage and omits events.selected."
+    },
+    {
+      "number": 20,
+      "variant": "scoped-context-v2",
+      "scenario": "multiple-events-no-proven-assist",
+      "eventIds": [
+        "evt-002",
+        "evt-003"
+      ],
+      "audience": "Player",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 2523,
+      "usage": {
+        "input_tokens": 807,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 163,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 970
+      },
+      "apiStatus": 200,
+      "automaticEvidencePass": true,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Player",
+        "eventIds": [
+          "evt-002",
+          "evt-003"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "events.selected",
+            "value": 2,
+            "eventIds": [
+              "evt-002",
+              "evt-003"
+            ]
+          }
+        ],
+        "text": "In this synthetic match sample, Bukayo Saka from Arsenal completed a pressured pass early in the game. Shortly after, his teammate Viktor Gyökeres took a pressured shot which was saved by the opposition. Considering these actions, how might you adjust your decision-making under pressure to create clearer scoring opportunities?",
+        "caveats": [
+          "This is a synthetic scenario, not actual match data or real player performance.",
+          "Only a small sample of events is recorded and analyzed here, limiting context.",
+          "Key details such as the recipient of the pass or subsequent play developments are not available."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": true,
+      "reviewNotes": "Correct separate events, no asserted causal link. A future decision-making question is clearly hypothetical."
+    },
+    {
+      "number": 21,
+      "variant": "scoped-context-v2",
+      "scenario": "multiple-events-no-proven-assist",
+      "eventIds": [
+        "evt-002",
+        "evt-003"
+      ],
+      "audience": "Coach",
+      "model": "gpt-4.1-mini",
+      "latencyMs": 3068,
+      "usage": {
+        "input_tokens": 807,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 269,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1076
+      },
+      "apiStatus": 422,
+      "automaticEvidencePass": false,
+      "promptSha256": "454CC4A101F79D6DA1E1FB219DCEF92B7246F6B900CF8A50670011C01BEDF5CB",
+      "generatedInsight": {
+        "audience": "Coach",
+        "eventIds": [
+          "evt-002",
+          "evt-003"
+        ],
+        "metricEvidence": [
+          {
+            "metricKey": "passes.completed",
+            "value": 1,
+            "eventIds": [
+              "evt-002"
+            ]
+          },
+          {
+            "metricKey": "passes.attempted",
+            "value": 1,
+            "eventIds": [
+              "evt-002"
+            ]
+          },
+          {
+            "metricKey": "pressure.events",
+            "value": 2,
+            "eventIds": [
+              "evt-002",
+              "evt-003"
+            ]
+          }
+        ],
+        "text": "In this synthetic sample, Bukayo Saka of Arsenal successfully completed a pressured pass early in the match, followed shortly by a pressured shot by Viktor Gyökeres, which was saved. Both events occurred under pressure, highlighting moments where the team maintained possession and attempted to create scoring opportunities despite opponent pressure. A relevant review question could be: How did the team manage pressure in these situations to maintain control and generate shot opportunities, and can this resilience be improved or replicated more consistently?",
+        "caveats": [
+          "This analysis is based on synthetic event data, not real match performance.",
+          "The sample is limited and does not represent full match context or comprehensive player statistics.",
+          "No video or positional tracking data is available to assess the quality, timing, or tactical context of the actions.",
+          "Pass completion percentage is only from passes with known outcomes in this sample.",
+          "No information on the intended receivers or connection between events can be inferred."
+        ]
+      },
+      "reviewer": "Codex qualitative review, not independent human review",
+      "usefulAdaptation": false,
+      "reviewNotes": "REJECTED: passes.completed=1, passes.attempted=1 and pressure.events=2 conflict with sample values 6, 8 and 8. Prose asserts possession continuity/resilience not established by the selected events, despite caveat admitting no known connection."
+    }
+  ]
+}

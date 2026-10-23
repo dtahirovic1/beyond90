@@ -7,7 +7,13 @@ public sealed record InsightRequest(
     IReadOnlyList<string> EventIds,
     Audience Audience,
     IReadOnlyDictionary<string, decimal?> VerifiedMetrics,
-    IReadOnlyList<MatchEvent> SelectedEvents);
+    IReadOnlyList<MatchEvent> SelectedEvents)
+{
+    public IReadOnlyList<MatchPlayer> Players { get; init; } = [];
+    public IReadOnlyList<MatchTeam> Teams { get; init; } = [];
+    public int? RecordedEventCount { get; init; }
+    public int? PassesWithKnownOutcome { get; init; }
+}
 
 public interface IInsightProvider
 {
