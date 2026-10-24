@@ -10,6 +10,7 @@ public sealed class MatchStore
     private IReadOnlyList<MatchStore>? _matches;
     public IReadOnlyList<MatchStore> All => _matches ?? new[] { this };
     public MatchStore? Find(string id) => All.FirstOrDefault(match => match.Id == id);
+    public DecisionSnapshot? GetDecisionSnapshot(string sceneId) => _demo.DecisionSnapshots.FirstOrDefault(s => s.SceneId == sceneId);
     public static MatchStore LoadCatalog(string directory)
     {
         var matches = Directory.GetFiles(directory, "*.json").OrderBy(path => path, StringComparer.Ordinal).Select(Load).ToArray();
@@ -42,6 +43,7 @@ public sealed class MatchStore
     public IReadOnlyList<MatchTeam> Teams => _demo.Teams;
     public IReadOnlyList<MatchPlayer> Players => _demo.Players;
     public IReadOnlyList<MatchEvent> Events => _demo.Events;
+    public IReadOnlyList<DecisionSnapshot> DecisionSnapshots => _demo.DecisionSnapshots;
     public MatchMetrics Metrics => MetricsCalculator.Calculate(_demo.Events);
     public IReadOnlyList<KeyMoment> KeyMoments => KeyMomentSelector.Select(_demo.Events, Metrics, 8);
 
@@ -81,5 +83,6 @@ public sealed class MatchStore
         public List<MatchTeam> Teams { get; set; } = [];
         public List<MatchPlayer> Players { get; set; } = [];
         public List<MatchEvent> Events { get; set; } = [];
+        public List<DecisionSnapshot> DecisionSnapshots { get; set; } = [];
     }
 }
