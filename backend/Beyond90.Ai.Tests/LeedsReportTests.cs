@@ -76,7 +76,8 @@ public sealed class LeedsReportTests
         Assert.All(capture.Request.SelectedEvents, e => Assert.Equal("lee-5", e.PlayerId));
         Assert.Equal(42, capture.Request.SelectedEvents.Count);
         Assert.NotNull(capture.Request.ReportContext);
-        Assert.Single(capture.Request.Players);
+        Assert.All(capture.Request.Decisions, d => Assert.Equal("lee-5",d.Snapshot.Decision.PlayerId));
+        Assert.Contains(capture.Request.Players,p=>p.TeamId=="arsenal");
         Assert.IsType<BadRequestObjectResult>(await controller.Insight(new() { Audience = Audience.Player }, default));
     }
 

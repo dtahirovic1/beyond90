@@ -39,8 +39,9 @@ public sealed class InsightsController(MatchStore catalogue, IInsightProvider pr
 
         var providerRequest = new InsightRequest(store.Id, selectedIds, request.Audience, metrics, selectedEvents)
         {
-            Players = store.Players.Where(player => selectedEvents.Any(e => e.PlayerId == player.Id)).ToArray(),
-            Teams = store.Teams.Where(team => selectedEvents.Any(e => e.TeamId == team.Id)).ToArray(),
+            Players = store.Players,
+            Teams = store.Teams,
+            Decisions = store.Decisions.Where(d => selectedIds.Contains(d.Snapshot.EventId)).ToArray(),
             RecordedEventCount = store.Events.Count,
             PassesWithKnownOutcome = store.Events.Count(e =>
                 string.Equals(e.Type, "Pass", StringComparison.OrdinalIgnoreCase) && !string.IsNullOrWhiteSpace(e.Outcome))

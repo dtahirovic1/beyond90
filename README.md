@@ -104,3 +104,8 @@ License selection is pending before public submission.
 ### Decision snapshot integration status
 
 The Arsenal/Chelsea decision snapshot examples added in commit e6663d3 are preserved as reference data. They are not yet loaded by MatchStore or sent to Azure. The current application loads the separate data/synthetic/leeds catalogue. See docs/backend-integration-review.md for the integration gaps before connecting snapshots.
+
+
+### Spatial decision review
+
+Open a Leeds player match and select **Review spatial scene**. Choose a passing, shooting or carrying option to inspect the same moment and geometric assessment. Scene coverage is partial and labels are not success probabilities. See [decision integration notes](docs/backend-integration-review.md) for the data contract and calculation method. `GET /api/matches/{id}/decisions` supplies the same context used by the UI and AI.

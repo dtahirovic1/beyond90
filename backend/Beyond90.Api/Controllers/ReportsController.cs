@@ -26,7 +26,7 @@ public sealed class ReportsController(MatchStore catalogue, IInsightProvider pro
         var stats = PerformanceReport.Stats(Events(matches, playerId));
         return Ok(new { playerId, matchId, matchCount = matches.Length, stats, observations = PerformanceReport.Observations(stats),
             coverage = "Synthetic event samples from selected players. Not complete match statistics or real player performance.",
-            matches = matches.Select(m => new { id = m.Id, scenarioLabel = m.ScenarioLabel, opponent = m.Teams.First(t => t.Id != "leeds").Name, stats = PerformanceReport.Stats(Events([m], playerId)) }) });
+            matches = matches.Select(m => new { id = m.Id, scenarioLabel = m.ScenarioLabel, opponent = m.Teams.First(t => t.Id != "leeds").Name, result = m.Result, stats = PerformanceReport.Stats(Events([m], playerId)) }) });
     }
 
     [HttpPost("insight")]
@@ -42,10 +42,11 @@ public sealed class ReportsController(MatchStore catalogue, IInsightProvider pro
         var input = new InsightRequest(request.MatchId ?? "leeds-overview", events.Select(e => e.EventId).ToArray(), request.Audience,
             new Dictionary<string, decimal?> { ["events.selected"] = events.Length }, events)
         {
-            Players = matches.SelectMany(m => m.Players).Where(p => p.TeamId == "leeds" && (request.PlayerId is null || p.Id == request.PlayerId)).DistinctBy(p => p.Id).ToArray(),
-            Teams = matches[0].Teams.Where(t => t.Id == "leeds").ToArray(),
-            ReportContext = new { scope = request.PlayerId is null ? "Selected Leeds players" : "Individual player", matchCount = matches.Length, stats,
-                matches = matches.Select(m => new { id = m.Id, scenario = m.ScenarioLabel, opponent = m.Teams.First(t => t.Id != "leeds").Name, stats = PerformanceReport.Stats(Events([m], request.PlayerId)) }) }
+            Players = matches.SelectMany(m => m.Players).DistinctBy(p => p.Id).ToArray(),
+            Teams = matches.SelectMany(m => m.Teams).DistinctBy(t => t.Id).ToArray(),
+            Decisions = matches.SelectMany(m => m.Decisions).Where(d => events.Any(e => e.MatchId == d.Snapshot.MatchId && e.EventId == d.Snapshot.EventId)).ToArray(),
+            ReportContext = new { subjectPlayerId = request.PlayerId, subjectPlayerName = matches.SelectMany(m=>m.Players).FirstOrDefault(p=>p.Id==request.PlayerId)?.Name, scope = request.PlayerId is null ? "Selected Leeds players" : "Individual player", matchCount = matches.Length, stats,
+                matches = matches.Select(m => new { id = m.Id, scenario = m.ScenarioLabel, opponent = m.Teams.First(t => t.Id != "leeds").Name, result = m.Result, stats = PerformanceReport.Stats(Events([m], request.PlayerId)) }) }
         };
         try { return Ok(await provider.GenerateAsync(input, cancellationToken)); }
         catch (Exception exception) when (exception is InsightProviderException or HttpRequestException || (exception is OperationCanceledException && !cancellationToken.IsCancellationRequested))

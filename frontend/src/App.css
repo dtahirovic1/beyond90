@@ -231,3 +231,19 @@
 @media(max-width:900px) { .overview-hero { padding:24px; }.club-hero-shirts { width:210px; }.club-hero-shirts .pixel-jersey { width:70px; }.overview-analysis { grid-template-columns:1fr; }.ai-review { padding:24px 0 0; border-left:0; border-top:1px solid #3e484a; }.performance-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }.player-picker,.match-cards { gap:12px; }.player-card { padding:16px; }.player-card h2 { font-size:19px; }.tracked-grid { grid-template-columns:1fr; }.match-card { padding:16px; } }
 @media(max-width:600px) { .player-picker,.match-cards { grid-template-columns:1fr; }.player-card { padding:22px; }.player-card .pixel-jersey { width:145px; margin:12px auto; }.player-card h2 { font-size:24px; }.overview-hero { padding:22px 18px; gap:10px; }.overview-hero > .pixel-jersey { width:90px; }.overview-hero h1 { font-size:29px; letter-spacing:-1px; overflow-wrap:anywhere; }.overview-hero p { font-size:12px; }.club-hero-shirts { width:90px; flex-direction:column; }.club-hero-shirts .pixel-jersey { width:60px; margin-top:-12px; }.club-hero-shirts .pixel-jersey:first-child { margin-top:0; }.stat-tile { padding:17px; }.stat-tile > strong { font-size:29px; }.section-title { align-items:flex-start; flex-direction:column; gap:7px; }.overview-analysis { padding:20px; }.workspace-nav { font-size:11px; gap:8px; }.leeds-poster .poster-title { margin:24px 0; }.poster-opponents > div { font-size:12px; }.topbar { gap:12px; }.topbar-caption { display:none; }.pitch-coordinates { flex-wrap:wrap; gap:6px; }.app-footer { flex-wrap:wrap; gap:12px; }.overview-hero .sample-pill { font-size:9px; }.event-table { min-width:550px; } }
 @media(prefers-reduced-motion:reduce) { .player-card { transition:none; }.player-card:hover { transform:none; } }
+
+.decision-options { display:flex; flex-wrap:wrap; gap:8px; padding:16px; }
+.decision-options button { flex:1 1 140px; text-align:left; padding:12px; border:1px solid #46534c; border-radius:5px; background:#202a26; color:#f4f3e9; cursor:pointer; }
+.decision-options button.is-selected { border-color:#d2ed83; background:#34402c; }
+.decision-options small { display:block; margin-top:7px; color:#bbc7b1; }
+.decision-details { padding:0 16px 18px; font-size:13px; line-height:1.6; }
+.decision-details small { display:block; color:#aebbb2; margin:8px 0; }
+.scene-shortcuts { display:flex; flex-wrap:wrap; gap:8px; padding:12px 16px; }
+
+.insight-result > p { white-space: pre-line; }
+.decision-verdict { margin: 16px 0; padding: 18px; border-left: 3px solid #cce58e; background: rgba(204,229,142,.05); }
+.decision-verdict h3 { margin: 8px 0; font-size: 20px; }
+.decision-verdict p,.decision-verdict small { line-height: 1.65; }
+.decision-badge { display: block; color: #cce58e; font-size: 11px; margin-top: 5px; }
+.match-result { font-size: 32px; font-weight: 750; margin: 12px 0; font-variant-numeric: tabular-nums; }
+.match-result small { display: block; font-size: 10px; letter-spacing: .1em; opacity: .65; margin-top: 4px; }

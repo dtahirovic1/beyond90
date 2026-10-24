@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\Beyond90.Analytics\Beyond90.Analytics.csproj" />
     <ProjectReference Include="..\Beyond90.Domain\Beyond90.Domain.csproj" />
   </ItemGroup>
 

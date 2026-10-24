@@ -8,6 +8,7 @@ public sealed class MatchesController(MatchStore catalogue) : ControllerBase
     [HttpGet] public IActionResult List() => Ok(catalogue.All.Select(match => match.Summary));
     [HttpGet("{id}")] public IActionResult Get(string id) => catalogue.Find(id) is { } match ? Ok(match.Details) : NotFound();
     [HttpGet("{id}/events")] public IActionResult Events(string id) => catalogue.Find(id) is { } match ? Ok(match.Events) : NotFound();
+    [HttpGet("{id}/decisions")] public IActionResult Decisions(string id) => catalogue.Find(id) is { } match ? Ok(match.Decisions) : NotFound();
     [HttpGet("{id}/metrics")] public IActionResult Metrics(string id) => catalogue.Find(id) is { } match ? Ok(match.Metrics) : NotFound();
     [HttpGet("{id}/recap")]
     public IActionResult Recap(string id, [FromQuery] string? playerId = null)

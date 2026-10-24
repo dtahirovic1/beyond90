@@ -1320,75 +1320,385 @@
       "sceneId": "leeds-scene-003-a",
       "matchContext": {
         "minute": 2,
-        "score": { "leeds": 0, "liverpool": 0 },
+        "score": {
+          "leeds": 0,
+          "liverpool": 0
+        },
         "phase": "build_up",
-        "possessionId": "pos-002"
+        "possessionId": "pos-002",
+        "second": 29
       },
       "pitch": {
         "coordinateUnits": "normalized_0_100",
         "lengthMeters": 105,
         "widthMeters": 68,
-        "attackDirection": { "leeds": "left_to_right", "liverpool": "right_to_left" }
-      },
-      "decisionSnapshot": {
-        "secondsBeforeAction": 0,
-        "ball": { "x": 58, "y": 26 },
-        "players": [
-          { "id": "lee-4", "teamId": "leeds", "x": 58, "y": 26, "role": "defensive midfielder" },
-          { "id": "lee-5", "teamId": "leeds", "x": 52, "y": 20, "role": "centre-back" },
-          { "id": "lee-9", "teamId": "leeds", "x": 46, "y": 18, "role": "striker" },
-          { "id": "liv-4", "teamId": "liverpool", "x": 60, "y": 22, "role": "centre-back" },
-          { "id": "liv-7", "teamId": "liverpool", "x": 58, "y": 30, "role": "attacking midfielder" }
-        ]
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "liverpool": "right_to_left"
+        }
       },
       "decision": {
         "playerId": "lee-4",
         "selectedOptionId": "pass-lee-9",
         "bodyPartUsed": "right_foot",
         "options": [
-          { "id": "pass-lee-9", "type": "pass", "receiverId": "lee-9" },
-          { "id": "pass-lee-5", "type": "pass", "receiverId": "lee-5" },
-          { "id": "carry", "type": "dribble" }
+          {
+            "id": "pass-lee-9",
+            "type": "pass",
+            "receiverId": "lee-9"
+          },
+          {
+            "id": "pass-lee-5",
+            "type": "pass",
+            "receiverId": "lee-5"
+          },
+          {
+            "id": "carry",
+            "type": "dribble"
+          }
         ]
       },
-      "recordedOutcome": "completed"
+      "recordedOutcome": "Completed",
+      "matchId": "leeds-sim-003",
+      "eventId": "leeds-sim-003-evt-002",
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 58,
+          "y": 26
+        },
+        "players": [
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 58,
+            "y": 26,
+            "role": "defensive midfielder"
+          },
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 52,
+            "y": 20,
+            "role": "centre-back"
+          },
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 46,
+            "y": 18,
+            "role": "striker"
+          },
+          {
+            "id": "liv-4",
+            "teamId": "liverpool",
+            "x": 60,
+            "y": 22,
+            "role": "centre-back"
+          },
+          {
+            "id": "liv-7",
+            "teamId": "liverpool",
+            "x": 58,
+            "y": 30,
+            "role": "attacking midfielder"
+          }
+        ]
+      }
     },
     {
       "sceneId": "leeds-scene-003-b",
       "matchContext": {
         "minute": 1,
-        "score": { "leeds": 0, "liverpool": 0 },
+        "score": {
+          "leeds": 0,
+          "liverpool": 0
+        },
         "phase": "high_pressure",
-        "possessionId": "pos-001"
+        "possessionId": "pos-001",
+        "second": 11
       },
       "pitch": {
         "coordinateUnits": "normalized_0_100",
         "lengthMeters": 105,
         "widthMeters": 68,
-        "attackDirection": { "leeds": "left_to_right", "liverpool": "right_to_left" }
-      },
-      "decisionSnapshot": {
-        "secondsBeforeAction": 0,
-        "ball": { "x": 83, "y": 36 },
-        "players": [
-          { "id": "lee-5", "teamId": "leeds", "x": 83, "y": 36, "role": "centre-back" },
-          { "id": "lee-4", "teamId": "leeds", "x": 78, "y": 30, "role": "defensive midfielder" },
-          { "id": "lee-9", "teamId": "leeds", "x": 70, "y": 25, "role": "striker" },
-          { "id": "liv-4", "teamId": "liverpool", "x": 84, "y": 32, "role": "centre-back" },
-          { "id": "liv-9", "teamId": "liverpool", "x": 86, "y": 40, "role": "striker" }
-        ]
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "liverpool": "right_to_left"
+        }
       },
       "decision": {
         "playerId": "lee-5",
         "selectedOptionId": "pass-lee-4",
         "bodyPartUsed": "right_foot",
         "options": [
-          { "id": "pass-lee-4", "type": "pass", "receiverId": "lee-4" },
-          { "id": "carry", "type": "dribble" },
-          { "id": "shot", "type": "shot" }
+          {
+            "id": "pass-lee-4",
+            "type": "pass",
+            "receiverId": "lee-4"
+          },
+          {
+            "id": "carry",
+            "type": "dribble"
+          },
+          {
+            "id": "shot",
+            "type": "shot"
+          }
         ]
       },
-      "recordedOutcome": "completed"
+      "recordedOutcome": "Completed",
+      "matchId": "leeds-sim-003",
+      "eventId": "leeds-sim-003-evt-001",
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 83,
+          "y": 36
+        },
+        "players": [
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 83,
+            "y": 36,
+            "role": "centre-back"
+          },
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 78,
+            "y": 30,
+            "role": "defensive midfielder"
+          },
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 70,
+            "y": 25,
+            "role": "striker"
+          },
+          {
+            "id": "liv-4",
+            "teamId": "liverpool",
+            "x": 84,
+            "y": 32,
+            "role": "centre-back"
+          },
+          {
+            "id": "liv-9",
+            "teamId": "liverpool",
+            "x": 86,
+            "y": 40,
+            "role": "striker"
+          }
+        ]
+      }
+    },
+    {
+      "sceneId": "leeds-sim-003-lee-9",
+      "matchId": "leeds-sim-003",
+      "eventId": "leeds-sim-003-evt-003",
+      "matchContext": {
+        "minute": 3,
+        "second": 56,
+        "score": {
+          "leeds": 0,
+          "liverpool": 0
+        },
+        "phase": "synthetic_action",
+        "possessionId": null
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "liverpool": "right_to_left"
+        }
+      },
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 46,
+          "y": 21
+        },
+        "players": [
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 46,
+            "y": 21,
+            "role": "Striker"
+          },
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 32,
+            "y": 37,
+            "role": "Centre-back"
+          },
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 38,
+            "y": 3,
+            "role": "Defensive midfielder"
+          },
+          {
+            "id": "liv-4",
+            "teamId": "liverpool",
+            "x": 55,
+            "y": 33,
+            "role": "Centre-back"
+          },
+          {
+            "id": "liv-7",
+            "teamId": "liverpool",
+            "x": 61,
+            "y": 11,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "liv-9",
+            "teamId": "liverpool",
+            "x": 68,
+            "y": 45,
+            "role": "Striker"
+          }
+        ]
+      },
+      "decision": {
+        "playerId": "lee-9",
+        "selectedOptionId": "pass-lee-5",
+        "bodyPartUsed": null,
+        "options": [
+          {
+            "id": "pass-lee-5",
+            "type": "pass",
+            "receiverId": "lee-5"
+          },
+          {
+            "id": "pass-lee-4",
+            "type": "pass",
+            "receiverId": "lee-4"
+          },
+          {
+            "id": "shot",
+            "type": "shot"
+          },
+          {
+            "id": "carry",
+            "type": "dribble"
+          }
+        ]
+      },
+      "recordedOutcome": "Completed"
+    },
+    {
+      "sceneId": "leeds-sim-003-late-decision",
+      "matchContext": {
+        "minute": 79,
+        "score": {
+          "leeds": 1,
+          "liverpool": 0
+        },
+        "phase": "high_pressure",
+        "possessionId": null,
+        "second": 30
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "liverpool": "right_to_left"
+        }
+      },
+      "decision": {
+        "playerId": "lee-5",
+        "selectedOptionId": "pass-lee-4",
+        "bodyPartUsed": null,
+        "options": [
+          {
+            "id": "pass-lee-4",
+            "type": "pass",
+            "receiverId": "lee-4"
+          },
+          {
+            "id": "carry",
+            "type": "dribble"
+          },
+          {
+            "id": "shot",
+            "type": "shot"
+          }
+        ]
+      },
+      "recordedOutcome": "Incomplete",
+      "matchId": "leeds-sim-003",
+      "eventId": "leeds-sim-003-evt-079",
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 89,
+          "y": 63
+        },
+        "players": [
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 89,
+            "y": 63,
+            "role": "centre-back"
+          },
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 84,
+            "y": 57,
+            "role": "defensive midfielder"
+          },
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 76,
+            "y": 52,
+            "role": "striker"
+          },
+          {
+            "id": "liv-4",
+            "teamId": "liverpool",
+            "x": 90,
+            "y": 59,
+            "role": "centre-back"
+          },
+          {
+            "id": "liv-9",
+            "teamId": "liverpool",
+            "x": 92,
+            "y": 67,
+            "role": "striker"
+          }
+        ]
+      }
     }
-  ]
+  ],
+  "rosterSource": "User-selected scenario roster; action data and positions are synthetic",
+  "rosterSourceUrl": "https://www.leedsunited.com/",
+  "goalLogComplete": true,
+  "goals": [
+    {
+      "eventId": "leeds-sim-003-evt-037",
+      "teamId": "leeds",
+      "minute": 37,
+      "second": 55
+    }
+  ],
+  "result": {
+    "home": 1,
+    "away": 0
+  }
 }

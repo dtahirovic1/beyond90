@@ -1,183 +1,120 @@
-using System.Linq;
 using Beyond90.Domain;
-
 namespace Beyond90.Analytics;
 
-public sealed record PassOptionAssessment(
-    string OptionId,
-    decimal LengthMeters,
-    decimal AngleDegrees,
-    decimal NearestOpponentDistanceMeters,
-    LaneCategory Lane,
-    string Reason);
-
-public sealed record ShotOptionAssessment(
-    string OptionId,
-    decimal DistanceToGoalMeters,
-    decimal AngleToGoalDegrees,
-    int OpponentsBetween,
-    LaneCategory Lane,
-    string Reason);
-
-public sealed record DribbleOptionAssessment(
-    string OptionId,
-    decimal SpaceAheadMeters,
-    int OpponentCount,
-    decimal NearestOpponentDistanceMeters,
-    LaneCategory Lane,
-    string Reason);
+// Geometric descriptors of a partial static scene. These are not success probabilities.
+public sealed record OptionAssessment(string OptionId, string Type, string? ReceiverId, decimal? DistanceMeters,
+    decimal? NearestOpponentMeters, decimal? CorridorClearanceMeters, int OpponentsInCorridor,
+    decimal? SpaceAheadMeters, decimal? GoalOpeningDegrees, string Corridor, string Reason)
+{
+    public decimal? ProgressionMeters { get; init; }
+    public decimal? Benefit { get; init; }
+    public decimal? Risk { get; init; }
+    public decimal? ComparativeValue { get; init; }
+}
+public sealed record DecisionVerdict(string Label, string? PreferredOptionId, string Explanation, string MatchSituation);
+public sealed record DecisionAnalysis(DecisionSnapshot Snapshot, IReadOnlyList<OptionAssessment> Options,
+    int VisiblePlayers, int VisibleOpponents, string Coverage)
+{
+    public DecisionVerdict? Verdict { get; init; }
+}
 
 public static class DecisionOptionCalculator
 {
-    private const int PitchLengthMeters = 105;
-    private const int PitchWidthMeters = 68;
-
-    public static PassOptionAssessment CalculatePassOption(
-        PlayerPosition passer,
-        PlayerPosition receiver,
-        IReadOnlyList<PlayerPosition> opponents)
+    private const double BlockRadius = 2;
+    private const double ContestRadius = 4;
+    private const double DribbleHorizon = 10;
+    private static (double X,double Y) Metres(PlayerPosition p, PitchInfo pitch) => (p.X*pitch.LengthMeters/100d,p.Y*pitch.WidthMeters/100d);
+    private static double Distance((double X,double Y) a,(double X,double Y) b) => Math.Sqrt(Math.Pow(a.X-b.X,2)+Math.Pow(a.Y-b.Y,2));
+    private static decimal Round(double value) => Math.Round((decimal)value,2);
+    private static int Direction(PlayerPosition actor,PitchInfo pitch) => pitch.AttackDirection[actor.TeamId] == "left_to_right" ? 1 : -1;
+    private static double? Clearance((double X,double Y) start,(double X,double Y) end,(double X,double Y) opponent, bool includeEndpoints)
     {
-        if (passer is null) throw new ArgumentNullException(nameof(passer));
-        if (receiver is null) throw new ArgumentNullException(nameof(receiver));
-        if (opponents is null) throw new ArgumentNullException(nameof(opponents));
-
-        var lengthMeters = DistanceMeters(passer.X, passer.Y, receiver.X, receiver.Y);
-        var angleDegrees = AngleDegrees(passer.X, passer.Y, receiver.X, receiver.Y);
-        var nearestOpponentDistance = opponents.Count == 0
-            ? decimal.MaxValue
-            : opponents.Min(o => DistanceMeters(receiver.X, receiver.Y, o.X, o.Y));
-
-        var lane = ClassifyLane(nearestOpponentDistance, lengthMeters);
-        var reason = lane switch
-        {
-            LaneCategory.Open => $"Open passing lane to {receiver.Id}; nearest opponent is {nearestOpponentDistance:0.#}m away.",
-            LaneCategory.Contested => $"Contested pass to {receiver.Id}; nearest opponent is {nearestOpponentDistance:0.#}m away.",
-            LaneCategory.Blocked => $"Blocked pass to {receiver.Id}; nearest opponent is {nearestOpponentDistance:0.#}m away.",
-            _ => "Unable to assess lane."
-        };
-
-        return new PassOptionAssessment(
-            $"pass-{receiver.Id}",
-            lengthMeters,
-            angleDegrees,
-            nearestOpponentDistance == decimal.MaxValue ? 0 : nearestOpponentDistance,
-            lane,
-            reason);
+        var dx=end.X-start.X; var dy=end.Y-start.Y; var squared=dx*dx+dy*dy;
+        if(squared==0) return null;
+        var t=((opponent.X-start.X)*dx+(opponent.Y-start.Y)*dy)/squared;
+        if(!includeEndpoints && (t<0 || t>1)) return null;
+        t=Math.Clamp(t,0,1);
+        return Distance(opponent,(start.X+t*dx,start.Y+t*dy));
     }
-
-    public static ShotOptionAssessment CalculateShotOption(
-        PlayerPosition shooter,
-        string attackingTeamId,
-        IReadOnlyList<PlayerPosition> opponents)
+    private static OptionAssessment Assess(string id,string type,string? receiver,PlayerPosition actor,
+        (double X,double Y) target,IReadOnlyList<PlayerPosition> opponents,PitchInfo pitch,double? space=null,double? goalAngle=null)
     {
-        if (shooter is null) throw new ArgumentNullException(nameof(shooter));
-        if (opponents is null) throw new ArgumentNullException(nameof(opponents));
-
-        var goalX = attackingTeamId == "leeds" ? 105 : 0;
-        var goalY = PitchWidthMeters / 2;
-
-        var distanceToGoal = DistanceMeters(shooter.X, shooter.Y, goalX, goalY);
-        var angleToGoal = AngleDegrees(shooter.X, shooter.Y, goalX, goalY);
-        var opponentsBetween = opponents.Count(o =>
-            IsBetween(shooter.X, shooter.Y, goalX, goalY, o.X, o.Y));
-
-        var lane = opponentsBetween switch
-        {
-            0 => LaneCategory.Open,
-            1 => LaneCategory.Contested,
-            _ => LaneCategory.Blocked
-        };
-
-        var reason = lane switch
-        {
-            LaneCategory.Open => $"Open shot lane; {distanceToGoal:0.#}m from goal.",
-            LaneCategory.Contested => $"Contested shot; {opponentsBetween} opponent between ball and goal.",
-            LaneCategory.Blocked => $"Blocked shot; {opponentsBetween} opponents between ball and goal.",
-            _ => "Unable to assess shot lane."
-        };
-
-        return new ShotOptionAssessment(
-            "shot",
-            distanceToGoal,
-            angleToGoal,
-            opponentsBetween,
-            lane,
-            reason);
+        var start=Metres(actor,pitch);
+        var defenders=opponents.Select(p=>Metres(p,pitch)).ToArray();
+        var distances=defenders.Select(p=>Clearance(start,target,p,type!="dribble")).Where(d=>d.HasValue).Select(d=>d!.Value).ToArray();
+        double? clearance=distances.Length==0 ? null : distances.Min();
+        var lane=defenders.Length==0 ? "Unknown" : clearance <= BlockRadius ? "Blocked" : clearance <= ContestRadius ? "Contested" : "Open";
+        var nearPoint=type=="pass" ? target : start;
+        decimal? nearest=defenders.Length==0 ? null : Round(defenders.Min(p=>Distance(nearPoint,p)));
+        return new(id,type,receiver,Round(Distance(start,target)),nearest,clearance.HasValue ? Round(clearance.Value) : null,
+            distances.Count(d=>d<=ContestRadius),space.HasValue ? Round(space.Value) : null,goalAngle.HasValue ? Round(goalAngle.Value) : null,lane,
+            lane=="Unknown" ? "No opponent positions supplied; corridor cannot be assessed." : $"{lane} among visible opponents only; static geometric corridor (2 m blocked, 4 m contested). Missing defenders, movement and ball speed may change the assessment.");
     }
-
-    public static DribbleOptionAssessment CalculateDribbleOption(
-        PlayerPosition ballCarrier,
-        string attackingTeamId,
-        IReadOnlyList<PlayerPosition> opponents)
+    public static OptionAssessment Pass(string id,PlayerPosition passer,PlayerPosition receiver,IReadOnlyList<PlayerPosition> opponents,PitchInfo pitch)
+        => Assess(id,"pass",receiver.Id,passer,Metres(receiver,pitch),opponents,pitch);
+    public static OptionAssessment Shot(string id,PlayerPosition actor,IReadOnlyList<PlayerPosition> opponents,PitchInfo pitch)
     {
-        if (ballCarrier is null) throw new ArgumentNullException(nameof(ballCarrier));
-        if (opponents is null) throw new ArgumentNullException(nameof(opponents));
-
-        var direction = attackingTeamId == "leeds" ? 1 : -1;
-        var spaceAheadMeters = direction > 0
-            ? PitchLengthMeters - ballCarrier.X
-            : ballCarrier.X;
-
-        var opponentCount = opponents.Count(o =>
-            Math.Abs(o.X - ballCarrier.X) < 15 && Math.Abs(o.Y - ballCarrier.Y) < 15);
-
-        var nearestOpponentDistance = opponents.Count == 0
-            ? decimal.MaxValue
-            : opponents.Min(o => DistanceMeters(ballCarrier.X, ballCarrier.Y, o.X, o.Y));
-
-        var lane = opponentCount switch
-        {
-            0 => LaneCategory.Open,
-            1 => LaneCategory.Contested,
-            _ => LaneCategory.Blocked
-        };
-
-        var reason = lane switch
-        {
-            LaneCategory.Open => $"Open space ahead ({spaceAheadMeters:0.#}m to goal line).",
-            LaneCategory.Contested => $"Contested dribble; {opponentCount} opponent nearby.",
-            LaneCategory.Blocked => $"Blocked dribble; {opponentCount} opponents nearby.",
-            _ => "Unable to assess dribble lane."
-        };
-
-        return new DribbleOptionAssessment(
-            "carry",
-            spaceAheadMeters,
-            opponentCount,
-            nearestOpponentDistance == decimal.MaxValue ? 0 : nearestOpponentDistance,
-            lane,
-            reason);
+        var goalX=Direction(actor,pitch)>0 ? pitch.LengthMeters : 0d;
+        var goalY=pitch.WidthMeters/2d; var start=Metres(actor,pitch);
+        var a=(X:goalX-start.X,Y:goalY-3.66-start.Y); var b=(X:goalX-start.X,Y:goalY+3.66-start.Y);
+        var angle=Math.Atan2(Math.Abs(a.X*b.Y-a.Y*b.X),a.X*b.X+a.Y*b.Y)*180/Math.PI;
+        return Assess(id,"shot",null,actor,(goalX,goalY),opponents,pitch,goalAngle:angle);
     }
-
-    private static decimal DistanceMeters(int x1, int y1, int x2, int y2)
+    public static OptionAssessment Dribble(string id,PlayerPosition actor,IReadOnlyList<PlayerPosition> opponents,PitchInfo pitch)
     {
-        var dx = (x2 - x1) / 100m * PitchLengthMeters;
-        var dy = (y2 - y1) / 100m * PitchWidthMeters;
-        return (decimal)Math.Sqrt((double)(dx * dx + dy * dy));
+        var start=Metres(actor,pitch); var direction=Direction(actor,pitch);
+        var toLine=direction>0 ? pitch.LengthMeters-start.X : start.X;
+        var horizon=Math.Min(DribbleHorizon,toLine);
+        var ahead=opponents.Select(p=>Metres(p,pitch)).Select(p=>(Forward:(p.X-start.X)*direction,Side:Math.Abs(p.Y-start.Y)))
+            .Where(p=>p.Forward>=0 && p.Forward<=horizon && p.Side<=BlockRadius).Select(p=>Math.Max(0,p.Forward-BlockRadius)).ToArray();
+        var space=ahead.Length==0 ? horizon : ahead.Min();
+        var result=Assess(id,"dribble",null,actor,(start.X+direction*horizon,start.Y),opponents,pitch,space:opponents.Count==0 ? null : space);
+        return result with { DistanceMeters=Round(toLine), Reason=result.Reason+" Space ahead examines at most 10 m in the attack direction; it is not a predicted dribble route." };
     }
-
-    private static decimal AngleDegrees(int x1, int y1, int x2, int y2)
+    public static DecisionAnalysis Calculate(DecisionSnapshot snapshot)
     {
-        var dx = (x2 - x1) / 100m * PitchLengthMeters;
-        var dy = (y2 - y1) / 100m * PitchWidthMeters;
-        var radians = (decimal)Math.Atan2((double)dy, (double)dx);
-        var degrees = radians * 180m / (decimal)Math.PI;
-        return degrees < 0 ? degrees + 360m : degrees;
-    }
-
-    private static bool IsBetween(int x1, int y1, int x2, int y2, int ox, int oy)
-    {
-        var lineLength = DistanceMeters(x1, y1, x2, y2);
-        var distToOpponent = DistanceMeters(x1, y1, ox, oy);
-        var distFromOpponentToEnd = DistanceMeters(ox, oy, x2, y2);
-        return distToOpponent < lineLength && distFromOpponentToEnd < lineLength &&
-               Math.Abs(distToOpponent + distFromOpponentToEnd - lineLength) < 5m;
-    }
-
-    private static LaneCategory ClassifyLane(decimal nearestOpponentDistance, decimal passLength)
-    {
-        if (nearestOpponentDistance >= 8m) return LaneCategory.Open;
-        if (nearestOpponentDistance >= 4m) return LaneCategory.Contested;
-        return LaneCategory.Blocked;
+        var actor=snapshot.PreDecision.Players.Single(p=>p.Id==snapshot.Decision.PlayerId);
+        var opponents=snapshot.PreDecision.Players.Where(p=>p.TeamId!=actor.TeamId).ToArray();
+        var options=snapshot.Decision.Options.Select(o=>o.Type switch {
+            "pass" => Pass(o.Id,actor,snapshot.PreDecision.Players.Single(p=>p.Id==o.ReceiverId),opponents,snapshot.Pitch),
+            "shot" => Shot(o.Id,actor,opponents,snapshot.Pitch),
+            "dribble" => Dribble(o.Id,actor,opponents,snapshot.Pitch),
+            _ => new OptionAssessment(o.Id,o.Type,o.ReceiverId,null,null,null,0,null,null,"Not assessed","This action has no geometric option model.")
+        }).ToArray();
+        var score=snapshot.MatchContext.Score;
+        int? margin=score is null ? null : score[actor.TeamId]-score.Where(s=>s.Key!=actor.TeamId).Sum(s=>s.Value);
+        var late=snapshot.MatchContext.Minute>=75;
+        var riskWeight=late && margin>0 ? 1.2m : late && margin<0 ? .65m : .9m;
+        var situation=margin is null ? "Score unknown; neutral risk weighting." :
+            $"{snapshot.MatchContext.Minute} min; acting team {(margin>0 ? "leading" : margin<0 ? "trailing" : "level")}. " +
+            (late && margin>0 ? "Protecting the lead gives risk more weight." : late && margin<0 ? "Chasing the game gives progression more weight." : "Balanced risk weighting.");
+        options=options.Select(o=> {
+            if(o.Corridor is "Unknown" or "Not assessed") return o;
+            var progression=o.Type=="pass" ? (snapshot.PreDecision.Players.Single(p=>p.Id==o.ReceiverId).X-actor.X)*snapshot.Pitch.LengthMeters/100m*Direction(actor,snapshot.Pitch)
+                : o.Type=="dribble" ? o.SpaceAheadMeters??0 : 0;
+            // Dimensionless comparison units, deliberately not calibrated percentages or xG.
+            var benefit=o.Type=="shot" ? Math.Clamp(55-(o.DistanceMeters??55)*1.2m+(o.GoalOpeningDegrees??0)*1.1m,0,80)
+                : o.Type=="pass" ? Math.Clamp(20+progression*1.3m+Math.Min(o.NearestOpponentMeters??0,12),0,80)
+                : Math.Clamp(15+progression*2,0,40);
+            var risk=o.Corridor=="Blocked" ? 55m : o.Corridor=="Contested" ? 30m : 10m;
+            if(o.Type=="pass") risk+=Math.Max(0,(o.DistanceMeters??0)-25)*.4m+Math.Max(0,4-(o.NearestOpponentMeters??4))*5;
+            if(o.Type=="shot") risk+=Math.Max(0,(o.DistanceMeters??0)-25)*.6m;
+            risk=Math.Min(90,risk);
+            return o with { ProgressionMeters=Math.Round(progression,2), Benefit=Math.Round(benefit,2), Risk=Math.Round(risk,2), ComparativeValue=Math.Round(benefit-riskWeight*risk,2) };
+        }).ToArray();
+        var chosen=options.Single(o=>o.OptionId==snapshot.Decision.SelectedOptionId);
+        var ranked=options.Where(o=>o.ComparativeValue.HasValue).OrderByDescending(o=>o.ComparativeValue).ToArray();
+        var sufficient=chosen.ComparativeValue.HasValue && ranked.Length>=2;
+        var best=ranked.FirstOrDefault();
+        var gap=sufficient ? best!.ComparativeValue!.Value-chosen.ComparativeValue!.Value : 0;
+        var label=!sufficient ? "Insufficient context" : gap>=15 ? "Better visible alternative" : chosen.Risk>=55 ? "High-risk choice" : "Reasonable choice";
+        var explanation=!sufficient ? "At least two assessable options are needed for a comparative verdict. The recorded outcome alone cannot establish decision quality." :
+            $"Chosen action: {chosen.Corridor.ToLowerInvariant()} corridor" +
+            (chosen.Type=="shot" ? $", {chosen.DistanceMeters} m from goal and {chosen.GoalOpeningDegrees}° goal opening." : $", {chosen.ProgressionMeters} m forward progress.") +
+            (gap>=15 ? " Another supplied option offers a better balance of progression, space and visible risk." : " No supplied option has a clearly stronger balance of benefit and risk.") +
+            " This is a provisional comparison of visible options, not a proven optimal decision.";
+        return new(snapshot,options,snapshot.PreDecision.Players.Count,opponents.Length,
+            "Synthetic partial snapshot. Unseen players, offside, movement and ball speed remain unknown. Comparison scores are uncalibrated rules, not success probabilities. The recorded outcome does not affect the verdict.")
+            { Verdict=new(label,sufficient && gap>=15 ? best!.OptionId : null,explanation,situation) };
     }
 }

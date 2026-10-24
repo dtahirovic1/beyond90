@@ -77,6 +77,18 @@
               "string",
               "null"
             ]
+          },
+          "dominantFoot": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "Left",
+              "Right",
+              "Both",
+              null
+            ]
           }
         },
         "additionalProperties": false
@@ -135,7 +147,8 @@
               "Shot",
               "Tackle",
               "Pressure",
-              "PossessionChange"
+              "PossessionChange",
+              "Recovery"
             ]
           },
           "x": {
@@ -181,9 +194,11 @@
           "sceneId",
           "matchContext",
           "pitch",
-          "decisionSnapshot",
+          "preDecision",
           "decision",
-          "recordedOutcome"
+          "recordedOutcome",
+          "matchId",
+          "eventId"
         ],
         "properties": {
           "sceneId": {
@@ -192,35 +207,56 @@
           },
           "matchContext": {
             "type": "object",
-            "required": ["minute", "score", "phase", "possessionId"],
+            "required": [
+              "minute",
+              "score",
+              "phase",
+              "possessionId",
+              "second"
+            ],
             "properties": {
               "minute": {
                 "type": "integer",
                 "minimum": 0
               },
               "score": {
-                "type": "object",
-                "required": ["arsenal", "chelsea"],
-                "properties": {
-                  "arsenal": { "type": "integer", "minimum": 0 },
-                  "chelsea": { "type": "integer", "minimum": 0 }
-                },
-                "additionalProperties": false
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "additionalProperties": {
+                  "type": "integer",
+                  "minimum": 0
+                }
               },
               "phase": {
-                "type": "string",
-                "minLength": 1
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "possessionId": {
-                "type": "string",
-                "minLength": 1
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "second": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 59
               }
             },
             "additionalProperties": false
           },
           "pitch": {
             "type": "object",
-            "required": ["coordinateUnits", "lengthMeters", "widthMeters", "attackDirection"],
+            "required": [
+              "coordinateUnits",
+              "lengthMeters",
+              "widthMeters",
+              "attackDirection"
+            ],
             "properties": {
               "coordinateUnits": {
                 "type": "string",
@@ -236,46 +272,12 @@
               },
               "attackDirection": {
                 "type": "object",
-                "required": ["arsenal", "chelsea"],
-                "properties": {
-                  "arsenal": { "type": "string", "minLength": 1 },
-                  "chelsea": { "type": "string", "minLength": 1 }
-                },
-                "additionalProperties": false
-              }
-            },
-            "additionalProperties": false
-          },
-          "decisionSnapshot": {
-            "type": "object",
-            "required": ["secondsBeforeAction", "ball", "players"],
-            "properties": {
-              "secondsBeforeAction": {
-                "type": "integer",
-                "minimum": 0
-              },
-              "ball": {
-                "type": "object",
-                "required": ["x", "y"],
-                "properties": {
-                  "x": { "type": "integer", "minimum": 0, "maximum": 100 },
-                  "y": { "type": "integer", "minimum": 0, "maximum": 100 }
-                },
-                "additionalProperties": false
-              },
-              "players": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "required": ["id", "teamId", "x", "y"],
-                  "properties": {
-                    "id": { "type": "string", "minLength": 1 },
-                    "teamId": { "type": "string", "minLength": 1 },
-                    "x": { "type": "integer", "minimum": 0, "maximum": 100 },
-                    "y": { "type": "integer", "minimum": 0, "maximum": 100 },
-                    "role": { "type": "string", "minLength": 1 }
-                  },
-                  "additionalProperties": false
+                "minProperties": 2,
+                "additionalProperties": {
+                  "enum": [
+                    "left_to_right",
+                    "right_to_left"
+                  ]
                 }
               }
             },
@@ -283,23 +285,59 @@
           },
           "decision": {
             "type": "object",
-            "required": ["playerId", "selectedOptionId", "options"],
+            "required": [
+              "playerId",
+              "selectedOptionId",
+              "options"
+            ],
             "properties": {
-              "playerId": { "type": "string", "minLength": 1 },
-              "selectedOptionId": { "type": "string", "minLength": 1 },
-              "bodyPartUsed": { "type": "string", "minLength": 1 },
+              "playerId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "selectedOptionId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "bodyPartUsed": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "left_foot",
+                  "right_foot",
+                  "head",
+                  "other",
+                  null
+                ]
+              },
               "options": {
                 "type": "array",
                 "items": {
                   "type": "object",
-                  "required": ["id", "type"],
+                  "required": [
+                    "id",
+                    "type"
+                  ],
                   "properties": {
-                    "id": { "type": "string", "minLength": 1 },
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
                     "type": {
                       "type": "string",
-                      "enum": ["pass", "shot", "dribble"]
+                      "enum": [
+                        "pass",
+                        "shot",
+                        "dribble",
+                        "tackle"
+                      ]
                     },
-                    "receiverId": { "type": "string", "minLength": 1 }
+                    "receiverId": {
+                      "type": "string",
+                      "minLength": 1
+                    }
                   },
                   "additionalProperties": false
                 }
@@ -308,15 +346,97 @@
             "additionalProperties": false
           },
           "recordedOutcome": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "preDecision": {
+            "type": "object",
+            "required": [
+              "secondsBeforeAction",
+              "ball",
+              "players"
+            ],
+            "properties": {
+              "secondsBeforeAction": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "ball": {
+                "type": "object",
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "properties": {
+                  "x": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "y": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100
+                  }
+                },
+                "additionalProperties": false
+              },
+              "players": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "teamId",
+                    "x",
+                    "y"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "teamId": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "x": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "y": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "role": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "matchId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "eventId": {
+            "type": "string",
+            "minLength": 1
           }
         },
         "additionalProperties": false
       }
     },
     "dataStatus": {
-      "type": "string",
-      "const": "Sintetička simulacija — nije stvarna utakmica"
+      "type": "string"
     },
     "rosterSeason": {
       "type": "string",
@@ -328,6 +448,60 @@
     "rosterSourceUrl": {
       "type": "string",
       "format": "uri"
+    },
+    "scenarioLabel": {
+      "type": "string"
+    },
+    "goalLogComplete": {
+      "type": "boolean"
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "home",
+        "away"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "home": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "away": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "goals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "eventId",
+          "teamId",
+          "minute",
+          "second"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "eventId": {
+            "type": "string"
+          },
+          "teamId": {
+            "type": "string"
+          },
+          "minute": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "second": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 59
+          }
+        }
+      }
     }
   },
   "additionalProperties": false

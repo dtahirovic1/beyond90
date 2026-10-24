@@ -1319,76 +1319,388 @@
     {
       "sceneId": "leeds-scene-002-a",
       "matchContext": {
-        "minute": 3,
-        "score": { "leeds": 0, "chelsea": 0 },
+        "minute": 9,
+        "score": {
+          "leeds": 0,
+          "chelsea": 0
+        },
         "phase": "settled_attack",
-        "possessionId": "pos-003"
+        "possessionId": "pos-003",
+        "second": 2
       },
       "pitch": {
         "coordinateUnits": "normalized_0_100",
         "lengthMeters": 105,
         "widthMeters": 68,
-        "attackDirection": { "leeds": "left_to_right", "chelsea": "right_to_left" }
-      },
-      "decisionSnapshot": {
-        "secondsBeforeAction": 0,
-        "ball": { "x": 50, "y": 67 },
-        "players": [
-          { "id": "lee-9", "teamId": "leeds", "x": 50, "y": 67, "role": "striker" },
-          { "id": "lee-4", "teamId": "leeds", "x": 44, "y": 60, "role": "defensive midfielder" },
-          { "id": "lee-5", "teamId": "leeds", "x": 56, "y": 72, "role": "centre-back" },
-          { "id": "che-25", "teamId": "chelsea", "x": 48, "y": 62, "role": "midfielder" },
-          { "id": "che-24", "teamId": "chelsea", "x": 46, "y": 70, "role": "defender" }
-        ]
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "chelsea": "right_to_left"
+        }
       },
       "decision": {
         "playerId": "lee-9",
         "selectedOptionId": "pass-lee-4",
         "bodyPartUsed": "left_foot",
         "options": [
-          { "id": "pass-lee-4", "type": "pass", "receiverId": "lee-4" },
-          { "id": "shot", "type": "shot" },
-          { "id": "carry", "type": "dribble" }
+          {
+            "id": "pass-lee-4",
+            "type": "pass",
+            "receiverId": "lee-4"
+          },
+          {
+            "id": "shot",
+            "type": "shot"
+          },
+          {
+            "id": "carry",
+            "type": "dribble"
+          }
         ]
       },
-      "recordedOutcome": "completed"
+      "recordedOutcome": "Completed",
+      "matchId": "leeds-sim-002",
+      "eventId": "leeds-sim-002-evt-009",
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 45,
+          "y": 87
+        },
+        "players": [
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 45,
+            "y": 87,
+            "role": "striker"
+          },
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 39,
+            "y": 80,
+            "role": "defensive midfielder"
+          },
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 51,
+            "y": 92,
+            "role": "centre-back"
+          },
+          {
+            "id": "che-25",
+            "teamId": "chelsea",
+            "x": 43,
+            "y": 82,
+            "role": "midfielder"
+          },
+          {
+            "id": "che-24",
+            "teamId": "chelsea",
+            "x": 41,
+            "y": 90,
+            "role": "defender"
+          }
+        ]
+      }
     },
     {
       "sceneId": "leeds-scene-002-b",
       "matchContext": {
         "minute": 1,
-        "score": { "leeds": 0, "chelsea": 0 },
+        "score": {
+          "leeds": 0,
+          "chelsea": 0
+        },
         "phase": "defensive_duel",
-        "possessionId": "pos-001"
+        "possessionId": "pos-001",
+        "second": 4
       },
       "pitch": {
         "coordinateUnits": "normalized_0_100",
         "lengthMeters": 105,
         "widthMeters": 68,
-        "attackDirection": { "leeds": "left_to_right", "chelsea": "right_to_left" }
-      },
-      "decisionSnapshot": {
-        "secondsBeforeAction": 0,
-        "ball": { "x": 87, "y": 30 },
-        "players": [
-          { "id": "lee-5", "teamId": "leeds", "x": 87, "y": 30, "role": "centre-back" },
-          { "id": "lee-4", "teamId": "leeds", "x": 82, "y": 25, "role": "defensive midfielder" },
-          { "id": "lee-9", "teamId": "leeds", "x": 75, "y": 35, "role": "striker" },
-          { "id": "che-10", "teamId": "chelsea", "x": 88, "y": 28, "role": "attacking midfielder" },
-          { "id": "che-25", "teamId": "chelsea", "x": 90, "y": 35, "role": "midfielder" }
-        ]
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "chelsea": "right_to_left"
+        }
       },
       "decision": {
         "playerId": "lee-5",
         "selectedOptionId": "tackle",
         "bodyPartUsed": "right_foot",
         "options": [
-          { "id": "tackle", "type": "dribble" },
-          { "id": "pass-lee-4", "type": "pass", "receiverId": "lee-4" },
-          { "id": "carry", "type": "dribble" }
+          {
+            "id": "tackle",
+            "type": "tackle"
+          }
         ]
       },
-      "recordedOutcome": "lost"
+      "recordedOutcome": "Lost",
+      "matchId": "leeds-sim-002",
+      "eventId": "leeds-sim-002-evt-001",
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 87,
+          "y": 30
+        },
+        "players": [
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 87,
+            "y": 30,
+            "role": "centre-back"
+          },
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 82,
+            "y": 25,
+            "role": "defensive midfielder"
+          },
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 75,
+            "y": 35,
+            "role": "striker"
+          },
+          {
+            "id": "che-10",
+            "teamId": "chelsea",
+            "x": 88,
+            "y": 28,
+            "role": "attacking midfielder"
+          },
+          {
+            "id": "che-25",
+            "teamId": "chelsea",
+            "x": 90,
+            "y": 35,
+            "role": "midfielder"
+          }
+        ]
+      }
+    },
+    {
+      "sceneId": "leeds-sim-002-lee-4",
+      "matchId": "leeds-sim-002",
+      "eventId": "leeds-sim-002-evt-008",
+      "matchContext": {
+        "minute": 8,
+        "second": 14,
+        "score": {
+          "leeds": 0,
+          "chelsea": 0
+        },
+        "phase": "synthetic_action",
+        "possessionId": null
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "chelsea": "right_to_left"
+        }
+      },
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 79,
+          "y": 47
+        },
+        "players": [
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 79,
+            "y": 47,
+            "role": "Defensive midfielder"
+          },
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 65,
+            "y": 63,
+            "role": "Centre-back"
+          },
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 71,
+            "y": 29,
+            "role": "Striker"
+          },
+          {
+            "id": "che-10",
+            "teamId": "chelsea",
+            "x": 88,
+            "y": 59,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "che-24",
+            "teamId": "chelsea",
+            "x": 94,
+            "y": 37,
+            "role": "Defender"
+          },
+          {
+            "id": "che-25",
+            "teamId": "chelsea",
+            "x": 98,
+            "y": 71,
+            "role": "Midfielder"
+          }
+        ]
+      },
+      "decision": {
+        "playerId": "lee-4",
+        "selectedOptionId": "pass-lee-5",
+        "bodyPartUsed": null,
+        "options": [
+          {
+            "id": "pass-lee-5",
+            "type": "pass",
+            "receiverId": "lee-5"
+          },
+          {
+            "id": "pass-lee-9",
+            "type": "pass",
+            "receiverId": "lee-9"
+          },
+          {
+            "id": "shot",
+            "type": "shot"
+          },
+          {
+            "id": "carry",
+            "type": "dribble"
+          }
+        ]
+      },
+      "recordedOutcome": "Completed"
+    },
+    {
+      "sceneId": "leeds-sim-002-late-decision",
+      "matchId": "leeds-sim-002",
+      "eventId": "leeds-sim-002-evt-080",
+      "matchContext": {
+        "minute": 80,
+        "second": 37,
+        "score": {
+          "leeds": 0,
+          "chelsea": 1
+        },
+        "phase": "synthetic_action",
+        "possessionId": null
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "chelsea": "right_to_left"
+        }
+      },
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 57,
+          "y": 21
+        },
+        "players": [
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 57,
+            "y": 21,
+            "role": "Defensive midfielder"
+          },
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 43,
+            "y": 37,
+            "role": "Centre-back"
+          },
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 49,
+            "y": 3,
+            "role": "Striker"
+          },
+          {
+            "id": "che-10",
+            "teamId": "chelsea",
+            "x": 66,
+            "y": 33,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "che-24",
+            "teamId": "chelsea",
+            "x": 72,
+            "y": 11,
+            "role": "Defender"
+          },
+          {
+            "id": "che-25",
+            "teamId": "chelsea",
+            "x": 76,
+            "y": 45,
+            "role": "Midfielder"
+          }
+        ]
+      },
+      "decision": {
+        "playerId": "lee-4",
+        "selectedOptionId": "pass-lee-5",
+        "bodyPartUsed": null,
+        "options": [
+          {
+            "id": "pass-lee-5",
+            "type": "pass",
+            "receiverId": "lee-5"
+          },
+          {
+            "id": "pass-lee-9",
+            "type": "pass",
+            "receiverId": "lee-9"
+          },
+          {
+            "id": "shot",
+            "type": "shot"
+          },
+          {
+            "id": "carry",
+            "type": "dribble"
+          }
+        ]
+      },
+      "recordedOutcome": "Completed"
     }
-  ]
+  ],
+  "rosterSource": "User-selected scenario roster; action data and positions are synthetic",
+  "rosterSourceUrl": "https://www.leedsunited.com/",
+  "goalLogComplete": true,
+  "goals": [
+    {
+      "eventId": "leeds-sim-002-evt-028",
+      "teamId": "chelsea",
+      "minute": 28,
+      "second": 42
+    }
+  ],
+  "result": {
+    "home": 0,
+    "away": 1
+  }
 }

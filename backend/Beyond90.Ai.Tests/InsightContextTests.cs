@@ -50,8 +50,8 @@ public sealed class InsightContextTests
         Assert.False(root.TryGetProperty("selectionMetrics", out _));
         Assert.False(root.TryGetProperty("matchTotals", out _));
         Assert.False(root.TryGetProperty("selectedEventIds", out _));
-        Assert.False(selected.TryGetProperty("eventId", out _));
-        Assert.False(selected.TryGetProperty("x", out _));
-        Assert.False(selected.TryGetProperty("y", out _));
+        Assert.Equal(eventId, selected.GetProperty("eventId").GetString());
+        Assert.True(selected.TryGetProperty("x", out _));
+        Assert.True(selected.TryGetProperty("y", out _));
     }
 }

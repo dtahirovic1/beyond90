@@ -15,4 +15,5 @@ public sealed class MatchEvent
     public string? Outcome { get; set; }
     public bool? UnderPressure { get; set; }
     public List<string>? ReceiverOptions { get; set; }
+    public Dictionary<string, int>? ScoreBefore { get; set; }
 }

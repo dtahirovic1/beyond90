@@ -1,17 +1,28 @@
-# Backend integration review — 24 October 2026
+# Decision scene integration
 
-Reviewed Amir commit e6663d3723ede3b42ff6aee5f352f14c7de1c019. Its four files are preserved unchanged during integration.
+Status: implemented locally, pending user review and push approval.
 
-Useful foundation: typed player/ball positions, available decision options, selected option, body part and a dominant-foot enum. The three example scenes are consistent with the old event sample's player, minute, location and outcome.
+- Thirteen synthetic, action-time spatial snapshots across three Leeds scenarios. Each tracked player has a scene in each match. The remaining events have no spatial snapshot.
+- Every snapshot names its match and event; timestamp, actor, outcome, team directions, options and positions are validated on loading.
+- The old JSON field `decisionSnapshot` was renamed to `preDecision`; team score and attack direction maps are generic. Unknown scores remain null.
+- Corrected legacy scene with a pass option lacking a receiver. Existing Leeds scenes were linked to compatible actor/actions; when the actor moved, the whole local formation moved with it.
+- Defensive tackle scenes do not claim possession or attacking alternatives.
+- GET /api/matches/{id}/decisions returns snapshot, computed options and coverage.
+- Event insights receive only that event's scene. Player/coach reports include relevant scenes with match/event IDs and explicit partial coverage. Statistics still use recorded events only.
+- The pitch and AI share the same validated scene and computed descriptors. Missing scenes show the single recorded action, without invented teammates or ball destinations.
 
-Required before enabling spatial analysis:
+## Geometry
+Coordinates use 0..100, converted to metres with the scene's pitch dimensions. Pass clearance is the minimum distance of a visible opponent to the bounded passing segment, including endpoints. Labels use 2 m (Blocked) and 4 m (Contested); larger clearances are Open among visible players only. No supplied opponents means Unknown.
 
-1. JSON uses `decisionSnapshot` for the pre-action state, while `DecisionSnapshot.cs` calls its constructor property `PreDecision` (web JSON expects `preDecision`). Without an explicit mapping, the model does not receive that object.
-2. `AttackDirection(string Arsenal, string Chelsea)` and `MatchScore(int Arsenal, int Chelsea)` plus the schema hardcode two clubs. Use team-ID dictionaries or explicit home/away fields for Leeds and all opponents.
-3. A scene has no `eventId`. Add an explicit reference to the existing event; minute alone is not an unambiguous link to one action. Validate match/player/receiver references and `selectedOptionId` membership.
-4. MatchStore's deserialized fixture class has no snapshot property and the Foundry mapper sends only name, team, action, outcome and pressure. Nothing in the new scene reaches the running API or GPT yet.
-5. The runtime now loads `data/synthetic/leeds/*.json`; Amir's scenes are in the historical `match-demo.json`. The schema now requires decisionSnapshots but the Leeds samples have none. The old schema also has its original fixed dataStatus and no scenarioLabel property. Define a shared multi-club schema before treating those samples as schema-valid.
-6. `DominantFoot` is added only to C#: there are no player values in the fixtures and the schema's player object does not allow the property. Add aligned schema/type/value handling. String enum JSON requires JsonStringEnumConverter in fixture loading when these values are populated.
-7. `LaneCategory` has no calculation or use yet. Listed pass/shot/dribble options do not establish their feasibility or probabilities. Distances, passing-lane checks and uncertainty handling still need implementation and validation.
+Shots target the correct goal centre using attack direction; output includes distance, goal opening angle (7.32 m goal width) and static centre-line obstruction. This is not xG or a full goal-mouth obstruction model.
 
-The push of the Leeds UI includes its existing catalogue/report API dependencies. It does not claim that the new snapshot analysis is connected or evaluated. No live paid Azure requests are needed for these compatibility checks.
+Dribbles examine a forward corridor up to 10 m, capped at the goal line. Space ahead stops 2 m before a visible obstacle in that corridor. Distance to the goal line is reported separately. No movement, acceleration, ball speed, offside, goalkeeper reach, fatigue or success probability is inferred.
+
+The scenes show only 5 or 6 players; missing defenders may change every option assessment. Selecting an option shows a proposed path, not measured ball travel. See decision-assessment.md for the benefit/risk comparison and score ledger.
+
+## Previous integration verification
+30 AI/integration/geometry tests pass, including endpoint obstruction, mirrored attacks, cross-match references, invalid receivers and selected-scene payload filtering. JSON Schema validation passes for all four fixture files. Frontend TypeScript and production build pass. Azure requests were verified with a fake HTTP handler; no paid model call was made.
+
+
+## Decision upgrade verification
+29 targeted tests passed (decision geometry, verdicts, score timing, reports and request context); TypeScript and production build passed. No live model quality evaluation was performed in this update.

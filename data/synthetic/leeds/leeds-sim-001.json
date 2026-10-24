@@ -41,9 +41,9 @@
       "teamId": "arsenal"
     },
     {
-      "id": "ars-8",
-      "name": "Martin Ødegaard",
-      "position": "Midfielder",
+      "id": "ars-4",
+      "name": "Ben White",
+      "position": "Defender",
       "teamId": "arsenal"
     },
     {
@@ -121,7 +121,7 @@
       "minute": 5,
       "second": 59,
       "teamId": "arsenal",
-      "playerId": "ars-8",
+      "playerId": "ars-4",
       "type": "Pressure",
       "x": 60,
       "y": 84,
@@ -211,7 +211,7 @@
       "minute": 11,
       "second": 30,
       "teamId": "arsenal",
-      "playerId": "ars-8",
+      "playerId": "ars-4",
       "type": "Pass",
       "x": 32,
       "y": 86,
@@ -301,7 +301,7 @@
       "minute": 17,
       "second": 48,
       "teamId": "arsenal",
-      "playerId": "ars-8",
+      "playerId": "ars-4",
       "type": "Recovery",
       "x": 81,
       "y": 83,
@@ -391,7 +391,7 @@
       "minute": 23,
       "second": 2,
       "teamId": "arsenal",
-      "playerId": "ars-8",
+      "playerId": "ars-4",
       "type": "PossessionChange",
       "x": 68,
       "y": 46,
@@ -481,7 +481,7 @@
       "minute": 29,
       "second": 7,
       "teamId": "arsenal",
-      "playerId": "ars-8",
+      "playerId": "ars-4",
       "type": "Pass",
       "x": 89,
       "y": 71,
@@ -571,7 +571,7 @@
       "minute": 35,
       "second": 12,
       "teamId": "arsenal",
-      "playerId": "ars-8",
+      "playerId": "ars-4",
       "type": "Recovery",
       "x": 51,
       "y": 19,
@@ -661,7 +661,7 @@
       "minute": 41,
       "second": 16,
       "teamId": "arsenal",
-      "playerId": "ars-8",
+      "playerId": "ars-4",
       "type": "Pass",
       "x": 47,
       "y": 61,
@@ -751,7 +751,7 @@
       "minute": 47,
       "second": 46,
       "teamId": "arsenal",
-      "playerId": "ars-8",
+      "playerId": "ars-4",
       "type": "PossessionChange",
       "x": 24,
       "y": 83,
@@ -841,7 +841,7 @@
       "minute": 53,
       "second": 49,
       "teamId": "arsenal",
-      "playerId": "ars-8",
+      "playerId": "ars-4",
       "type": "Pass",
       "x": 70,
       "y": 57,
@@ -931,7 +931,7 @@
       "minute": 59,
       "second": 29,
       "teamId": "arsenal",
-      "playerId": "ars-8",
+      "playerId": "ars-4",
       "type": "Pressure",
       "x": 37,
       "y": 60,
@@ -1021,7 +1021,7 @@
       "minute": 65,
       "second": 56,
       "teamId": "arsenal",
-      "playerId": "ars-8",
+      "playerId": "ars-4",
       "type": "Pressure",
       "x": 38,
       "y": 66,
@@ -1111,7 +1111,7 @@
       "minute": 71,
       "second": 5,
       "teamId": "arsenal",
-      "playerId": "ars-8",
+      "playerId": "ars-4",
       "type": "Recovery",
       "x": 61,
       "y": 76,
@@ -1201,7 +1201,7 @@
       "minute": 77,
       "second": 43,
       "teamId": "arsenal",
-      "playerId": "ars-8",
+      "playerId": "ars-4",
       "type": "PossessionChange",
       "x": 49,
       "y": 28,
@@ -1291,7 +1291,7 @@
       "minute": 83,
       "second": 25,
       "teamId": "arsenal",
-      "playerId": "ars-8",
+      "playerId": "ars-4",
       "type": "Pass",
       "x": 71,
       "y": 39,
@@ -1320,75 +1320,489 @@
       "sceneId": "leeds-scene-001-a",
       "matchContext": {
         "minute": 1,
-        "score": { "leeds": 0, "arsenal": 0 },
+        "score": {
+          "leeds": 0,
+          "arsenal": 0
+        },
         "phase": "build_up",
-        "possessionId": "pos-001"
+        "possessionId": "pos-001",
+        "second": 48
       },
       "pitch": {
         "coordinateUnits": "normalized_0_100",
         "lengthMeters": 105,
         "widthMeters": 68,
-        "attackDirection": { "leeds": "left_to_right", "arsenal": "right_to_left" }
-      },
-      "decisionSnapshot": {
-        "secondsBeforeAction": 0,
-        "ball": { "x": 74, "y": 46 },
-        "players": [
-          { "id": "lee-5", "teamId": "leeds", "x": 74, "y": 46, "role": "centre-back" },
-          { "id": "lee-4", "teamId": "leeds", "x": 68, "y": 52, "role": "defensive midfielder" },
-          { "id": "lee-9", "teamId": "leeds", "x": 55, "y": 38, "role": "striker" },
-          { "id": "ars-7", "teamId": "arsenal", "x": 82, "y": 40, "role": "winger" },
-          { "id": "ars-8", "teamId": "arsenal", "x": 78, "y": 52, "role": "midfielder" }
-        ]
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "arsenal": "right_to_left"
+        }
       },
       "decision": {
         "playerId": "lee-5",
         "selectedOptionId": "pass-lee-4",
         "bodyPartUsed": "right_foot",
         "options": [
-          { "id": "pass-lee-4", "type": "pass", "receiverId": "lee-4" },
-          { "id": "pass-lee-9", "type": "pass", "receiverId": "lee-9" },
-          { "id": "carry", "type": "dribble" }
+          {
+            "id": "pass-lee-4",
+            "type": "pass",
+            "receiverId": "lee-4"
+          },
+          {
+            "id": "pass-lee-9",
+            "type": "pass",
+            "receiverId": "lee-9"
+          },
+          {
+            "id": "carry",
+            "type": "dribble"
+          }
         ]
       },
-      "recordedOutcome": "completed"
+      "recordedOutcome": "Completed",
+      "matchId": "leeds-sim-001",
+      "eventId": "leeds-sim-001-evt-001",
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 74,
+          "y": 46
+        },
+        "players": [
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 74,
+            "y": 46,
+            "role": "centre-back"
+          },
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 68,
+            "y": 52,
+            "role": "defensive midfielder"
+          },
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 55,
+            "y": 38,
+            "role": "striker"
+          },
+          {
+            "id": "ars-7",
+            "teamId": "arsenal",
+            "x": 82,
+            "y": 40,
+            "role": "winger"
+          },
+          {
+            "id": "ars-4",
+            "teamId": "arsenal",
+            "x": 78,
+            "y": 52,
+            "role": "midfielder"
+          }
+        ]
+      }
     },
     {
       "sceneId": "leeds-scene-001-b",
       "matchContext": {
-        "minute": 5,
-        "score": { "leeds": 0, "arsenal": 0 },
+        "minute": 25,
+        "score": {
+          "leeds": 0,
+          "arsenal": 0
+        },
         "phase": "defensive_transition",
-        "possessionId": "pos-005"
+        "possessionId": "pos-005",
+        "second": 43
       },
       "pitch": {
         "coordinateUnits": "normalized_0_100",
         "lengthMeters": 105,
         "widthMeters": 68,
-        "attackDirection": { "leeds": "left_to_right", "arsenal": "right_to_left" }
-      },
-      "decisionSnapshot": {
-        "secondsBeforeAction": 0,
-        "ball": { "x": 60, "y": 84 },
-        "players": [
-          { "id": "lee-5", "teamId": "leeds", "x": 60, "y": 84, "role": "centre-back" },
-          { "id": "lee-4", "teamId": "leeds", "x": 55, "y": 78, "role": "defensive midfielder" },
-          { "id": "lee-9", "teamId": "leeds", "x": 48, "y": 70, "role": "striker" },
-          { "id": "ars-8", "teamId": "arsenal", "x": 60, "y": 84, "role": "midfielder" },
-          { "id": "ars-41", "teamId": "arsenal", "x": 64, "y": 78, "role": "midfielder" }
-        ]
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "arsenal": "right_to_left"
+        }
       },
       "decision": {
         "playerId": "lee-5",
         "selectedOptionId": "tackle",
         "bodyPartUsed": "right_foot",
         "options": [
-          { "id": "tackle", "type": "dribble" },
-          { "id": "pass-lee-4", "type": "pass", "receiverId": "lee-4" },
-          { "id": "carry", "type": "dribble" }
+          {
+            "id": "tackle",
+            "type": "tackle"
+          }
         ]
       },
-      "recordedOutcome": "lost"
+      "recordedOutcome": "Lost",
+      "matchId": "leeds-sim-001",
+      "eventId": "leeds-sim-001-evt-025",
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 39,
+          "y": 84
+        },
+        "players": [
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 39,
+            "y": 84,
+            "role": "centre-back"
+          },
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 34,
+            "y": 78,
+            "role": "defensive midfielder"
+          },
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 27,
+            "y": 70,
+            "role": "striker"
+          },
+          {
+            "id": "ars-4",
+            "teamId": "arsenal",
+            "x": 39,
+            "y": 84,
+            "role": "midfielder"
+          },
+          {
+            "id": "ars-41",
+            "teamId": "arsenal",
+            "x": 43,
+            "y": 78,
+            "role": "midfielder"
+          }
+        ]
+      }
+    },
+    {
+      "sceneId": "leeds-sim-001-lee-4",
+      "matchId": "leeds-sim-001",
+      "eventId": "leeds-sim-001-evt-008",
+      "matchContext": {
+        "minute": 8,
+        "second": 22,
+        "score": {
+          "leeds": 0,
+          "arsenal": 0
+        },
+        "phase": "synthetic_action",
+        "possessionId": null
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "arsenal": "right_to_left"
+        }
+      },
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 15,
+          "y": 67
+        },
+        "players": [
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 15,
+            "y": 67,
+            "role": "Defensive midfielder"
+          },
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 2,
+            "y": 83,
+            "role": "Centre-back"
+          },
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 7,
+            "y": 49,
+            "role": "Striker"
+          },
+          {
+            "id": "ars-7",
+            "teamId": "arsenal",
+            "x": 24,
+            "y": 79,
+            "role": "Winger"
+          },
+          {
+            "id": "ars-4",
+            "teamId": "arsenal",
+            "x": 30,
+            "y": 57,
+            "role": "Midfielder"
+          },
+          {
+            "id": "ars-41",
+            "teamId": "arsenal",
+            "x": 37,
+            "y": 91,
+            "role": "Midfielder"
+          }
+        ]
+      },
+      "decision": {
+        "playerId": "lee-4",
+        "selectedOptionId": "pass-lee-5",
+        "bodyPartUsed": null,
+        "options": [
+          {
+            "id": "pass-lee-5",
+            "type": "pass",
+            "receiverId": "lee-5"
+          },
+          {
+            "id": "pass-lee-9",
+            "type": "pass",
+            "receiverId": "lee-9"
+          },
+          {
+            "id": "shot",
+            "type": "shot"
+          },
+          {
+            "id": "carry",
+            "type": "dribble"
+          }
+        ]
+      },
+      "recordedOutcome": "Incomplete"
+    },
+    {
+      "sceneId": "leeds-sim-001-lee-9",
+      "matchId": "leeds-sim-001",
+      "eventId": "leeds-sim-001-evt-009",
+      "matchContext": {
+        "minute": 9,
+        "second": 8,
+        "score": {
+          "leeds": 0,
+          "arsenal": 0
+        },
+        "phase": "synthetic_action",
+        "possessionId": null
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "arsenal": "right_to_left"
+        }
+      },
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 87,
+          "y": 44
+        },
+        "players": [
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 87,
+            "y": 44,
+            "role": "Striker"
+          },
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 73,
+            "y": 60,
+            "role": "Centre-back"
+          },
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 79,
+            "y": 26,
+            "role": "Defensive midfielder"
+          },
+          {
+            "id": "ars-7",
+            "teamId": "arsenal",
+            "x": 96,
+            "y": 56,
+            "role": "Winger"
+          },
+          {
+            "id": "ars-4",
+            "teamId": "arsenal",
+            "x": 98,
+            "y": 34,
+            "role": "Midfielder"
+          },
+          {
+            "id": "ars-41",
+            "teamId": "arsenal",
+            "x": 98,
+            "y": 68,
+            "role": "Midfielder"
+          }
+        ]
+      },
+      "decision": {
+        "playerId": "lee-9",
+        "selectedOptionId": "shot",
+        "bodyPartUsed": null,
+        "options": [
+          {
+            "id": "pass-lee-5",
+            "type": "pass",
+            "receiverId": "lee-5"
+          },
+          {
+            "id": "pass-lee-4",
+            "type": "pass",
+            "receiverId": "lee-4"
+          },
+          {
+            "id": "shot",
+            "type": "shot"
+          },
+          {
+            "id": "carry",
+            "type": "dribble"
+          }
+        ]
+      },
+      "recordedOutcome": "Saved"
+    },
+    {
+      "sceneId": "leeds-sim-001-late-decision",
+      "matchId": "leeds-sim-001",
+      "eventId": "leeds-sim-001-evt-080",
+      "matchContext": {
+        "minute": 80,
+        "second": 42,
+        "score": {
+          "leeds": 1,
+          "arsenal": 0
+        },
+        "phase": "synthetic_action",
+        "possessionId": null
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "arsenal": "right_to_left"
+        }
+      },
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 69,
+          "y": 87
+        },
+        "players": [
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 69,
+            "y": 87,
+            "role": "Defensive midfielder"
+          },
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 56,
+            "y": 100,
+            "role": "Centre-back"
+          },
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 61,
+            "y": 69,
+            "role": "Striker"
+          },
+          {
+            "id": "ars-7",
+            "teamId": "arsenal",
+            "x": 78,
+            "y": 99,
+            "role": "Winger"
+          },
+          {
+            "id": "ars-4",
+            "teamId": "arsenal",
+            "x": 84,
+            "y": 77,
+            "role": "Midfielder"
+          },
+          {
+            "id": "ars-41",
+            "teamId": "arsenal",
+            "x": 91,
+            "y": 100,
+            "role": "Midfielder"
+          }
+        ]
+      },
+      "decision": {
+        "playerId": "lee-4",
+        "selectedOptionId": "pass-lee-5",
+        "bodyPartUsed": null,
+        "options": [
+          {
+            "id": "pass-lee-5",
+            "type": "pass",
+            "receiverId": "lee-5"
+          },
+          {
+            "id": "pass-lee-9",
+            "type": "pass",
+            "receiverId": "lee-9"
+          },
+          {
+            "id": "shot",
+            "type": "shot"
+          },
+          {
+            "id": "carry",
+            "type": "dribble"
+          }
+        ]
+      },
+      "recordedOutcome": "Completed"
     }
-  ]
+  ],
+  "rosterSource": "User-selected scenario roster; action data and positions are synthetic",
+  "rosterSourceUrl": "https://www.leedsunited.com/",
+  "goalLogComplete": true,
+  "goals": [
+    {
+      "eventId": "leeds-sim-001-evt-062",
+      "teamId": "leeds",
+      "minute": 62,
+      "second": 18
+    }
+  ],
+  "result": {
+    "home": 1,
+    "away": 0
+  }
 }

@@ -261,114 +261,264 @@
       "sceneId": "scene-001",
       "matchContext": {
         "minute": 2,
-        "score": { "arsenal": 0, "chelsea": 0 },
+        "score": null,
         "phase": "settled_attack",
-        "possessionId": "pos-001"
+        "possessionId": "pos-001",
+        "second": 8
       },
       "pitch": {
         "coordinateUnits": "normalized_0_100",
         "lengthMeters": 105,
         "widthMeters": 68,
-        "attackDirection": { "arsenal": "left_to_right", "chelsea": "right_to_left" }
-      },
-      "decisionSnapshot": {
-        "secondsBeforeAction": 0,
-        "ball": { "x": 38, "y": 48 },
-        "players": [
-          { "id": "ars-8", "teamId": "arsenal", "x": 38, "y": 48, "role": "midfielder" },
-          { "id": "ars-7", "teamId": "arsenal", "x": 56, "y": 36, "role": "winger" },
-          { "id": "ars-14", "teamId": "arsenal", "x": 61, "y": 63, "role": "forward" },
-          { "id": "che-25", "teamId": "chelsea", "x": 46, "y": 44, "role": "midfielder" },
-          { "id": "che-24", "teamId": "chelsea", "x": 53, "y": 38, "role": "defender" }
-        ]
+        "attackDirection": {
+          "arsenal": "left_to_right",
+          "chelsea": "right_to_left"
+        }
       },
       "decision": {
         "playerId": "ars-8",
         "selectedOptionId": "pass-saka",
         "bodyPartUsed": "right_foot",
         "options": [
-          { "id": "pass-saka", "type": "pass", "receiverId": "ars-7" },
-          { "id": "pass-forward", "type": "pass", "receiverId": "ars-14" },
-          { "id": "shot", "type": "shot" },
-          { "id": "carry", "type": "dribble" }
+          {
+            "id": "pass-saka",
+            "type": "pass",
+            "receiverId": "ars-7"
+          },
+          {
+            "id": "pass-forward",
+            "type": "pass",
+            "receiverId": "ars-14"
+          },
+          {
+            "id": "shot",
+            "type": "shot"
+          },
+          {
+            "id": "carry",
+            "type": "dribble"
+          }
         ]
       },
-      "recordedOutcome": "completed"
+      "recordedOutcome": "Completed",
+      "matchId": "b90-demo-001",
+      "eventId": "evt-001",
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 38,
+          "y": 48
+        },
+        "players": [
+          {
+            "id": "ars-8",
+            "teamId": "arsenal",
+            "x": 38,
+            "y": 48,
+            "role": "midfielder"
+          },
+          {
+            "id": "ars-7",
+            "teamId": "arsenal",
+            "x": 56,
+            "y": 36,
+            "role": "winger"
+          },
+          {
+            "id": "ars-14",
+            "teamId": "arsenal",
+            "x": 61,
+            "y": 63,
+            "role": "forward"
+          },
+          {
+            "id": "che-25",
+            "teamId": "chelsea",
+            "x": 46,
+            "y": 44,
+            "role": "midfielder"
+          },
+          {
+            "id": "che-24",
+            "teamId": "chelsea",
+            "x": 53,
+            "y": 38,
+            "role": "defender"
+          }
+        ]
+      }
     },
     {
       "sceneId": "scene-002",
       "matchContext": {
         "minute": 7,
-        "score": { "arsenal": 0, "chelsea": 0 },
+        "score": null,
         "phase": "build_up",
-        "possessionId": "pos-004"
+        "possessionId": "pos-004",
+        "second": 22
       },
       "pitch": {
         "coordinateUnits": "normalized_0_100",
         "lengthMeters": 105,
         "widthMeters": 68,
-        "attackDirection": { "arsenal": "left_to_right", "chelsea": "right_to_left" }
-      },
-      "decisionSnapshot": {
-        "secondsBeforeAction": 0,
-        "ball": { "x": 44, "y": 57 },
-        "players": [
-          { "id": "che-25", "teamId": "chelsea", "x": 44, "y": 57, "role": "midfielder" },
-          { "id": "che-24", "teamId": "chelsea", "x": 31, "y": 50, "role": "defender" },
-          { "id": "ars-8", "teamId": "arsenal", "x": 48, "y": 50, "role": "midfielder" },
-          { "id": "ars-7", "teamId": "arsenal", "x": 56, "y": 36, "role": "winger" },
-          { "id": "ars-14", "teamId": "arsenal", "x": 61, "y": 63, "role": "forward" }
-        ]
+        "attackDirection": {
+          "arsenal": "left_to_right",
+          "chelsea": "right_to_left"
+        }
       },
       "decision": {
         "playerId": "che-25",
         "selectedOptionId": "pass-james",
         "bodyPartUsed": "left_foot",
         "options": [
-          { "id": "pass-james", "type": "pass", "receiverId": "che-24" },
-          { "id": "pass-forward", "type": "pass" },
-          { "id": "shot", "type": "shot" },
-          { "id": "carry", "type": "dribble" }
+          {
+            "id": "pass-james",
+            "type": "pass",
+            "receiverId": "che-24"
+          },
+          {
+            "id": "shot",
+            "type": "shot"
+          },
+          {
+            "id": "carry",
+            "type": "dribble"
+          }
         ]
       },
-      "recordedOutcome": "incomplete"
+      "recordedOutcome": "Incomplete",
+      "matchId": "b90-demo-001",
+      "eventId": "evt-004",
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 44,
+          "y": 57
+        },
+        "players": [
+          {
+            "id": "che-25",
+            "teamId": "chelsea",
+            "x": 44,
+            "y": 57,
+            "role": "midfielder"
+          },
+          {
+            "id": "che-24",
+            "teamId": "chelsea",
+            "x": 31,
+            "y": 50,
+            "role": "defender"
+          },
+          {
+            "id": "ars-8",
+            "teamId": "arsenal",
+            "x": 48,
+            "y": 50,
+            "role": "midfielder"
+          },
+          {
+            "id": "ars-7",
+            "teamId": "arsenal",
+            "x": 56,
+            "y": 36,
+            "role": "winger"
+          },
+          {
+            "id": "ars-14",
+            "teamId": "arsenal",
+            "x": 61,
+            "y": 63,
+            "role": "forward"
+          }
+        ]
+      }
     },
     {
       "sceneId": "scene-003",
       "matchContext": {
         "minute": 34,
-        "score": { "arsenal": 0, "chelsea": 0 },
+        "score": null,
         "phase": "settled_attack",
-        "possessionId": "pos-014"
+        "possessionId": "pos-014",
+        "second": 49
       },
       "pitch": {
         "coordinateUnits": "normalized_0_100",
         "lengthMeters": 105,
         "widthMeters": 68,
-        "attackDirection": { "arsenal": "left_to_right", "chelsea": "right_to_left" }
-      },
-      "decisionSnapshot": {
-        "secondsBeforeAction": 0,
-        "ball": { "x": 94, "y": 51 },
-        "players": [
-          { "id": "ars-14", "teamId": "arsenal", "x": 94, "y": 51, "role": "forward" },
-          { "id": "che-24", "teamId": "chelsea", "x": 92, "y": 48, "role": "defender" },
-          { "id": "che-25", "teamId": "chelsea", "x": 88, "y": 55, "role": "midfielder" },
-          { "id": "ars-8", "teamId": "arsenal", "x": 73, "y": 32, "role": "midfielder" },
-          { "id": "ars-7", "teamId": "arsenal", "x": 69, "y": 25, "role": "winger" }
-        ]
+        "attackDirection": {
+          "arsenal": "left_to_right",
+          "chelsea": "right_to_left"
+        }
       },
       "decision": {
         "playerId": "ars-14",
         "selectedOptionId": "shot",
         "bodyPartUsed": "right_foot",
         "options": [
-          { "id": "shot", "type": "shot" },
-          { "id": "pass-saka", "type": "pass", "receiverId": "ars-7" },
-          { "id": "carry", "type": "dribble" }
+          {
+            "id": "shot",
+            "type": "shot"
+          },
+          {
+            "id": "pass-saka",
+            "type": "pass",
+            "receiverId": "ars-7"
+          },
+          {
+            "id": "carry",
+            "type": "dribble"
+          }
         ]
       },
-      "recordedOutcome": "blocked"
+      "recordedOutcome": "Blocked",
+      "matchId": "b90-demo-001",
+      "eventId": "evt-014",
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 94,
+          "y": 51
+        },
+        "players": [
+          {
+            "id": "ars-14",
+            "teamId": "arsenal",
+            "x": 94,
+            "y": 51,
+            "role": "forward"
+          },
+          {
+            "id": "che-24",
+            "teamId": "chelsea",
+            "x": 92,
+            "y": 48,
+            "role": "defender"
+          },
+          {
+            "id": "che-25",
+            "teamId": "chelsea",
+            "x": 88,
+            "y": 55,
+            "role": "midfielder"
+          },
+          {
+            "id": "ars-8",
+            "teamId": "arsenal",
+            "x": 73,
+            "y": 32,
+            "role": "midfielder"
+          },
+          {
+            "id": "ars-7",
+            "teamId": "arsenal",
+            "x": 69,
+            "y": 25,
+            "role": "winger"
+          }
+        ]
+      }
     }
   ],
   "dataStatus": "Sintetička simulacija — nije stvarna utakmica",
