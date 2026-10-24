@@ -45,7 +45,7 @@ public sealed class InsightContextTests
         Assert.Equal(outcome, selected.GetProperty("outcome").GetString());
         Assert.Equal(pressure, selected.GetProperty("underPressure").ValueKind == JsonValueKind.Null
             ? (bool?)null : selected.GetProperty("underPressure").GetBoolean());
-        Assert.Equal("Fan", root.GetProperty("audience").GetString());
+        Assert.Equal("Player", root.GetProperty("audience").GetString());
         Assert.True(root.GetProperty("isSynthetic").GetBoolean());
         Assert.False(root.TryGetProperty("selectionMetrics", out _));
         Assert.False(root.TryGetProperty("matchTotals", out _));

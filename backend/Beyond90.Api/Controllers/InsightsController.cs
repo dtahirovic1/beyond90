@@ -6,18 +6,19 @@ namespace Beyond90.Api.Controllers;
 
 [ApiController]
 [Route("api/insights")]
-public sealed class InsightsController(MatchStore store, IInsightProvider provider, DemoInsightProvider demo,
+public sealed class InsightsController(MatchStore catalogue, IInsightProvider provider, DemoInsightProvider demo,
     ILogger<InsightsController> logger) : ControllerBase
 {
     [HttpPost("generate")]
     public async Task<IActionResult> Generate([FromBody] GenerateInsightRequest request, CancellationToken cancellationToken)
     {
-        if (request.MatchId != store.Id)
+        var store = catalogue.Find(request.MatchId);
+        if (store is null)
             return NotFound(new { error = "Match not found." });
         if (request.EventIds is null || request.EventIds.Length == 0 || request.EventIds.Any(string.IsNullOrWhiteSpace))
             return BadRequest(new { error = "Select at least one event." });
-        if (!Enum.IsDefined(request.Audience))
-            return BadRequest(new { error = "Audience must be Player, Coach, or Fan." });
+        if (request.Audience is not (Audience.Player or Audience.Coach))
+            return BadRequest(new { error = "Audience must be Player or Coach." });
 
         var selectedIds = request.EventIds.Distinct(StringComparer.Ordinal).ToArray();
         var eventsById = store.Events.ToDictionary(matchEvent => matchEvent.EventId, StringComparer.Ordinal);
@@ -77,5 +78,5 @@ public sealed class GenerateInsightRequest
 {
     public string MatchId { get; set; } = string.Empty;
     public string[] EventIds { get; set; } = [];
-    public Audience Audience { get; set; } = Audience.Fan;
+    public Audience Audience { get; set; } = Audience.Player;
 }

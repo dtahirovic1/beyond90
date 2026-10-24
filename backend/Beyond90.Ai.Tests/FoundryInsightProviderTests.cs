@@ -30,7 +30,7 @@ public sealed class FoundryInsightProviderTests
         var insight = await provider.GenerateAsync(Request(), CancellationToken.None);
 
         Assert.Equal("The synthetic shot was saved.", insight.Text);
-        Assert.Equal(Audience.Fan, insight.Audience);
+        Assert.Equal(Audience.Player, insight.Audience);
         Assert.Equal("evt-003", Assert.Single(insight.EventIds));
         using var json = JsonDocument.Parse(sentBody!);
         var body = json.RootElement;
@@ -42,7 +42,7 @@ public sealed class FoundryInsightProviderTests
         Assert.False(body.TryGetProperty("messages", out _));
         using var input = JsonDocument.Parse(body.GetProperty("input").GetString()!);
         var context = input.RootElement;
-        Assert.Equal("Fan", context.GetProperty("audience").GetString());
+        Assert.Equal("Player", context.GetProperty("audience").GetString());
         var selectedEvent = context.GetProperty("selectedEvents")[0];
         Assert.Equal("Arsenal", selectedEvent.GetProperty("teamName").GetString());
         Assert.Equal("Martin Ødegaard", selectedEvent.GetProperty("playerName").GetString());
@@ -56,7 +56,7 @@ public sealed class FoundryInsightProviderTests
         Assert.DoesNotContain("test-secret", sentBody);
 
         Assert.Equal("Foundry", insight.Source);
-        Assert.Equal(Audience.Fan, insight.Audience);
+        Assert.Equal(Audience.Player, insight.Audience);
         Assert.Equal("evt-003", Assert.Single(insight.EventIds));
         var evidence = Assert.Single(insight.MetricEvidence);
         Assert.Equal("events.selected", evidence.MetricKey);
@@ -89,7 +89,7 @@ public sealed class FoundryInsightProviderTests
         await Assert.ThrowsAnyAsync<OperationCanceledException>(() => provider.GenerateAsync(Request(), cancellation.Token));
     }
 
-    internal static InsightRequest Request() => new("demo", ["evt-003"], Audience.Fan,
+    internal static InsightRequest Request() => new("demo", ["evt-003"], Audience.Player,
         new Dictionary<string, decimal?> { ["events.selected"] = 1 },
         [new MatchEvent { EventId = "evt-003", Type = "Shot", Outcome = "saved", Minute = 3, TeamId = "arsenal", PlayerId = "ars-8" }])
     {

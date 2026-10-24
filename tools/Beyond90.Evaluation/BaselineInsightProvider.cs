@@ -18,7 +18,7 @@ internal sealed class BaselineInsightProvider(HttpClient httpClient, string endp
           "type":"object","additionalProperties":false,
           "required":["audience","eventIds","metricEvidence","text","caveats"],
           "properties":{
-            "audience":{"type":"string","enum":["Fan","Player","Coach"]},
+            "audience":{"type":"string","enum":["Player","Coach"]},
             "eventIds":{"type":"array","items":{"type":"string"}},
             "metricEvidence":{"type":"array","items":{
               "type":"object","additionalProperties":false,

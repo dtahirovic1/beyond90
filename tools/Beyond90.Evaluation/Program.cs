@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 if (!args.Contains("--live") || !args.Contains("--output"))
 {
-    Console.WriteLine("No calls made. Usage: --live --output evaluation-results/run.json (up to 21 paid Azure requests)");
+    Console.WriteLine("No calls made. Usage: --live --output evaluation-results/run.json (up to 15 paid Azure requests)");
     return 1;
 }
 var outputIndex = Array.IndexOf(args, "--output") + 1;
@@ -66,7 +66,7 @@ Directory.CreateDirectory(Path.GetDirectoryName(outputPath)!);
 foreach (var variant in new[] { "baseline-752ef02", "scoped-context-v2" })
 {
     foreach (var scenario in variant.StartsWith("baseline") ? cases.Take(1) : cases)
-    foreach (var audience in new[] { Audience.Fan, Audience.Player, Audience.Coach })
+    foreach (var audience in new[] { Audience.Player, Audience.Coach })
     {
         if (cancellation.IsCancellationRequested) return 1;
         using var capture = new UsageHandler(new HttpClientHandler { AllowAutoRedirect = false });

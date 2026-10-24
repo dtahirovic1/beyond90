@@ -15,7 +15,7 @@ public sealed class DemoInsightProvider : IInsightProvider
                 ? $"Player view: review the selected action at {eventList}; its outcome is not recorded."
                 : $"Player view: review the selected action at {eventList} and compare its recorded outcome with the context.",
             Audience.Coach => $"Coach view: the selected sequence ({eventList}) is available for tactical review.",
-            _ => $"Fan view: the replay highlights the selected moment at {eventList}."
+            _ => throw new ArgumentOutOfRangeException(nameof(request), "Unsupported audience.")
         };
         var caveats = new List<string> { "Synthetic demo insight; it describes illustrative events and does not predict a real match outcome." };
         if (missingOutcome)
@@ -35,7 +35,7 @@ public sealed class DemoInsightProvider : IInsightProvider
                     EventIds = request.EventIds.ToList()
                 }
             ],
-            Text = $"Demo insight (synthetic). {voice}",
+            Text = request.ReportContext is null ? $"Demo insight (synthetic). {voice}" : $"This local summary covers {request.SelectedEvents.Count} recorded actions by {string.Join(", ", request.Players.Select(p => p.Name))}. Review the passing, shooting and defensive figures above, then open an individual match to inspect the actions behind them. A richer AI review is available when Azure is connected.",
             Caveats = caveats
         });
     }
