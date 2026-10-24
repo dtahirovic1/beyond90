@@ -6,4 +6,5 @@ public sealed class MatchPlayer
     public string TeamId { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public string? Position { get; set; }
+    public DominantFoot? DominantFoot { get; set; }
 }
