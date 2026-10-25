@@ -2,7 +2,7 @@
 
 **The Game Doesn't End at Full Time.**
 
-Beyond90 turns synthetic football match events into explainable statistics and audience-specific match insights. The demo focuses on Leeds United and uses real player names from the 2026/27 squads, with Arsenal, Chelsea and Liverpool as scenario opponents, but every event and statistic is invented for illustration; it is not a replay or claim about an actual match. It does not analyze video or use Premier League footage, club crests, or player images.
+Beyond90 turns synthetic football match events into explainable statistics and audience-specific match insights. The demo focuses on Leeds United and uses real player names from the 2026/27 squads, with Arsenal, Chelsea, Liverpool and Tottenham as scenario opponents, but every event and statistic is invented for illustration; it is not a replay or claim about an actual match. It does not analyze video or use Premier League footage, club crests, or player images.
 
 ## Project status
 
@@ -25,7 +25,7 @@ dotnet run --project backend/Beyond90.Api
 
 In Visual Studio, open `backend/Beyond90.sln`, set `Beyond90.Api` as the startup project, and run the `http` profile. Keep the API running while using the frontend.
 
-The API serves three bundled Leeds event samples (84 events each). Reports aggregate only the tracked Leeds players; these are not complete match or season statistics. Available routes:
+The API serves four bundled Leeds event samples (three 84-event scenarios plus a 30-event pilot). Reports aggregate only the tracked Leeds players; these are not complete match or season statistics. Available routes:
 
 - `GET /api/matches` — list available matches
 - `GET /api/matches/{id}` — match details, teams, players, and data-status label

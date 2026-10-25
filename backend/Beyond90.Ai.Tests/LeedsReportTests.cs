@@ -14,15 +14,15 @@ public sealed class LeedsReportTests
     private static JsonElement Json(IActionResult response) => JsonSerializer.SerializeToElement(Assert.IsType<OkObjectResult>(response).Value, new JsonSerializerOptions(JsonSerializerDefaults.Web));
 
     [Fact]
-    public void Three_scenarios_have_unique_events_and_valid_player_team_links()
+    public void Four_scenarios_have_unique_events_and_valid_player_team_links()
     {
         var store = Catalogue();
-        Assert.Equal(3, store.All.Count);
+        Assert.Equal(4, store.All.Count);
         var events = store.All.SelectMany(m => m.Events).ToArray();
         Assert.Equal(events.Length, events.Select(e => e.EventId).Distinct().Count());
         foreach (var match in store.All)
         {
-            Assert.Equal(84, match.Events.Count);
+            Assert.True(match.Events.Count is 84 or 30);
             Assert.All(match.Events, e => Assert.Contains(match.Players, p => p.Id == e.PlayerId && p.TeamId == e.TeamId));
         }
     }
@@ -36,9 +36,9 @@ public sealed class LeedsReportTests
         var store = Catalogue();
         var controller = new ReportsController(store, new DemoInsightProvider(), new DemoInsightProvider());
         var report = Json(controller.Get(playerId, null));
-        Assert.Equal(3, report.GetProperty("matchCount").GetInt32());
+        Assert.Equal(4, report.GetProperty("matchCount").GetInt32());
         var stats = report.GetProperty("stats");
-        Assert.Equal(42, stats.GetProperty("events").GetInt32());
+        Assert.Equal(store.All.SelectMany(m => m.Events).Count(e => e.PlayerId == playerId), stats.GetProperty("events").GetInt32());
         Assert.Equal(report.GetProperty("matches").EnumerateArray().Sum(m => m.GetProperty("stats").GetProperty("completedPasses").GetInt32()), stats.GetProperty("completedPasses").GetInt32());
         var expected = PerformanceReport.Stats(store.All.SelectMany(m => m.Events).Where(e => e.PlayerId == playerId).ToArray());
         Assert.Equal(expected.Passes, stats.GetProperty("passes").GetInt32());
@@ -52,7 +52,7 @@ public sealed class LeedsReportTests
     public void Coach_report_excludes_opponent_events_and_unknown_selections_are_rejected()
     {
         var controller = new ReportsController(Catalogue(), new DemoInsightProvider(), new DemoInsightProvider());
-        Assert.Equal(126, Json(controller.Get(null, null)).GetProperty("stats").GetProperty("events").GetInt32());
+        Assert.Equal(143, Json(controller.Get(null, null)).GetProperty("stats").GetProperty("events").GetInt32());
         Assert.IsType<NotFoundResult>(controller.Get("ars-7", null));
         Assert.IsType<NotFoundResult>(controller.Get(null, "missing"));
     }
@@ -74,7 +74,7 @@ public sealed class LeedsReportTests
         Assert.IsType<OkObjectResult>(await controller.Insight(new() { PlayerId = "lee-5", Audience = Audience.Player }, default));
         Assert.NotNull(capture.Request);
         Assert.All(capture.Request.SelectedEvents, e => Assert.Equal("lee-5", e.PlayerId));
-        Assert.Equal(42, capture.Request.SelectedEvents.Count);
+        Assert.Equal(47, capture.Request.SelectedEvents.Count);
         Assert.NotNull(capture.Request.ReportContext);
         Assert.All(capture.Request.Decisions, d => Assert.Equal("lee-5",d.Snapshot.Decision.PlayerId));
         Assert.Contains(capture.Request.Players,p=>p.TeamId=="arsenal");
@@ -106,9 +106,9 @@ public sealed class LeedsReportTests
         using var body = JsonDocument.Parse(payload!);
         using var input = JsonDocument.Parse(body.RootElement.GetProperty("input").GetString()!);
         var report = input.RootElement.GetProperty("report");
-        Assert.Equal(3, report.GetProperty("matchCount").GetInt32());
-        Assert.Equal(42, report.GetProperty("stats").GetProperty("events").GetInt32());
-        Assert.Equal(3, report.GetProperty("matches").GetArrayLength());
+        Assert.Equal(4, report.GetProperty("matchCount").GetInt32());
+        Assert.Equal(49, report.GetProperty("stats").GetProperty("events").GetInt32());
+        Assert.Equal(4, report.GetProperty("matches").GetArrayLength());
         Assert.Empty(input.RootElement.GetProperty("selectedEvents").EnumerateArray());
         Assert.Empty(input.RootElement.GetProperty("decisionContexts").EnumerateArray());
         Assert.Equal("Dominic Calvert-Lewin", report.GetProperty("subjectPlayerName").GetString());

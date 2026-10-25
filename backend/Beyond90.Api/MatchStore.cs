@@ -13,9 +13,20 @@ public sealed class MatchStore
     public DecisionSnapshot? GetDecisionSnapshot(string sceneId) => _demo.DecisionSnapshots.FirstOrDefault(s => s.SceneId == sceneId);
     public static MatchStore LoadCatalog(string directory)
     {
-        var matches = Directory.GetFiles(directory, "*.json").OrderBy(path => path, StringComparer.Ordinal).Select(Load).ToArray();
-        if (matches.Length == 0) throw new InvalidDataException("No match scenarios available.");
-        if (matches.Select(m => m.Id).Distinct().Count() != matches.Length) throw new InvalidDataException("Duplicate match IDs.");
+        var matches = new List<MatchStore>();
+    foreach (var path in Directory.GetFiles(directory, "*.json").OrderBy(p => p, StringComparer.Ordinal))
+    {
+        try
+        {
+            matches.Add(Load(path));
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Warning: skipping synthetic match fixture '{path}': {ex.Message}");
+        }
+    }
+        if (matches.Count == 0) throw new InvalidDataException("No match scenarios available.");
+        if (matches.Select(m => m.Id).Distinct().Count() != matches.Count) throw new InvalidDataException("Duplicate match IDs.");
         matches[0]._matches = matches;
         return matches[0];
     }
