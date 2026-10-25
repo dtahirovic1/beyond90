@@ -52,7 +52,7 @@ public sealed class LeedsReportTests
     public void Coach_report_excludes_opponent_events_and_unknown_selections_are_rejected()
     {
         var controller = new ReportsController(Catalogue(), new DemoInsightProvider(), new DemoInsightProvider());
-        Assert.Equal(143, Json(controller.Get(null, null)).GetProperty("stats").GetProperty("events").GetInt32());
+        Assert.Equal(170, Json(controller.Get(null, null)).GetProperty("stats").GetProperty("events").GetInt32());
         Assert.IsType<NotFoundResult>(controller.Get("ars-7", null));
         Assert.IsType<NotFoundResult>(controller.Get(null, "missing"));
     }
@@ -74,7 +74,7 @@ public sealed class LeedsReportTests
         Assert.IsType<OkObjectResult>(await controller.Insight(new() { PlayerId = "lee-5", Audience = Audience.Player }, default));
         Assert.NotNull(capture.Request);
         Assert.All(capture.Request.SelectedEvents, e => Assert.Equal("lee-5", e.PlayerId));
-        Assert.Equal(47, capture.Request.SelectedEvents.Count);
+        Assert.Equal(56, capture.Request.SelectedEvents.Count);
         Assert.NotNull(capture.Request.ReportContext);
         Assert.All(capture.Request.Decisions, d => Assert.Equal("lee-5",d.Snapshot.Decision.PlayerId));
         Assert.Contains(capture.Request.Players,p=>p.TeamId=="arsenal");
@@ -107,7 +107,7 @@ public sealed class LeedsReportTests
         using var input = JsonDocument.Parse(body.RootElement.GetProperty("input").GetString()!);
         var report = input.RootElement.GetProperty("report");
         Assert.Equal(4, report.GetProperty("matchCount").GetInt32());
-        Assert.Equal(49, report.GetProperty("stats").GetProperty("events").GetInt32());
+        Assert.Equal(58, report.GetProperty("stats").GetProperty("events").GetInt32());
         Assert.Equal(4, report.GetProperty("matches").GetArrayLength());
         Assert.Empty(input.RootElement.GetProperty("selectedEvents").EnumerateArray());
         Assert.Empty(input.RootElement.GetProperty("decisionContexts").EnumerateArray());

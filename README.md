@@ -25,7 +25,7 @@ dotnet run --project backend/Beyond90.Api
 
 In Visual Studio, open `backend/Beyond90.sln`, set `Beyond90.Api` as the startup project, and run the `http` profile. Keep the API running while using the frontend.
 
-The API serves four bundled Leeds event samples (three 84-event scenarios plus a 30-event pilot). Reports aggregate only the tracked Leeds players; these are not complete match or season statistics. Available routes:
+The API serves four bundled Leeds event samples (all 84-event scenarios). Reports aggregate only the tracked Leeds players; these are not complete match or season statistics. Available routes:
 
 - `GET /api/matches` — list available matches
 - `GET /api/matches/{id}` — match details, teams, players, and data-status label

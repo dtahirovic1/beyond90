@@ -2,7 +2,7 @@
 
 Approved scope: Player selection -> aggregate player overview -> match -> event. Coach aggregate overview -> match. Remove Fan entry. Preserve pixel shirts and dark/cream/lime visual system. Local preview approved for publication.
 
-Four deterministic synthetic event samples (three of 84 events, one 30-event pilot), with three tracked Leeds players and three real opponent players per scenario. No fabricated full match results, minutes, xG or performance rating. All cards and reports derive from the same API events. Existing match-demo.json remains untouched for Amir and historical tests.
+Four deterministic synthetic event samples (all 84 events), with three tracked Leeds players and three real opponent players per scenario. No fabricated full match results, minutes, xG or performance rating. All cards and reports derive from the same API events. Existing match-demo.json remains untouched for Amir and historical tests.
 
 Checks: backend tests, TypeScript/build, fixture consistency and scope tests, browser desktop/mobile navigation, long shirt names, no Fan entry, scoped report totals, error/retry and Azure fallback labels. Live paid AI evaluation is outside this preview check; request serialization is checked locally.
 
@@ -19,4 +19,4 @@ Kit references (pixel interpretations, not official assets):
 
 Local preview: frontend port 5175, API port 5090. Standard desktop startup remains dotnet run --project backend/Beyond90.Api and npm run dev in frontend. Restart the API after changing the fixture catalogue. Foundry remains configured via User Secrets; no keys added to source.
 
-Scenario 04: Leeds 1–0 Tottenham Hotspur (pilot, 30 events, 5 decision snapshots). Tracked Leeds players: Muharemović, Ampadu, Calvert-Lewin; Spurs: Van de Ven, Simons, Richarlison. Goal: Calvert-Lewin (18').
+Scenario 04: Leeds 1–0 Tottenham Hotspur (84 events, 8 decision snapshots). Tracked Leeds players: Muharemović, Ampadu, Calvert-Lewin; Spurs: Van de Ven, Simons, Richarlison. Goal: Calvert-Lewin (18').
