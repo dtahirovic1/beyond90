@@ -5,7 +5,7 @@ namespace Beyond90.Api.Controllers;
 
 [ApiController]
 [Route("api/reports")]
-public sealed class ReportsController(MatchStore catalogue, IInsightProvider provider, DemoInsightProvider demo) : ControllerBase
+public sealed class ReportsController(MatchStore catalogue, IInsightProvider provider, DemoInsightProvider demo, ILogger<ReportsController>? logger=null) : ControllerBase
 {
     [HttpGet("club")]
     public IActionResult Club() => Ok(new { name = "Leeds United", players = catalogue.All.SelectMany(m => m.Players).Where(p => p.TeamId == "leeds").DistinctBy(p => p.Id) });
@@ -45,16 +45,16 @@ public sealed class ReportsController(MatchStore catalogue, IInsightProvider pro
             Players = matches.SelectMany(m => m.Players).DistinctBy(p => p.Id).ToArray(),
             Teams = matches.SelectMany(m => m.Teams).DistinctBy(t => t.Id).ToArray(),
             Decisions = matches.SelectMany(m => m.Decisions).Where(d => events.Any(e => e.MatchId == d.Snapshot.MatchId && e.EventId == d.Snapshot.EventId)).ToArray(),
-            ReportContext = new { subjectPlayerId = request.PlayerId, subjectPlayerName = matches.SelectMany(m=>m.Players).FirstOrDefault(p=>p.Id==request.PlayerId)?.Name, scope = request.PlayerId is null ? "Selected Leeds players" : "Individual player", matchCount = matches.Length, stats,
-                matches = matches.Select(m => new { id = m.Id, scenario = m.ScenarioLabel, opponent = m.Teams.First(t => t.Id != "leeds").Name, result = m.Result, stats = PerformanceReport.Stats(Events([m], request.PlayerId)) }) }
+            ReportContext = new { subjectPlayerId = request.PlayerId, subjectPlayerName = matches.SelectMany(m=>m.Players).FirstOrDefault(p=>p.Id==request.PlayerId)?.Name, scope = request.PlayerId is null ? "Selected Leeds players" : "Individual player", matchCount = matches.Length, stats, segments = PerformanceReport.Segments(events),
+                matches = matches.Select(m => new { id = m.Id, scenario = m.ScenarioLabel, opponent = m.Teams.First(t => t.Id != "leeds").Name, result = m.Result, stats = PerformanceReport.Stats(Events([m], request.PlayerId)), segments = PerformanceReport.Segments(Events([m], request.PlayerId)) }) }
         };
+        if (provider is DemoInsightProvider) return StatusCode(503,new { error="AI not available here." });
         try { return Ok(await provider.GenerateAsync(input, cancellationToken)); }
         catch (Exception exception) when (exception is InsightProviderException or HttpRequestException || (exception is OperationCanceledException && !cancellationToken.IsCancellationRequested))
         {
-            var fallback = await demo.GenerateAsync(input, cancellationToken);
-            fallback.Source = "DemoFallback";
-            fallback.Caveats.Add("Azure AI is unavailable. Showing a local summary.");
-            return Ok(fallback);
+            logger?.LogWarning("AI report unavailable: {Reason}",exception.Message);
+            if(exception is InsightProviderException {RetryAfterSeconds: { } seconds}) Response.Headers.RetryAfter=seconds.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            return StatusCode(503,new { error="AI not available here." });
         }
     }
 }

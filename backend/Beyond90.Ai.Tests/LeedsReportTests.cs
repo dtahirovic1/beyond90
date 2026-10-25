@@ -63,7 +63,7 @@ public sealed class LeedsReportTests
         var controller = new InsightsController(Catalogue(), new DemoInsightProvider(), new DemoInsightProvider(), NullLogger<InsightsController>.Instance);
         Assert.IsType<BadRequestObjectResult>(await controller.Generate(new() { MatchId = "leeds-sim-002", EventIds = ["leeds-sim-001-evt-001"], Audience = Audience.Player }, default));
         Assert.IsType<BadRequestObjectResult>(await controller.Generate(new() { MatchId = "leeds-sim-001", EventIds = ["leeds-sim-001-evt-001"], Audience = (Audience)2 }, default));
-        Assert.IsType<OkObjectResult>(await controller.Generate(new() { MatchId = "leeds-sim-002", EventIds = ["leeds-sim-002-evt-001"], Audience = Audience.Player }, default));
+        Assert.Equal(503, Assert.IsType<ObjectResult>(await controller.Generate(new() { MatchId = "leeds-sim-002", EventIds = ["leeds-sim-002-evt-001"], Audience = Audience.Player }, default)).StatusCode);
     }
 
     [Fact]
@@ -109,6 +109,8 @@ public sealed class LeedsReportTests
         Assert.Equal(3, report.GetProperty("matchCount").GetInt32());
         Assert.Equal(42, report.GetProperty("stats").GetProperty("events").GetInt32());
         Assert.Equal(3, report.GetProperty("matches").GetArrayLength());
-        Assert.All(input.RootElement.GetProperty("selectedEvents").EnumerateArray(), e => Assert.Equal("Dominic Calvert-Lewin", e.GetProperty("playerName").GetString()));
+        Assert.Empty(input.RootElement.GetProperty("selectedEvents").EnumerateArray());
+        Assert.Empty(input.RootElement.GetProperty("decisionContexts").EnumerateArray());
+        Assert.Equal("Dominic Calvert-Lewin", report.GetProperty("subjectPlayerName").GetString());
     }
 }

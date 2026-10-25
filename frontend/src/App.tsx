@@ -14,7 +14,7 @@ type Details = { id: string; homeTeam: Team; awayTeam: Team; teams: Team[]; play
 type KeyMoment = { eventIds: string[]; score: number; reasonCode: string; events: MatchEvent[] }
 type Stats = { events: number; passes: number; completedPasses: number; passAccuracy: number | null; shots: number; goals: number; recoveries: number; tacklesWon: number; turnovers: number; pressureEvents: number }
 type Report = { matchCount: number; stats: Stats; observations: string[]; coverage: string; matches: { id: string; scenarioLabel: string; opponent: string; result:Result|null; stats: Stats }[] }
-type Insight = { source?: string; text: string; caveats: string[] }
+type Insight = { source?: string; text: string; caveats: string[]; decisionReview?:{optionId:string|null;optionName:string;isHypothetical:boolean;rating:number|null;ratingLabel:string;confidence:string;audience:string} }
 
 async function getJson<T>(url: string, signal: AbortSignal): Promise<T> {
   const response = await fetch(url, { signal })
@@ -35,7 +35,7 @@ function useResource<T>(url: string) {
 function Loading() { return <div className="view-state" role="status">Loading matchroom…</div> }
 function Failure({ retry }: { retry: () => void }) { return <div className="view-state" role="alert"><h2>Data unavailable</h2><p>Please check the connection and try again.</p><button className="pixel-button" onClick={retry}>Try again</button></div> }
 function Brand() { return <a className="wordmark" href="#" aria-label="Beyond90 home">BEYOND<span>90</span></a> }
-function Footer() { return <footer className="app-footer"><span>BEYOND90</span><span>SYNTHETIC SCENARIOS · NOT REAL PLAYER PERFORMANCE</span><span>LEEDS UNITED / 2026–27</span></footer> }
+function Footer() { return <footer className="app-footer"><span>BEYOND90</span><span>Simulated match data · Not real player performance</span><span>LEEDS UNITED / 2026–27</span></footer> }
 function percent(value: number | null) { return value === null ? '—' : `${value}%` }
 
 function App() {
@@ -64,13 +64,13 @@ function App() {
 function Welcome({ players, loading, error, retry }: { players: Player[]; loading: boolean; error: boolean; retry: () => void }) {
   return <main className="welcome-shell"><header className="welcome-nav"><Brand /><span className="nav-tagline">AI Football Intelligence</span><span className="edition-tag">LEEDS / 2026–27</span></header>
     <section className="entry-layout"><div className="match-poster leeds-poster">
-      <div className="poster-top"><span><i /> CLUB MATCHROOM</span><span>SYNTHETIC SCENARIOS</span></div>
+      <div className="poster-top"><span><i /> CLUB MATCHROOM</span></div>
       <div className="poster-title"><h2>Leeds<br /><em>United.</em></h2><span className="poster-index">LU</span></div>
       <div className="club-row"><div className="club-label"><span className="club-color leeds-color" /><strong>Player analysis</strong><span>2026 / 27</span></div>
         <div className="jersey-lineup">{players.map(p => <figure className="locker-player" key={p.id}><PixelJersey team={p.teamId} name={p.name} number={squadNumber(p.id)} /><figcaption><strong>{p.name}</strong><span>{p.position}</span></figcaption></figure>)}</div>
         {loading && <Loading />}{error && <Failure retry={retry} />}
       </div><div className="poster-opponents"><span>SCENARIO OPPONENTS</span><div><b>Arsenal</b><b>Chelsea</b><b>Liverpool</b></div></div>
-      <div className="poster-bottom"><span>Real players. Simulated match events.</span><span>LEEDS <b>×</b> BEYOND90</span></div>
+      <div className="poster-bottom"><span>LEEDS <b>×</b> BEYOND90</span></div>
     </div><div className="entry-copy"><span className="entry-kicker"><span /> CHOOSE YOUR VIEW</span><h1>The Game<br />Doesn't End<br />at <em>Full Time.</em></h1>
       <div className="entry-roles">{([{role:'Player',href:'#players',description:'Choose your player. Review performance across matches.'},{role:'Coach',href:'#coach',description:'Review the club, compare matches and inspect decisions.'}] as const).map((item,i) => <a className="entry-role" key={item.role} href={item.href}><span className="entry-role-index">0{i+1}</span><span className="entry-role-copy"><strong>{item.role}</strong><small>{item.description}</small></span><span className="entry-role-arrow">↗</span></a>)}</div><div className="entry-note"><span className="entry-note-dot" /> No account required.</div>
     </div></section><Footer /></main>
@@ -80,7 +80,7 @@ function PlayerPicker({ players }: { players: Player[] }) {
     <div className="player-picker">{players.map(p => <a className="player-card" href={`#player/${p.id}`} key={p.id}><div className="player-card-top"><span>{p.position}</span><b>#{squadNumber(p.id)}</b></div><PixelJersey team={p.teamId} name={p.name} number={squadNumber(p.id)} /><h2>{p.name}</h2><div className="player-card-bottom"><span>View player overview</span><span>↗</span></div></a>)}</div></>
 }
 function Overview({ player, audience, players }: { player?: Player; audience: Audience; players: Player[] }) {
-  return <><section className="overview-hero"><div><span className="eyebrow">{player ? 'PLAYER OVERVIEW' : 'COACH / CLUB OVERVIEW'} · LEEDS UNITED</span><h1>{player ? player.name : 'Leeds United'}</h1><p>{player ? `${player.position} · #${squadNumber(player.id)} · 2026/27` : 'Performance across the available match scenarios'}</p><span className="sample-pill">Synthetic event samples</span></div>
+  return <><section className="overview-hero"><div><span className="eyebrow">{player ? 'PLAYER OVERVIEW' : 'COACH / CLUB OVERVIEW'} · LEEDS UNITED</span><h1>{player ? player.name : 'Leeds United'}</h1><p>{player ? `${player.position} · #${squadNumber(player.id)} · 2026/27` : 'Performance across the available match scenarios'}</p></div>
     {player ? <PixelJersey team="leeds" name={player.name} number={squadNumber(player.id)} /> : <div className="club-hero-shirts">{players.map(p => <PixelJersey key={p.id} team="leeds" name={p.name} number={squadNumber(p.id)} />)}</div>}</section>
     <Performance key={player?.id ?? 'club'} player={player} audience={audience} />
     {!player && <section className="tracked-section"><div className="section-title"><h2>Tracked players</h2><span>3 individual profiles</span></div><div className="tracked-grid">{players.map(p => <a href={`#player/${p.id}`} key={p.id}><PixelJersey team="leeds" name={p.name} number={squadNumber(p.id)} /><div><strong>{p.name}</strong><small>{p.position}</small></div><span>↗</span></a>)}</div></section>}
@@ -92,30 +92,31 @@ function Performance({ player, audience, matchId }: { player?: Player; audience:
   const report = useResource<Report>(`/api/reports?${query}`)
   if (report.loading) return <Loading />
   if (report.error || !report.data) return <Failure retry={report.retry} />
-  const { stats, matches, coverage, observations } = report.data
+  const { stats, matches, observations } = report.data
   return <><div className="section-title"><h2>{matchId ? 'Performance in this match' : 'Performance overview'}</h2><span>{player ? player.name : 'Tracked Leeds players'} · {report.data.matchCount} {report.data.matchCount === 1 ? 'scenario' : 'scenarios'}</span></div>
     <div className="performance-grid"><Stat label="Pass completion" value={percent(stats.passAccuracy)} detail={`${stats.completedPasses} / ${stats.passes} recorded passes`} /><Stat label="Shots / goals" value={`${stats.shots} / ${stats.goals}`} detail="In the recorded event sample" /><Stat label="Recoveries" value={stats.recoveries} detail={`Tackles won: ${stats.tacklesWon}`} /><Stat label="Turnovers" value={stats.turnovers} detail={`${stats.events} total recorded actions`} /></div>
-    <p className="coverage-note">{coverage}</p>
     <section className="overview-analysis"><div><span className="eyebrow">DATA REVIEW</span><h2>{player ? 'Your performance review' : 'Club performance review'}</h2><div className="observation-list">{observations.map((text,i) => <div key={text}><span>0{i+1}</span><p>{text}</p></div>)}</div></div><div className="ai-review"><AiInsight key={query.toString()} endpoint="/api/reports/insight" body={{ playerId: player?.id, matchId, audience }} title={player ? 'Player analysis' : 'Coaching analysis'} label="Generate AI review" /></div></section>
     {!matchId && <section className="match-library"><div className="section-title"><div><span className="eyebrow">MATCH LIBRARY</span><h2>Explore a match</h2></div><span>Compare recorded samples</span></div><div className="match-cards">{matches.map((match,i) => <a className="match-card" href={player ? `#player/${player.id}/match/${match.id}` : `#coach/match/${match.id}`} key={match.id}>
-      <div className="match-card-top"><span>{match.scenarioLabel}</span><span>SIM</span></div><h3>Leeds United<br /><span>vs {match.opponent}</span></h3>{match.result&&<div className="match-result">{match.result.home} – {match.result.away}<small>FINAL · SIMULATED</small></div>}<div className="match-card-metrics"><div><strong>{percent(match.stats.passAccuracy)}</strong><small>Pass completion</small></div><div><strong>{match.stats.shots}</strong><small>Shots</small></div><div><strong>{match.stats.events}</strong><small>Actions</small></div></div><div className="sample-chart" aria-label={`Pass completion: ${percent(match.stats.passAccuracy)}`}><i style={{width:`${match.stats.passAccuracy ?? 0}%`}} /></div><div className="match-card-bottom"><span>Review match 0{i+1}</span><b>↗</b></div></a>)}</div></section>}
+      <div className="match-card-top"><span>{match.scenarioLabel}</span></div><h3>Leeds United<br /><span>vs {match.opponent}</span></h3>{match.result&&<div className="match-result">{match.result.home} – {match.result.away}<small>FINAL</small></div>}<div className="match-card-metrics"><div><strong>{percent(match.stats.passAccuracy)}</strong><small>Pass completion</small></div><div><strong>{match.stats.shots}</strong><small>Shots</small></div><div><strong>{match.stats.events}</strong><small>Actions</small></div></div><div className="sample-chart" aria-label={`Pass completion: ${percent(match.stats.passAccuracy)}`}><i style={{width:`${match.stats.passAccuracy ?? 0}%`}} /></div><div className="match-card-bottom"><span>Review match 0{i+1}</span><b>↗</b></div></a>)}</div></section>}
   </>
 }
 function Stat({ label, value, detail }: { label: string; value: string | number; detail: string }) { return <div className="stat-tile"><span>{label}</span><strong>{value}</strong><small>{detail}</small></div> }
 function AiInsight({ endpoint, body, title, label }: { endpoint: string; body: object; title: string; label: string }) {
   const [insight, setInsight] = useState<Insight | null>(null)
-  const [error, setError] = useState(false)
+  const [unavailable, setUnavailable] = useState(false)
+  const [retryAt,setRetryAt] = useState(0)
+  useEffect(()=>{ if(!retryAt)return; const timer=window.setTimeout(()=>setRetryAt(0),Math.max(0,retryAt-Date.now())); return ()=>window.clearTimeout(timer) },[retryAt])
   const [loading, setLoading] = useState(false)
   const request = useRef<AbortController | null>(null)
   useEffect(() => () => request.current?.abort(), [])
   async function generate() {
     request.current?.abort(); const controller = new AbortController(); request.current = controller
-    setLoading(true); setError(false); setInsight(null)
-    try { const response = await fetch(endpoint, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body), signal:controller.signal }); if (!response.ok) throw new Error(); const result = await response.json() as Insight; if (!controller.signal.aborted) setInsight(result) }
-    catch { if (!controller.signal.aborted) setError(true) }
+    setLoading(true); setUnavailable(false); setInsight(null)
+    try { const response = await fetch(endpoint, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body), signal:controller.signal }); if (response.status===503) { if (!controller.signal.aborted) { setUnavailable(true); const wait=Number(response.headers.get('Retry-After')); if(Number.isFinite(wait)&&wait>0)setRetryAt(Date.now()+wait*1000) }; return }; if (!response.ok) throw new Error(); const result = await response.json() as Insight; if (!controller.signal.aborted) { if (result.source!=='Foundry') setUnavailable(true); else setInsight(result) } }
+    catch { if (!controller.signal.aborted) setUnavailable(true) }
     finally { if (!controller.signal.aborted) setLoading(false) }
   }
-  return <><span className="eyebrow">AI / {title.toUpperCase()}</span><h3>{title}</h3><p className="ai-description">Review the recorded actions and statistics with feedback tailored to your view.</p><button className="pixel-button insight-button" onClick={generate} disabled={loading}>{loading ? 'Generating…' : label}</button>{error && <p className="insight-error" role="alert">Unable to generate a review. Please try again.</p>}{insight && <div className="insight-result" aria-live="polite"><span className="eyebrow">{insight.source === 'Foundry' ? 'AZURE AI' : insight.source === 'DemoFallback' ? 'LOCAL SUMMARY · AI UNAVAILABLE' : 'LOCAL SUMMARY'}</span><p>{insight.text}</p>{insight.caveats.map(c => <small key={c} className="insight-caveat">{c}</small>)}</div>}</>
+  return <><span className="eyebrow">AI / {title.toUpperCase()}</span><h3>{title}</h3>{endpoint!=='/api/insights/generate'&&<p className="ai-description">Feedback on the selected performance sample.</p>}<button className="pixel-button insight-button" onClick={generate} disabled={loading||retryAt>Date.now()}>{loading ? 'Generating…' : label}</button>{unavailable&&<p className="ai-unavailable" role="status">AI not available here.</p>}{insight && <div className="insight-result" aria-live="polite"><span className="eyebrow">AZURE AI</span>{insight.decisionReview&&<div className="decision-verdict"><span className="eyebrow">{insight.decisionReview.isHypothetical?'HYPOTHETICAL OPTION':'PLAYED ACTION'} · {insight.decisionReview.optionName}</span><div className="decision-rating">{insight.decisionReview.rating!==null?<><strong>{insight.decisionReview.rating.toFixed(1)}<small>/10</small></strong><span>{insight.decisionReview.ratingLabel}</span></>:<span>Not enough data to rate</span>}</div><small>Model estimate · Confidence: {insight.decisionReview.confidence}</small></div>}<p>{insight.text}</p>{insight.caveats.filter(c => !/synthetic|spatial assessments|only the selected event|Azure AI is unavailable/i.test(c)).map(c => <small key={c} className="insight-caveat">{c}</small>)}</div>}</>
 }
 
 function MatchReview({ matchId, player, audience }: { matchId: string; player?: Player; audience: Audience }) {
@@ -124,23 +125,29 @@ function MatchReview({ matchId, player, audience }: { matchId: string; player?: 
   const recap = useResource<{ keyMoments: KeyMoment[] }>(`/api/matches/${encodeURIComponent(matchId)}/recap${player ? `?playerId=${encodeURIComponent(player.id)}` : ''}`)
   const decisions = useResource<DecisionAnalysis[]>(`/api/matches/${encodeURIComponent(matchId)}/decisions`)
   const [eventId,setEventId] = useState<string | null>(null)
+  const [optionSelection,setOptionSelection] = useState<{eventId:string;optionId:string}|null>(null)
   if (details.loading || feed.loading || recap.loading || decisions.loading) return <Loading />
   if (details.error || feed.error || recap.error || decisions.error || !details.data || !feed.data || !recap.data) return <Failure retry={() => {details.retry();feed.retry();recap.retry();decisions.retry()}} />
   const d = details.data; const events = feed.data.filter(e => !player || e.playerId === player.id)
   const detailedIds = new Set(decisions.data?.map(d => d.snapshot.eventId))
+  const optionLabel = (id:string) => (decisions.data?.find(d=>d.snapshot.eventId===id)?.options.length??0)>1?'Compare options':'View positions'
   const keyEvents = events.filter(e => detailedIds.has(e.eventId) || recap.data!.keyMoments.some(m => m.eventIds.includes(e.eventId)))
   const selected = events.find(e => e.eventId === eventId) ?? events.find(e => detailedIds.has(e.eventId)) ?? events[0]
   const scene = decisions.data?.find(d => d.snapshot.eventId === selected?.eventId)
+  const activeOptionId = scene ? (optionSelection?.eventId===selected?.eventId ? optionSelection.optionId : scene.snapshot.decision.selectedOptionId) : undefined
+  const activeOption = scene?.options.find(o=>o.optionId===activeOptionId)
+  const activeOptionName = activeOption?.type==='pass' ? `Pass to ${d.players.find(p=>p.id===activeOption.receiverId)?.name??'teammate'}` : activeOption?.type==='dribble' ? 'Carry forward' : activeOption?.type==='shot' ? 'Shoot' : activeOption?.type==='tackle' ? 'Tackle' : selected?.type
   const names = new Map(d.players.map(p => [p.id,p.name]))
-  return <><section className="match-intro"><div><span className="eyebrow">{d.scenarioLabel} / {audience.toUpperCase()} REVIEW</span><h1>{d.homeTeam.name}<span className="versus">vs</span>{d.awayTeam.name}</h1><p className="intro-subtitle">{player ? `${player.name} · Individual match review` : 'Tracked Leeds players · Match review'}</p></div><div>{d.result&&<div className="match-result">{d.result.home} – {d.result.away}<small>FINAL · SIMULATED</small></div>}<span className="sample-pill">Synthetic match scenario</span></div></section>
+  return <><section className="match-intro"><div><span className="eyebrow">{d.scenarioLabel} / {audience.toUpperCase()} REVIEW</span><h1>{d.homeTeam.name}<span className="versus">vs</span>{d.awayTeam.name}</h1><p className="intro-subtitle">{player ? `${player.name} · Individual match review` : 'Tracked Leeds players · Match review'}</p></div><div>{d.result&&<div className="match-result">{d.result.home} – {d.result.away}<small>FINAL</small></div>}</div></section>
     <Performance player={player} audience={audience} matchId={matchId} />
     <div className="section-title"><h2>Decision review</h2><span>{player ? 'Select one of your recorded actions' : 'Select a player action'}</span></div>
     <div className="dashboard-grid"><section className="panel pitch-panel"><div className="panel-heading"><h2>Event map</h2><div className="legend"><span>Leeds United</span><span>{d.awayTeam.name}</span></div></div>
-      {scene ? <DecisionPitch key={scene.snapshot.eventId} analysis={scene} players={d.players} /> : <Pitch events={selected ? [selected] : []} players={d.players} selectedEventId={selected?.eventId ?? null} onSelect={setEventId} focusPlayerId={player?.id} />}
+      {selected && (<div className="event-readout"><div className="readout-time">{String(selected.minute).padStart(2,'0')}:{String(selected.second).padStart(2,'0')}</div><div className="readout-copy"><strong>{selected.type}<span>{selected.outcome ?? 'Outcome unknown'}</span></strong><small>{names.get(selected.playerId)}{selected.scoreBefore&&` · Before action: ${d.homeTeam.name} ${selected.scoreBefore[d.homeTeam.id]}–${selected.scoreBefore[d.awayTeam.id]} ${d.awayTeam.name}`}</small></div></div>)}
+      {scene ? <DecisionPitch key={scene.snapshot.eventId} analysis={scene} players={d.players} optionId={activeOptionId!} onOptionChange={id=>setOptionSelection({eventId:scene.snapshot.eventId,optionId:id})} /> : <Pitch events={selected ? [selected] : []} players={d.players} selectedEventId={selected?.eventId ?? null} onSelect={setEventId} focusPlayerId={player?.id} />}
 
-      {selected ? <><div className="event-readout"><div className="readout-time">{String(selected.minute).padStart(2,'0')}:{String(selected.second).padStart(2,'0')}</div><div className="readout-copy"><strong>{selected.type}<span>{selected.outcome ?? 'Outcome unknown'}</span></strong><small>{names.get(selected.playerId)}{selected.scoreBefore&&` · Before action: ${d.homeTeam.name} ${selected.scoreBefore[d.homeTeam.id]}–${selected.scoreBefore[d.awayTeam.id]} ${d.awayTeam.name}`}</small></div></div><section className="insight-tool"><AiInsight key={selected.eventId} endpoint="/api/insights/generate" body={{matchId,eventIds:[selected.eventId],audience}} title="Event insight" label="Analyse selected decision" /></section></> : <p className="empty-state">No recorded actions for this player.</p>}
-    </section><section className="panel moments-panel"><div className="panel-heading"><h2>Key decisions</h2></div>{keyEvents.length===0&&<p className="empty-state">Explore the recorded actions below.</p>}<ol className="moment-list">{keyEvents.map((e,i)=><li key={e.eventId}><button className={`moment-button ${e.eventId===selected?.eventId?'is-selected':''}`} onClick={()=>setEventId(e.eventId)}><span className="moment-index">{String(i+1).padStart(2,'0')}</span><span className="moment-content"><strong>{e.type} · {e.outcome??'Outcome unknown'}</strong><small>{e.minute}′ · {names.get(e.playerId)}</small><small className="decision-badge">{detailedIds.has(e.eventId)?'Compare options':'Event summary'}</small></span></button></li>)}</ol><p className="panel-footnote">Detailed decisions and notable recorded events, in match order. Select an action, then an option to see its path.</p></section>
-      <section className="panel events-panel"><div className="panel-heading"><h2>{player ? 'Your match actions' : 'Match events'}</h2><span>{events.length} actions</span></div><div className="event-table-wrap"><table className="event-table"><thead><tr><th>Time</th><th>Player</th><th>Action</th><th>Outcome</th><th>Pressure</th></tr></thead><tbody>{events.map(e => <tr key={e.eventId} className={e.eventId === selected?.eventId ? 'is-selected' : ''}><td><button className="time-link" aria-label={`Select ${e.type} by ${names.get(e.playerId)} at ${e.minute}:${String(e.second).padStart(2,'0')}`} onClick={() => setEventId(e.eventId)}>{e.minute}:{String(e.second).padStart(2,'0')}</button></td><td>{names.get(e.playerId)}</td><td>{e.type}{detailedIds.has(e.eventId)&&<small className="decision-badge">Compare options</small>}</td><td>{e.outcome ?? 'Unknown'}</td><td>{e.underPressure === null ? 'Unknown' : e.underPressure ? 'Yes' : 'No'}</td></tr>)}</tbody></table></div></section>
+      {selected ? <><section className="insight-tool"><AiInsight key={`${selected.eventId}-${activeOptionId??'event'}-${audience}`} endpoint="/api/insights/generate" body={{matchId,eventIds:[selected.eventId],audience,optionId:activeOptionId}} title={!scene?'Event summary':audience==='Player'?'Your decision analysis':'Coach decision analysis'} label={scene?`Analyse: ${activeOptionName}`:'Summarise event'} /></section></> : <p className="empty-state">No recorded actions for this player.</p>}
+    </section><section className="panel moments-panel"><div className="panel-heading"><h2>Key decisions</h2></div>{keyEvents.length===0&&<p className="empty-state">Explore the recorded actions below.</p>}<ol className="moment-list">{keyEvents.map((e,i)=><li key={e.eventId}><button className={`moment-button ${e.eventId===selected?.eventId?'is-selected':''}`} onClick={()=>setEventId(e.eventId)}><span className="moment-index">{String(i+1).padStart(2,'0')}</span><span className="moment-content"><strong>{e.type} · {e.outcome??'Outcome unknown'}</strong><small>{e.minute}′ · {names.get(e.playerId)}</small><small className="decision-badge">{detailedIds.has(e.eventId)?optionLabel(e.eventId):'Event summary'}</small></span></button></li>)}</ol><p className="panel-footnote">Select a moment to review the played action.</p></section>
+      <section className="panel events-panel"><div className="panel-heading"><h2>{player ? 'Your match actions' : 'Match events'}</h2><span>{events.length} actions</span></div><div className="event-table-wrap"><table className="event-table"><thead><tr><th>Time</th><th>Player</th><th>Action</th><th>Outcome</th><th>Pressure</th></tr></thead><tbody>{events.map(e => <tr key={e.eventId} className={e.eventId === selected?.eventId ? 'is-selected' : ''}><td><button className="time-link" aria-label={`Select ${e.type} by ${names.get(e.playerId)} at ${e.minute}:${String(e.second).padStart(2,'0')}`} onClick={() => setEventId(e.eventId)}>{e.minute}:{String(e.second).padStart(2,'0')}</button></td><td>{names.get(e.playerId)}</td><td>{e.type}{detailedIds.has(e.eventId)&&<small className="decision-badge">{optionLabel(e.eventId)}</small>}</td><td>{e.outcome ?? 'Unknown'}</td><td>{e.underPressure === null ? 'Unknown' : e.underPressure ? 'Yes' : 'No'}</td></tr>)}</tbody></table></div></section>
     </div>
   </>
 }
@@ -183,7 +190,7 @@ function Pitch({ events, players, selectedEventId, onSelect, focusPlayerId }: { 
       </g>)}
       {selected && <EventBall key={selected.eventId} event={selected} />}
     </svg>
-    <div className="pitch-coordinates"><span>Single action · spatial snapshot unavailable</span><span>{focusPlayerId ? 'Your actions are listed below' : 'Choose a shirt to inspect its event'}</span></div>
+    <div className="pitch-coordinates"><span>Only this player’s position was recorded</span><span>{focusPlayerId ? 'Your actions are listed below' : 'Other player positions are unavailable'}</span></div>
   </div>
 }
 

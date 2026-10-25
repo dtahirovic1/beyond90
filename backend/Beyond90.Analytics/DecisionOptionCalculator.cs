@@ -10,8 +10,18 @@ public sealed record OptionAssessment(string OptionId, string Type, string? Rece
     public decimal? Benefit { get; init; }
     public decimal? Risk { get; init; }
     public decimal? ComparativeValue { get; init; }
+    public decimal? SetupRiskAdjustment { get; init; }
+    public string TechniqueNote { get; init; } = "Technique context unavailable.";
 }
-public sealed record DecisionVerdict(string Label, string? PreferredOptionId, string Explanation, string MatchSituation);
+public sealed record RatingComponents(decimal RiskControl, decimal AttackingValue, decimal OptionSelection);
+public sealed record DecisionVerdict(string Label, string? PreferredOptionId, string Explanation, string MatchSituation)
+{
+    public decimal? Rating { get; init; }
+    public string RatingLabel { get; init; } = "Not enough data to rate";
+    public string Confidence { get; init; } = "Limited";
+    public RatingComponents? Components { get; init; }
+    public string RatingMethod { get; init; } = "Heuristic v1; not calibrated against expert ratings.";
+}
 public sealed record DecisionAnalysis(DecisionSnapshot Snapshot, IReadOnlyList<OptionAssessment> Options,
     int VisiblePlayers, int VisibleOpponents, string Coverage)
 {
@@ -71,7 +81,8 @@ public static class DecisionOptionCalculator
         var result=Assess(id,"dribble",null,actor,(start.X+direction*horizon,start.Y),opponents,pitch,space:opponents.Count==0 ? null : space);
         return result with { DistanceMeters=Round(toLine), Reason=result.Reason+" Space ahead examines at most 10 m in the attack direction; it is not a predicted dribble route." };
     }
-    public static DecisionAnalysis Calculate(DecisionSnapshot snapshot)
+    public static DecisionAnalysis Calculate(DecisionSnapshot snapshot) => Calculate(snapshot, snapshot.Decision.SelectedOptionId);
+    public static DecisionAnalysis Calculate(DecisionSnapshot snapshot, string evaluatedOptionId)
     {
         var actor=snapshot.PreDecision.Players.Single(p=>p.Id==snapshot.Decision.PlayerId);
         var opponents=snapshot.PreDecision.Players.Where(p=>p.TeamId!=actor.TeamId).ToArray();
@@ -89,6 +100,11 @@ public static class DecisionOptionCalculator
             $"{snapshot.MatchContext.Minute} min; acting team {(margin>0 ? "leading" : margin<0 ? "trailing" : "level")}. " +
             (late && margin>0 ? "Protecting the lead gives risk more weight." : late && margin<0 ? "Chasing the game gives progression more weight." : "Balanced risk weighting.");
         options=options.Select(o=> {
+            var technique=snapshot.Decision.Options.Single(x=>x.Id==o.OptionId).BodyPart;
+            var setup=snapshot.PreDecision.BodySetup;
+            var height=snapshot.PreDecision.BallHeight;
+            // Aerial trajectories/contact timing need a different model; do not reuse a ground corridor rating.
+            if(height=="high" || technique=="head") return o with {Corridor="Not assessed",TechniqueNote="Aerial ball: contact timing and ball trajectory are needed to rate this option."};
             if(o.Corridor is "Unknown" or "Not assessed") return o;
             var progression=o.Type=="pass" ? (snapshot.PreDecision.Players.Single(p=>p.Id==o.ReceiverId).X-actor.X)*snapshot.Pitch.LengthMeters/100m*Direction(actor,snapshot.Pitch)
                 : o.Type=="dribble" ? o.SpaceAheadMeters??0 : 0;
@@ -99,22 +115,34 @@ public static class DecisionOptionCalculator
             var risk=o.Corridor=="Blocked" ? 55m : o.Corridor=="Contested" ? 30m : 10m;
             if(o.Type=="pass") risk+=Math.Max(0,(o.DistanceMeters??0)-25)*.4m+Math.Max(0,4-(o.NearestOpponentMeters??4))*5;
             if(o.Type=="shot") risk+=Math.Max(0,(o.DistanceMeters??0)-25)*.6m;
-            risk=Math.Min(90,risk);
-            return o with { ProgressionMeters=Math.Round(progression,2), Benefit=Math.Round(benefit,2), Risk=Math.Round(risk,2), ComparativeValue=Math.Round(benefit-riskWeight*risk,2) };
+            decimal? adjustment=technique is "left_foot" or "right_foot" && setup is "left_foot" or "right_foot" or "balanced" && height is "ground" or "low"
+                ? (setup=="balanced" || technique==setup ? 0m : 6m)+(height=="low" ? 2m : 0m) : null;
+            var techniqueNote=adjustment is null ? "Body setup or option technique is unknown; no technique adjustment applied." :
+                setup!="balanced" && technique!=setup ? "This option uses the opposite foot to the current body setup; repositioning may make execution harder." : "The option technique fits the current body setup.";
+            if(height=="low") techniqueNote+=" A bouncing/low ball adds contact difficulty.";
+            risk=Math.Min(90,risk+(adjustment??0));
+            return o with { ProgressionMeters=Math.Round(progression,2), Benefit=Math.Round(benefit,2), Risk=Math.Round(risk,2), ComparativeValue=Math.Round(benefit-riskWeight*risk,2),SetupRiskAdjustment=adjustment,TechniqueNote=techniqueNote };
         }).ToArray();
-        var chosen=options.Single(o=>o.OptionId==snapshot.Decision.SelectedOptionId);
+        var chosen=options.Single(o=>o.OptionId==evaluatedOptionId);
         var ranked=options.Where(o=>o.ComparativeValue.HasValue).OrderByDescending(o=>o.ComparativeValue).ToArray();
         var sufficient=chosen.ComparativeValue.HasValue && ranked.Length>=2;
         var best=ranked.FirstOrDefault();
         var gap=sufficient ? best!.ComparativeValue!.Value-chosen.ComparativeValue!.Value : 0;
+        RatingComponents? components=sufficient ? new(
+            Math.Round(Math.Clamp(10-chosen.Risk!.Value*riskWeight/10,0,10),1),
+            Math.Round(Math.Clamp(chosen.Benefit!.Value/8,0,10),1),
+            Math.Round(Math.Clamp(10-gap/8,0,10),1)) : null;
+        decimal? rating=components is null ? null : Math.Round(Math.Clamp(.35m*components.RiskControl+.25m*components.AttackingValue+.4m*components.OptionSelection,1,9.5m),1);
         var label=!sufficient ? "Insufficient context" : gap>=15 ? "Better visible alternative" : chosen.Risk>=55 ? "High-risk choice" : "Reasonable choice";
         var explanation=!sufficient ? "At least two assessable options are needed for a comparative verdict. The recorded outcome alone cannot establish decision quality." :
-            $"Chosen action: {chosen.Corridor.ToLowerInvariant()} corridor" +
+            $"Evaluated option: {chosen.Corridor.ToLowerInvariant()} corridor" +
             (chosen.Type=="shot" ? $", {chosen.DistanceMeters} m from goal and {chosen.GoalOpeningDegrees}° goal opening." : $", {chosen.ProgressionMeters} m forward progress.") +
             (gap>=15 ? " Another supplied option offers a better balance of progression, space and visible risk." : " No supplied option has a clearly stronger balance of benefit and risk.") +
             " This is a provisional comparison of visible options, not a proven optimal decision.";
         return new(snapshot,options,snapshot.PreDecision.Players.Count,opponents.Length,
             "Synthetic partial snapshot. Unseen players, offside, movement and ball speed remain unknown. Comparison scores are uncalibrated rules, not success probabilities. The recorded outcome does not affect the verdict.")
-            { Verdict=new(label,sufficient && gap>=15 ? best!.OptionId : null,explanation,situation) };
+            { Verdict=new(label,sufficient && gap>=15 ? best!.OptionId : null,explanation,situation) {
+                Rating=rating,Components=components,RatingLabel=rating is null ? "Not enough data to rate" : rating>=8 ? "Strong choice" : rating>=7 ? "Good choice" : rating>=5 ? "Mixed choice" : "Poor choice"
+            } };
     }
 }

@@ -8,6 +8,7 @@ public sealed class Insight
     public List<string> EventIds { get; set; } = [];
     public List<MetricEvidence> MetricEvidence { get; set; } = [];
     public string Text { get; set; } = string.Empty;
+    public object? DecisionReview { get; set; }
     public List<string> Caveats { get; set; } = [];
 }
 

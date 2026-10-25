@@ -27,9 +27,17 @@ public static class DecisionSnapshotValidator
             Require(actor is not null && actor.X==e.X && actor.Y==e.Y,"actor location differs from event");
             Require(s.Decision.BodyPartUsed is null or "left_foot" or "right_foot" or "head" or "other","unknown body part");
             var options=s.Decision.Options!;
+            Require(state.BodySetup is null or "left_foot" or "right_foot" or "head" or "balanced","unknown body setup");
+            Require(state.BallHeight is null or "ground" or "low" or "high","unknown ball height");
+            Require(state.BodySetup!="head" || state.BallHeight=="high","heading setup needs a high ball");
             Require(options.Count>0 && options.All(o=>o is not null && !string.IsNullOrWhiteSpace(o.Id) && o.Type is "pass" or "shot" or "dribble" or "tackle") && options.Select(o=>o.Id).Distinct().Count()==options.Count,"invalid options");
             var selected=options.FirstOrDefault(o=>o.Id==s.Decision.SelectedOptionId);
             Require(selected is not null && string.Equals(selected.Type,e.Type,StringComparison.OrdinalIgnoreCase),"selected option differs from event action");
+            Require(options.All(o=>o.BodyPart is null or "left_foot" or "right_foot" or "head" or "other"),"unknown option body part");
+            Require(options.All(o=>o.BodyPart!="head" || state.BallHeight=="high"),"header option needs a high ball");
+            Require(s.Decision.BodyPartUsed!="head" || state.BallHeight=="high","recorded header needs a high ball");
+            Require(selected!.BodyPart is null || s.Decision.BodyPartUsed is null || selected.BodyPart==s.Decision.BodyPartUsed,"chosen technique differs from recorded technique");
+            Require(options.All(o=>o.Type!="dribble" || o.BodyPart!="head"),"cannot dribble with the head");
             foreach(var option in options)
                 Require(option.Type=="pass" ? state.Players.Any(p=>p.Id==option.ReceiverId && p.Id!=actor!.Id && p.TeamId==actor.TeamId) : option.ReceiverId is null,"invalid pass receiver");
             if(selected!.Type is "pass" or "shot" or "dribble")

@@ -2,7 +2,7 @@
 
 Status: implemented locally, pending user review and push approval.
 
-- Thirteen synthetic, action-time spatial snapshots across three Leeds scenarios. Each tracked player has a scene in each match. The remaining events have no spatial snapshot.
+- Fourteen synthetic, action-time spatial snapshots across three Leeds scenarios. Each tracked player has a scene in each match. The remaining events have no spatial snapshot.
 - Every snapshot names its match and event; timestamp, actor, outcome, team directions, options and positions are validated on loading.
 - The old JSON field `decisionSnapshot` was renamed to `preDecision`; team score and attack direction maps are generic. Unknown scores remain null.
 - Corrected legacy scene with a pass option lacking a receiver. Existing Leeds scenes were linked to compatible actor/actions; when the actor moved, the whole local formation moved with it.

@@ -337,6 +337,15 @@
                     "receiverId": {
                       "type": "string",
                       "minLength": 1
+                    },
+                    "bodyPart": {
+                      "enum": [
+                        "left_foot",
+                        "right_foot",
+                        "head",
+                        "other",
+                        null
+                      ]
                     }
                   },
                   "additionalProperties": false
@@ -419,6 +428,23 @@
                   },
                   "additionalProperties": false
                 }
+              },
+              "bodySetup": {
+                "enum": [
+                  "left_foot",
+                  "right_foot",
+                  "head",
+                  "balanced",
+                  null
+                ]
+              },
+              "ballHeight": {
+                "enum": [
+                  "ground",
+                  "low",
+                  "high",
+                  null
+                ]
               }
             },
             "additionalProperties": false

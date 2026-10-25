@@ -1345,16 +1345,19 @@
           {
             "id": "pass-lee-9",
             "type": "pass",
-            "receiverId": "lee-9"
+            "receiverId": "lee-9",
+            "bodyPart": "right_foot"
           },
           {
             "id": "pass-lee-5",
             "type": "pass",
-            "receiverId": "lee-5"
+            "receiverId": "lee-5",
+            "bodyPart": "left_foot"
           },
           {
             "id": "carry",
-            "type": "dribble"
+            "type": "dribble",
+            "bodyPart": "left_foot"
           }
         ]
       },
@@ -1403,7 +1406,9 @@
             "y": 30,
             "role": "attacking midfielder"
           }
-        ]
+        ],
+        "bodySetup": "left_foot",
+        "ballHeight": "ground"
       }
     },
     {
@@ -1435,15 +1440,18 @@
           {
             "id": "pass-lee-4",
             "type": "pass",
-            "receiverId": "lee-4"
+            "receiverId": "lee-4",
+            "bodyPart": "right_foot"
           },
           {
             "id": "carry",
-            "type": "dribble"
+            "type": "dribble",
+            "bodyPart": "right_foot"
           },
           {
             "id": "shot",
-            "type": "shot"
+            "type": "shot",
+            "bodyPart": "right_foot"
           }
         ]
       },
@@ -1492,7 +1500,9 @@
             "y": 40,
             "role": "striker"
           }
-        ]
+        ],
+        "bodySetup": "right_foot",
+        "ballHeight": "ground"
       }
     },
     {
@@ -1567,30 +1577,36 @@
             "y": 45,
             "role": "Striker"
           }
-        ]
+        ],
+        "bodySetup": "right_foot",
+        "ballHeight": "low"
       },
       "decision": {
         "playerId": "lee-9",
         "selectedOptionId": "pass-lee-5",
-        "bodyPartUsed": null,
+        "bodyPartUsed": "right_foot",
         "options": [
           {
             "id": "pass-lee-5",
             "type": "pass",
-            "receiverId": "lee-5"
+            "receiverId": "lee-5",
+            "bodyPart": "right_foot"
           },
           {
             "id": "pass-lee-4",
             "type": "pass",
-            "receiverId": "lee-4"
+            "receiverId": "lee-4",
+            "bodyPart": "right_foot"
           },
           {
             "id": "shot",
-            "type": "shot"
+            "type": "shot",
+            "bodyPart": "right_foot"
           },
           {
             "id": "carry",
-            "type": "dribble"
+            "type": "dribble",
+            "bodyPart": "right_foot"
           }
         ]
       },
@@ -1620,20 +1636,23 @@
       "decision": {
         "playerId": "lee-5",
         "selectedOptionId": "pass-lee-4",
-        "bodyPartUsed": null,
+        "bodyPartUsed": "left_foot",
         "options": [
           {
             "id": "pass-lee-4",
             "type": "pass",
-            "receiverId": "lee-4"
+            "receiverId": "lee-4",
+            "bodyPart": "left_foot"
           },
           {
             "id": "carry",
-            "type": "dribble"
+            "type": "dribble",
+            "bodyPart": "right_foot"
           },
           {
             "id": "shot",
-            "type": "shot"
+            "type": "shot",
+            "bodyPart": "right_foot"
           }
         ]
       },
@@ -1682,8 +1701,112 @@
             "y": 67,
             "role": "striker"
           }
-        ]
+        ],
+        "bodySetup": "right_foot",
+        "ballHeight": "ground"
       }
+    },
+    {
+      "sceneId": "leeds-sim-003-aerial-shot",
+      "matchId": "leeds-sim-003",
+      "eventId": "leeds-sim-003-evt-015",
+      "matchContext": {
+        "minute": 15,
+        "second": 39,
+        "score": {
+          "leeds": 0,
+          "liverpool": 0
+        },
+        "phase": "synthetic_action",
+        "possessionId": null
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "liverpool": "right_to_left"
+        }
+      },
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 78,
+          "y": 50
+        },
+        "players": [
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 78,
+            "y": 50,
+            "role": "Striker"
+          },
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 64,
+            "y": 66,
+            "role": "Centre-back"
+          },
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 70,
+            "y": 32,
+            "role": "Defensive midfielder"
+          },
+          {
+            "id": "liv-4",
+            "teamId": "liverpool",
+            "x": 87,
+            "y": 62,
+            "role": "Centre-back"
+          },
+          {
+            "id": "liv-7",
+            "teamId": "liverpool",
+            "x": 93,
+            "y": 40,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "liv-9",
+            "teamId": "liverpool",
+            "x": 100,
+            "y": 74,
+            "role": "Striker"
+          }
+        ],
+        "bodySetup": "head",
+        "ballHeight": "high"
+      },
+      "decision": {
+        "playerId": "lee-9",
+        "selectedOptionId": "aerial-shot",
+        "bodyPartUsed": "head",
+        "options": [
+          {
+            "id": "pass-lee-5",
+            "type": "pass",
+            "receiverId": "lee-5",
+            "bodyPart": "head"
+          },
+          {
+            "id": "pass-lee-4",
+            "type": "pass",
+            "receiverId": "lee-4",
+            "bodyPart": "head"
+          },
+          {
+            "id": "aerial-shot",
+            "type": "shot",
+            "bodyPart": "head"
+          }
+        ]
+      },
+      "recordedOutcome": "Blocked"
     }
   ],
   "rosterSource": "User-selected scenario roster; action data and positions are synthetic",

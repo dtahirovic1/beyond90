@@ -5,6 +5,26 @@ namespace Beyond90.Api;
 public sealed record PerformanceStats(int Events, int Passes, int CompletedPasses, decimal? PassAccuracy, int Shots, int Goals, int Recoveries, int TacklesWon, int Turnovers, int PressureEvents);
 public static class PerformanceReport
 {
+    public static object Segments(IReadOnlyList<MatchEvent> events)
+    {
+        object Passing(IEnumerable<MatchEvent> source)
+        {
+            var passes=source.Where(e=>e.Type=="Pass").ToArray();
+            var known=passes.Where(e=>e.Outcome is "Completed" or "Incomplete").ToArray();
+            var completed=known.Count(e=>e.Outcome=="Completed");
+            return new { attempts=passes.Length, knownOutcomes=known.Length, completed,
+                completionPercent=known.Length==0 ? (decimal?)null : Math.Round(100m*completed/known.Length,1) };
+        }
+        var shots=events.Where(e=>e.Type=="Shot").ToArray();
+        var tackles=events.Where(e=>e.Type=="Tackle").ToArray();
+        return new {
+            passing=new { overall=Passing(events), underPressure=Passing(events.Where(e=>e.UnderPressure==true)), withoutPressure=Passing(events.Where(e=>e.UnderPressure==false)), unknownPressure=Passing(events.Where(e=>e.UnderPressure is null)) },
+            shooting=new { attempts=shots.Length,goals=shots.Count(e=>e.Outcome=="Goal"),unknownOutcomes=shots.Count(e=>e.Outcome is null) },
+            defending=new { tackles=tackles.Length,won=tackles.Count(e=>e.Outcome=="Won"),lost=tackles.Count(e=>e.Outcome=="Lost"),recoveries=events.Count(e=>e.Type=="Recovery" && e.Outcome=="Won") },
+            possession=new { recordedTurnovers=events.Count(e=>e.Type=="PossessionChange" && e.Outcome=="Turnover"),turnoversUnderPressure=events.Count(e=>e.Type=="PossessionChange" && e.Outcome=="Turnover" && e.UnderPressure==true) },
+            scope="Selected player event sample; no full-team possession, defensive shape, pressing effectiveness or chance-quality measures. Counts are not per-90 rates."
+        };
+    }
     public static PerformanceStats Stats(IReadOnlyList<MatchEvent> events)
     {
         var metrics = MetricsCalculator.Calculate(events);

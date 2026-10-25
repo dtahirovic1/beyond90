@@ -13,6 +13,7 @@ public sealed record InsightRequest(
     public IReadOnlyList<MatchTeam> Teams { get; init; } = [];
     public IReadOnlyList<Beyond90.Analytics.DecisionAnalysis> Decisions { get; init; } = [];
     public object? ReportContext { get; init; }
+    public object? DecisionFocus { get; init; }
     public int? RecordedEventCount { get; init; }
     public int? PassesWithKnownOutcome { get; init; }
 }

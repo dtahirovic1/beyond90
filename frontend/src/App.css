@@ -247,3 +247,27 @@
 .decision-badge { display: block; color: #cce58e; font-size: 11px; margin-top: 5px; }
 .match-result { font-size: 32px; font-weight: 750; margin: 12px 0; font-variant-numeric: tabular-nums; }
 .match-result small { display: block; font-size: 10px; letter-spacing: .1em; opacity: .65; margin-top: 4px; }
+.played-action { display:flex; align-items:baseline; flex-wrap:wrap; gap:8px 14px; padding:18px 0 12px; }
+.played-action strong { font-size:20px; }
+.played-action > span:last-child { font-size:14px; color:#bdc6bf; }
+.path-caption { padding:10px 12px; background:#202a26; font-size:14px; line-height:1.5; }
+.path-caption small { display:block; color:#bdc6bf; font-size:12px; }
+.options-heading { padding:18px 0 0; display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline; }
+.options-heading span { color:#bdc6bf; font-size:13px; }
+.decision-options { padding:12px 0; }
+.decision-options .option-kind { margin:0 0 8px; font-size:11px; letter-spacing:.06em; }
+.decision-options strong { font-size:15px; }
+.decision-verdict { margin:8px 0 16px; padding:16px; }
+.decision-verdict p { font-size:15px; margin:8px 0; }
+.decision-verdict small { color:#bdc6bf; font-size:12px; }
+.decision-details { padding:0 0 14px; }
+.decision-details summary { cursor:pointer; padding:10px 0; font-size:14px; color:#d2ed83; }
+.decision-details summary:focus-visible,.decision-options button:focus-visible { outline:2px solid #d2ed83; outline-offset:4px; }
+.option-measurements { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px 16px; padding:12px; background:#202a26; font-size:13px; }
+.option-measurements dt { color:#bdc6bf; }.option-measurements dd { margin:0; text-align:right; }
+.pitch-panel > .event-readout { margin:0 0 4px; }
+.decision-rating { display:flex; align-items:center; gap:16px; margin:12px 0; }
+.decision-rating > strong { font-size:34px; line-height:1.1; color:#d2ed83; font-variant-numeric:tabular-nums; }
+.decision-rating > strong small { display:inline; font-size:16px; margin-left:4px; }
+.decision-rating > span { font-size:17px; font-weight:600; }
+.ai-unavailable { padding:14px 0; font-size:15px; color:#d2d8d2; }

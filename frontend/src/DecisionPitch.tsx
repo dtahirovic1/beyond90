@@ -1,15 +1,13 @@
-import { useState } from 'react'
 import { PixelJersey } from './PixelJersey'
 import { squadNumber } from './jerseyNumber'
 export type DecisionAnalysis = {
- snapshot: { eventId: string; matchContext: {minute:number; score:Record<string,number>|null}; decision: { playerId: string; selectedOptionId: string; bodyPartUsed: string | null; options: {id: string; type: string; receiverId?: string}[] }; pitch: { lengthMeters:number; attackDirection: Record<string,string> }; preDecision: {ball: {x:number;y:number};players:{id:string;teamId:string;x:number;y:number}[]} };
- options: {optionId:string;type:string;receiverId:string|null;distanceMeters:number|null;nearestOpponentMeters:number|null;corridorClearanceMeters:number|null;spaceAheadMeters:number|null;goalOpeningDegrees:number|null;corridor:string;reason:string;progressionMeters:number|null;risk:number|null;benefit:number|null}[];
- verdict: {label:string;preferredOptionId:string|null;explanation:string;matchSituation:string}|null;
+ snapshot: { eventId: string; matchContext: {minute:number; score:Record<string,number>|null}; decision: { playerId: string; selectedOptionId: string; bodyPartUsed: string | null; options: {id: string; type: string; receiverId?: string}[] }; pitch: { lengthMeters:number; attackDirection: Record<string,string> }; preDecision: {bodySetup?:string|null;ballHeight?:string|null;ball: {x:number;y:number};players:{id:string;teamId:string;x:number;y:number}[]} };
+ options: {optionId:string;type:string;receiverId:string|null;distanceMeters:number|null;nearestOpponentMeters:number|null;corridorClearanceMeters:number|null;spaceAheadMeters:number|null;goalOpeningDegrees:number|null;corridor:string;reason:string;progressionMeters:number|null;risk:number|null;benefit:number|null;techniqueNote?:string;setupRiskAdjustment?:number|null}[];
+ verdict: {label:string;preferredOptionId:string|null;explanation:string;matchSituation:string;rating?:number|null;ratingLabel?:string;confidence?:string;components?:{riskControl:number;attackingValue:number;optionSelection:number}|null}|null;
  visiblePlayers:number;visibleOpponents:number;coverage:string;
 }
-export function DecisionPitch({analysis,players}:{analysis:DecisionAnalysis;players:{id:string;name:string;teamId:string}[]}) {
+export function DecisionPitch({analysis,players,optionId,onOptionChange}:{analysis:DecisionAnalysis;players:{id:string;name:string;teamId:string}[];optionId:string;onOptionChange:(id:string)=>void}) {
  const {snapshot,options}=analysis
- const [optionId,setOptionId]=useState(snapshot.decision.selectedOptionId)
  const option=options.find(o=>o.optionId===optionId)!
  const actor=snapshot.preDecision.players.find(p=>p.id===snapshot.decision.playerId)!
  const receiver=snapshot.preDecision.players.find(p=>p.id===option.receiverId)
@@ -17,6 +15,11 @@ export function DecisionPitch({analysis,players}:{analysis:DecisionAnalysis;play
  const start=snapshot.preDecision.ball
  const target=receiver ?? (option.type==='shot' ? {x:snapshot.pitch.attackDirection[actor.teamId]==='left_to_right'?100:0,y:50}:option.type==='dribble'?{x:Math.max(0,Math.min(100,start.x+(snapshot.pitch.attackDirection[actor.teamId]==='left_to_right'?1:-1)*Math.min(10,option.spaceAheadMeters??0)/snapshot.pitch.lengthMeters*100)),y:start.y}:null)
  const names=new Map(players.map(p=>[p.id,p.name]))
+ const actionName=(o:DecisionAnalysis['options'][number])=>o.type==='pass'?`Pass to ${names.get(o.receiverId!)?.split(' ').at(-1)??'teammate'}`:o.type==='dribble'?'Carry forward':o.type==='shot'?'Shoot':'Tackle'
+ const played=options.find(o=>o.optionId===snapshot.decision.selectedOptionId)!
+ const viewingPlayed=option.optionId===played.optionId
+ const alternatives=options.filter(o=>o.optionId!==played.optionId)
+ const laneLabel=(o:DecisionAnalysis['options'][number])=>o.corridor==='Blocked'?'Defender close to the path':o.corridor==='Contested'?'Defender near the path':o.corridor==='Open'?'No visible defender close to the path':'Not enough position data'
  const placed:{x:number;y:number}[]=[]
  const markers=snapshot.preDecision.players.map(p=>{
    const px=x(p.x),py=y(p.y)
@@ -25,6 +28,8 @@ export function DecisionPitch({analysis,players}:{analysis:DecisionAnalysis;play
    placed.push(pos);return {...p,px,py,...pos}
  })
  return <div className="decision-scene">
+  <div className="played-action"><span className="eyebrow">PLAYED</span><strong>{actionName(played)}</strong><span>{names.get(actor.id)}</span></div>
+  <div className="path-caption" aria-live="polite">{viewingPlayed?'Showing played option':'Previewing alternative'}: <strong>{actionName(option)}</strong>{target&&<small>Dashed line = option path, not a replay.</small>}</div>
   <svg className="pitch-svg" viewBox="0 0 900 480" role="img" aria-label="Player positions at the selected action. Shirt callouts connect to exact position dots.">
    <rect width="900" height="480" fill="#23312f"/><rect x="28" y="26" width="844" height="428" className="pitch-outline"/>
    <path d="M450 26v428M28 136h120v208H28M28 190h46v100H28M872 136H752v208h120M872 190h-46v100h46" className="pitch-line"/><circle cx="450" cy="240" r="72" className="pitch-line"/>
@@ -39,14 +44,26 @@ export function DecisionPitch({analysis,players}:{analysis:DecisionAnalysis;play
    </g>)}
    <g transform={`translate(${x(start.x)} ${y(start.y)})`}><circle r="8" fill="#fffdf5" stroke="#152321" strokeWidth="2"/><path d="M0 -4L4 -1 2 4H-2L-4 -1Z" fill="#152321"/></g>
   </svg>
-  <div className="pitch-coordinates"><span>Same moment · {analysis.visiblePlayers} visible players</span><span>Body part: {snapshot.decision.bodyPartUsed?.replaceAll('_',' ')??'Unknown'}</span></div>
-  <div className="decision-options" aria-label="Available decision options">{options.map(o=><button key={o.optionId} aria-pressed={optionId===o.optionId} className={optionId===o.optionId?'is-selected':''} onClick={()=>setOptionId(o.optionId)}><strong>{o.type==='pass'?`Pass to ${names.get(o.receiverId!)?.split(' ').at(-1)??o.receiverId}`:o.type==='dribble'?'Carry forward':o.type==='shot'?'Shoot':'Tackle'}</strong><small>{o.optionId===snapshot.decision.selectedOptionId?'Chosen action':'Alternative'} · {o.corridor}{analysis.verdict?.preferredOptionId===o.optionId?' · Stronger visible option':''}</small></button>)}</div>
-  {analysis.verdict&&<div className="decision-verdict"><span className="eyebrow">PROVISIONAL DECISION ASSESSMENT</span><h3>{analysis.verdict.label}</h3><p>{analysis.verdict.explanation}</p><small>{analysis.verdict.matchSituation}</small></div>}
-  <div className="decision-details"><strong>{option.corridor} · visible opponents only</strong>
-   <p>{option.distanceMeters!==null&&`${option.type==='dribble'?'Distance to goal line':'Distance'}: ${option.distanceMeters} m. `}{option.corridorClearanceMeters!==null&&`Nearest defender to corridor: ${option.corridorClearanceMeters} m. `}{option.spaceAheadMeters!==null&&`Space ahead within 10 m: ${option.spaceAheadMeters} m. `}{option.goalOpeningDegrees!==null&&`Goal opening: ${option.goalOpeningDegrees}°. `}</p>
-   <p>{option.progressionMeters!==null&&option.type!=='shot'&&`Forward progress: ${option.progressionMeters} m. `}{option.type==='pass'&&option.nearestOpponentMeters!==null&&`Receiver’s nearest visible opponent: ${option.nearestOpponentMeters} m. `}</p>
-   <small>{option.reason}</small>
-   <small>{analysis.coverage} Paths illustrate options, not recorded ball flight.</small>
-  </div>
+  <div className="pitch-coordinates"><span>{analysis.visiblePlayers} recorded positions · Partial scene</span></div>
+  <div className="options-heading"><strong>{alternatives.length?'Compare options':'Played option'}</strong><span>{alternatives.length?'Select an option, then analyse it.':'No alternatives recorded for this action.'}</span></div>
+  <div className="decision-options" aria-label="Compare played action and alternatives">{[played,...alternatives].map(o=><button key={o.optionId} aria-pressed={optionId===o.optionId} className={optionId===o.optionId?'is-selected':''} onClick={()=>onOptionChange(o.optionId)}><small className="option-kind">{o.optionId===played.optionId?'PLAYED':'ALTERNATIVE'}</small><strong>{actionName(o)}</strong></button>)}</div>
+
+  <details key={optionId} className="decision-details"><summary>View details for {actionName(option)}</summary>
+   <p>{laneLabel(option)}.</p>
+   <dl className="option-measurements">
+    {option.distanceMeters!==null&&<><dt>{option.type==='dribble'?'Distance to goal line':'Distance'}</dt><dd>{option.distanceMeters} m</dd></>}
+    {option.progressionMeters!==null&&option.type!=='shot'&&<><dt>Direction</dt><dd>{Math.abs(option.progressionMeters)} m {option.progressionMeters<0?'backward':'forward'}</dd></>}
+    {option.corridorClearanceMeters!==null&&<><dt>Nearest defender to path</dt><dd>{option.corridorClearanceMeters} m</dd></>}
+    {option.type==='pass'&&option.nearestOpponentMeters!==null&&<><dt>Nearest defender to receiver</dt><dd>{option.nearestOpponentMeters} m</dd></>}
+    {option.spaceAheadMeters!==null&&<><dt>Space ahead (up to 10 m)</dt><dd>{option.spaceAheadMeters} m</dd></>}
+    {option.goalOpeningDegrees!==null&&<><dt>Goal opening</dt><dd>{option.goalOpeningDegrees}°</dd></>}
+    <dt>Body part used for played action</dt><dd>{snapshot.decision.bodyPartUsed?.replaceAll('_',' ')??'Unknown'}</dd>
+    <dt>Body ready for</dt><dd>{snapshot.preDecision.bodySetup?.replaceAll('_',' ')??'Unknown'}</dd>
+    <dt>Ball height</dt><dd>{snapshot.preDecision.ballHeight??'Unknown'}</dd>
+   </dl>
+   <p>{option.techniqueNote}</p>
+
+   <small>Only {analysis.visiblePlayers} players are shown. Movement and unseen opponents may change the assessment.</small>
+  </details>
  </div>
 }

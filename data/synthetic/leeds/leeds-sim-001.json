@@ -1345,16 +1345,19 @@
           {
             "id": "pass-lee-4",
             "type": "pass",
-            "receiverId": "lee-4"
+            "receiverId": "lee-4",
+            "bodyPart": "right_foot"
           },
           {
             "id": "pass-lee-9",
             "type": "pass",
-            "receiverId": "lee-9"
+            "receiverId": "lee-9",
+            "bodyPart": "left_foot"
           },
           {
             "id": "carry",
-            "type": "dribble"
+            "type": "dribble",
+            "bodyPart": "left_foot"
           }
         ]
       },
@@ -1403,7 +1406,9 @@
             "y": 52,
             "role": "midfielder"
           }
-        ]
+        ],
+        "bodySetup": "left_foot",
+        "ballHeight": "ground"
       }
     },
     {
@@ -1558,30 +1563,36 @@
             "y": 91,
             "role": "Midfielder"
           }
-        ]
+        ],
+        "bodySetup": "right_foot",
+        "ballHeight": "low"
       },
       "decision": {
         "playerId": "lee-4",
         "selectedOptionId": "pass-lee-5",
-        "bodyPartUsed": null,
+        "bodyPartUsed": "right_foot",
         "options": [
           {
             "id": "pass-lee-5",
             "type": "pass",
-            "receiverId": "lee-5"
+            "receiverId": "lee-5",
+            "bodyPart": "right_foot"
           },
           {
             "id": "pass-lee-9",
             "type": "pass",
-            "receiverId": "lee-9"
+            "receiverId": "lee-9",
+            "bodyPart": "right_foot"
           },
           {
             "id": "shot",
-            "type": "shot"
+            "type": "shot",
+            "bodyPart": "right_foot"
           },
           {
             "id": "carry",
-            "type": "dribble"
+            "type": "dribble",
+            "bodyPart": "right_foot"
           }
         ]
       },
@@ -1659,30 +1670,36 @@
             "y": 68,
             "role": "Midfielder"
           }
-        ]
+        ],
+        "bodySetup": "right_foot",
+        "ballHeight": "ground"
       },
       "decision": {
         "playerId": "lee-9",
         "selectedOptionId": "shot",
-        "bodyPartUsed": null,
+        "bodyPartUsed": "left_foot",
         "options": [
           {
             "id": "pass-lee-5",
             "type": "pass",
-            "receiverId": "lee-5"
+            "receiverId": "lee-5",
+            "bodyPart": "right_foot"
           },
           {
             "id": "pass-lee-4",
             "type": "pass",
-            "receiverId": "lee-4"
+            "receiverId": "lee-4",
+            "bodyPart": "right_foot"
           },
           {
             "id": "shot",
-            "type": "shot"
+            "type": "shot",
+            "bodyPart": "left_foot"
           },
           {
             "id": "carry",
-            "type": "dribble"
+            "type": "dribble",
+            "bodyPart": "right_foot"
           }
         ]
       },
@@ -1760,30 +1777,36 @@
             "y": 100,
             "role": "Midfielder"
           }
-        ]
+        ],
+        "bodySetup": "right_foot",
+        "ballHeight": "ground"
       },
       "decision": {
         "playerId": "lee-4",
         "selectedOptionId": "pass-lee-5",
-        "bodyPartUsed": null,
+        "bodyPartUsed": "right_foot",
         "options": [
           {
             "id": "pass-lee-5",
             "type": "pass",
-            "receiverId": "lee-5"
+            "receiverId": "lee-5",
+            "bodyPart": "right_foot"
           },
           {
             "id": "pass-lee-9",
             "type": "pass",
-            "receiverId": "lee-9"
+            "receiverId": "lee-9",
+            "bodyPart": "right_foot"
           },
           {
             "id": "shot",
-            "type": "shot"
+            "type": "shot",
+            "bodyPart": "right_foot"
           },
           {
             "id": "carry",
-            "type": "dribble"
+            "type": "dribble",
+            "bodyPart": "right_foot"
           }
         ]
       },

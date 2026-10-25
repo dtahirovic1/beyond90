@@ -18,13 +18,11 @@ public sealed class InsightEvidenceTests
     }
 
     [Fact]
-    public async Task Timeout_is_a_labeled_fallback_not_a_successful_AI_result()
+    public async Task Timeout_returns_unavailable_without_a_generated_fallback()
     {
         var controller = Create(new FailingProvider());
         var result = await controller.Generate(Request(), CancellationToken.None);
-        var insight = Assert.IsType<Insight>(Assert.IsType<OkObjectResult>(result).Value);
-        Assert.Equal("DemoFallback", insight.Source);
-        Assert.NotEmpty(insight.Caveats);
+        Assert.Equal(503, Assert.IsType<ObjectResult>(result).StatusCode);
     }
 
     [Fact]
