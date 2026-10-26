@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: beyond90
+    runtime: docker
+    plan: free
+    region: frankfurt
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: PORT
+        value: "10000"
+      - key: Foundry__Deployment
+        value: gpt-4.1-mini

@@ -20,3 +20,4 @@ npm-debug.log*
 .npm-cache/
 .superpowers/
 evaluation-results/
+.deploy-check/

@@ -29,7 +29,13 @@ builder.Services.AddTransient<IInsightProvider>(services =>
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
     app.MapOpenApi();
+app.UseDefaultFiles();
+app.UseStaticFiles();
+app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
 app.MapControllers();
+// Keep missing API routes as JSON 404s instead of returning the SPA's HTML.
+app.MapFallback("/api/{**path}", () => Results.NotFound(new { error = "API route not found." }));
+app.MapFallbackToFile("index.html");
 app.Run();
 
 public partial class Program { }

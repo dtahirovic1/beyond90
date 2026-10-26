@@ -2,6 +2,12 @@
 
 **The Game Doesn't End at Full Time.**
 
+## Deploy on Render
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://dashboard.render.com/select-repo?type=blueprint&repo=https://github.com/dtahirovic1/beyond90)
+
+Deploy the frontend and .NET API together as one Free Docker web service using the root `render.yaml`. See [deployment and Azure AI setup](docs/render-deploy.md). The hosted service's public HTTPS URL is the Live Demo link for hackathon submissions and Demosmith; Azure AI reviews require server environment configuration.
+
 Beyond90 turns synthetic football match events into explainable statistics and audience-specific match insights. The demo focuses on Leeds United and uses real player names from the 2026/27 squads, with Arsenal, Chelsea, Liverpool and Tottenham as scenario opponents, but every event and statistic is invented for illustration; it is not a replay or claim about an actual match. It does not analyze video or use Premier League footage, club crests, or player images.
 
 ## Project status
