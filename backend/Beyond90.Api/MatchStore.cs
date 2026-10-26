@@ -11,10 +11,10 @@ public sealed class MatchStore
     public IReadOnlyList<MatchStore> All => _matches ?? new[] { this };
     public MatchStore? Find(string id) => All.FirstOrDefault(match => match.Id == id);
     public DecisionSnapshot? GetDecisionSnapshot(string sceneId) => _demo.DecisionSnapshots.FirstOrDefault(s => s.SceneId == sceneId);
-    public static MatchStore LoadCatalog(string directory)
+    public static MatchStore LoadCatalog(string directory, bool includeCity = false)
     {
         var matches = new List<MatchStore>();
-    foreach (var path in Directory.GetFiles(directory, "*.json").OrderBy(p => p, StringComparer.Ordinal))
+    foreach (var path in Directory.GetFiles(directory, "*.json").Concat(includeCity && Directory.Exists(Path.Combine(directory, "..", "city")) ? Directory.GetFiles(Path.Combine(directory, "..", "city"), "*.json") : Array.Empty<string>()).OrderBy(p => p, StringComparer.Ordinal))
     {
         try
         {

@@ -16,5 +16,6 @@
   <ItemGroup>
     <Content Include="..\..\data\synthetic\match-demo.json" Link="match-demo.json" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="..\..\data\synthetic\leeds\*.json" Link="leeds\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\..\data\synthetic\city\*.json" Link="city\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

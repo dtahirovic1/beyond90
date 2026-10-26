@@ -1,0 +1,1722 @@
+{
+  "matchId": "city-sim-002",
+  "homeTeamId": "city",
+  "awayTeamId": "chelsea",
+  "dataStatus": "Synthetic event sample — not real match results or player performance.",
+  "rosterSeason": "2026/27",
+  "scenarioLabel": "Scenario 02",
+  "teams": [
+    {
+      "id": "city",
+      "name": "Manchester City"
+    },
+    {
+      "id": "chelsea",
+      "name": "Chelsea"
+    }
+  ],
+  "players": [
+    {
+      "id": "mci-15",
+      "teamId": "city",
+      "name": "Marc Guéhi",
+      "position": "Centre-back"
+    },
+    {
+      "id": "mci-10",
+      "teamId": "city",
+      "name": "Rayan Cherki",
+      "position": "Attacking midfielder"
+    },
+    {
+      "id": "mci-9",
+      "teamId": "city",
+      "name": "Erling Haaland",
+      "position": "Striker"
+    },
+    {
+      "id": "che-10",
+      "name": "Cole Palmer",
+      "position": "Attacking midfielder",
+      "teamId": "chelsea"
+    },
+    {
+      "id": "che-24",
+      "name": "Reece James",
+      "position": "Defender",
+      "teamId": "chelsea"
+    },
+    {
+      "id": "che-25",
+      "name": "Moisés Caicedo",
+      "position": "Midfielder",
+      "teamId": "chelsea"
+    }
+  ],
+  "events": [
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-001",
+      "sequence": 1,
+      "minute": 1,
+      "second": 4,
+      "teamId": "city",
+      "playerId": "mci-15",
+      "type": "Tackle",
+      "x": 87,
+      "y": 30,
+      "outcome": "Lost",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-002",
+      "sequence": 2,
+      "minute": 2,
+      "second": 48,
+      "teamId": "city",
+      "playerId": "mci-10",
+      "type": "Pressure",
+      "x": 55,
+      "y": 88,
+      "outcome": null,
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-003",
+      "sequence": 3,
+      "minute": 3,
+      "second": 38,
+      "teamId": "city",
+      "playerId": "mci-9",
+      "type": "Pressure",
+      "x": 50,
+      "y": 67,
+      "outcome": null,
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-004",
+      "sequence": 4,
+      "minute": 4,
+      "second": 2,
+      "teamId": "chelsea",
+      "playerId": "che-10",
+      "type": "Pass",
+      "x": 19,
+      "y": 70,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-005",
+      "sequence": 5,
+      "minute": 5,
+      "second": 36,
+      "teamId": "chelsea",
+      "playerId": "che-24",
+      "type": "Pass",
+      "x": 30,
+      "y": 57,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-006",
+      "sequence": 6,
+      "minute": 6,
+      "second": 53,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "Pass",
+      "x": 82,
+      "y": 59,
+      "outcome": "Completed",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-007",
+      "sequence": 7,
+      "minute": 7,
+      "second": 42,
+      "teamId": "city",
+      "playerId": "mci-15",
+      "type": "Recovery",
+      "x": 13,
+      "y": 71,
+      "outcome": "Won",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-008",
+      "sequence": 8,
+      "minute": 8,
+      "second": 14,
+      "teamId": "city",
+      "playerId": "mci-10",
+      "type": "Pass",
+      "x": 79,
+      "y": 47,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-009",
+      "sequence": 9,
+      "minute": 9,
+      "second": 2,
+      "teamId": "city",
+      "playerId": "mci-9",
+      "type": "Pass",
+      "x": 45,
+      "y": 87,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-010",
+      "sequence": 10,
+      "minute": 10,
+      "second": 22,
+      "teamId": "chelsea",
+      "playerId": "che-10",
+      "type": "PossessionChange",
+      "x": 29,
+      "y": 62,
+      "outcome": "Turnover",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-011",
+      "sequence": 11,
+      "minute": 11,
+      "second": 43,
+      "teamId": "chelsea",
+      "playerId": "che-24",
+      "type": "Tackle",
+      "x": 42,
+      "y": 29,
+      "outcome": "Won",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-012",
+      "sequence": 12,
+      "minute": 12,
+      "second": 1,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "Tackle",
+      "x": 28,
+      "y": 42,
+      "outcome": "Won",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-013",
+      "sequence": 13,
+      "minute": 13,
+      "second": 43,
+      "teamId": "city",
+      "playerId": "mci-15",
+      "type": "Pass",
+      "x": 64,
+      "y": 71,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-014",
+      "sequence": 14,
+      "minute": 14,
+      "second": 7,
+      "teamId": "city",
+      "playerId": "mci-10",
+      "type": "Pass",
+      "x": 57,
+      "y": 13,
+      "outcome": "Completed",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-015",
+      "sequence": 15,
+      "minute": 15,
+      "second": 28,
+      "teamId": "city",
+      "playerId": "mci-9",
+      "type": "Recovery",
+      "x": 79,
+      "y": 20,
+      "outcome": "Won",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-016",
+      "sequence": 16,
+      "minute": 16,
+      "second": 11,
+      "teamId": "chelsea",
+      "playerId": "che-10",
+      "type": "Pass",
+      "x": 41,
+      "y": 39,
+      "outcome": "Completed",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-017",
+      "sequence": 17,
+      "minute": 17,
+      "second": 32,
+      "teamId": "chelsea",
+      "playerId": "che-24",
+      "type": "Pressure",
+      "x": 56,
+      "y": 86,
+      "outcome": null,
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-018",
+      "sequence": 18,
+      "minute": 18,
+      "second": 22,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "PossessionChange",
+      "x": 76,
+      "y": 33,
+      "outcome": "Turnover",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-019",
+      "sequence": 19,
+      "minute": 19,
+      "second": 15,
+      "teamId": "city",
+      "playerId": "mci-15",
+      "type": "Pass",
+      "x": 78,
+      "y": 58,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-020",
+      "sequence": 20,
+      "minute": 20,
+      "second": 47,
+      "teamId": "city",
+      "playerId": "mci-10",
+      "type": "PossessionChange",
+      "x": 45,
+      "y": 16,
+      "outcome": "Turnover",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-021",
+      "sequence": 21,
+      "minute": 21,
+      "second": 45,
+      "teamId": "city",
+      "playerId": "mci-9",
+      "type": "Recovery",
+      "x": 30,
+      "y": 60,
+      "outcome": "Won",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-022",
+      "sequence": 22,
+      "minute": 22,
+      "second": 34,
+      "teamId": "chelsea",
+      "playerId": "che-10",
+      "type": "Pass",
+      "x": 22,
+      "y": 33,
+      "outcome": "Incomplete",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-023",
+      "sequence": 23,
+      "minute": 23,
+      "second": 50,
+      "teamId": "chelsea",
+      "playerId": "che-24",
+      "type": "Recovery",
+      "x": 56,
+      "y": 88,
+      "outcome": "Won",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-024",
+      "sequence": 24,
+      "minute": 24,
+      "second": 31,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "Pass",
+      "x": 19,
+      "y": 33,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-025",
+      "sequence": 25,
+      "minute": 25,
+      "second": 22,
+      "teamId": "city",
+      "playerId": "mci-15",
+      "type": "Recovery",
+      "x": 56,
+      "y": 67,
+      "outcome": "Won",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-026",
+      "sequence": 26,
+      "minute": 26,
+      "second": 23,
+      "teamId": "city",
+      "playerId": "mci-10",
+      "type": "PossessionChange",
+      "x": 76,
+      "y": 39,
+      "outcome": "Turnover",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-027",
+      "sequence": 27,
+      "minute": 27,
+      "second": 56,
+      "teamId": "city",
+      "playerId": "mci-9",
+      "type": "Pass",
+      "x": 16,
+      "y": 60,
+      "outcome": "Incomplete",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-028",
+      "sequence": 28,
+      "minute": 28,
+      "second": 42,
+      "teamId": "chelsea",
+      "playerId": "che-10",
+      "type": "Shot",
+      "x": 21,
+      "y": 63,
+      "outcome": "Goal",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-029",
+      "sequence": 29,
+      "minute": 29,
+      "second": 44,
+      "teamId": "chelsea",
+      "playerId": "che-24",
+      "type": "Pass",
+      "x": 66,
+      "y": 42,
+      "outcome": "Incomplete",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-030",
+      "sequence": 30,
+      "minute": 30,
+      "second": 44,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "Pass",
+      "x": 34,
+      "y": 50,
+      "outcome": "Incomplete",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-031",
+      "sequence": 31,
+      "minute": 31,
+      "second": 22,
+      "teamId": "city",
+      "playerId": "mci-15",
+      "type": "Pressure",
+      "x": 37,
+      "y": 83,
+      "outcome": null,
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-032",
+      "sequence": 32,
+      "minute": 32,
+      "second": 33,
+      "teamId": "city",
+      "playerId": "mci-10",
+      "type": "Tackle",
+      "x": 75,
+      "y": 61,
+      "outcome": "Won",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-033",
+      "sequence": 33,
+      "minute": 33,
+      "second": 8,
+      "teamId": "city",
+      "playerId": "mci-9",
+      "type": "PossessionChange",
+      "x": 71,
+      "y": 47,
+      "outcome": "Turnover",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-034",
+      "sequence": 34,
+      "minute": 34,
+      "second": 6,
+      "teamId": "chelsea",
+      "playerId": "che-10",
+      "type": "Pass",
+      "x": 28,
+      "y": 44,
+      "outcome": "Incomplete",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-035",
+      "sequence": 35,
+      "minute": 35,
+      "second": 6,
+      "teamId": "chelsea",
+      "playerId": "che-24",
+      "type": "Pass",
+      "x": 42,
+      "y": 73,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-036",
+      "sequence": 36,
+      "minute": 36,
+      "second": 51,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "Tackle",
+      "x": 29,
+      "y": 36,
+      "outcome": "Won",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-037",
+      "sequence": 37,
+      "minute": 37,
+      "second": 53,
+      "teamId": "city",
+      "playerId": "mci-15",
+      "type": "Pass",
+      "x": 40,
+      "y": 32,
+      "outcome": "Incomplete",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-038",
+      "sequence": 38,
+      "minute": 38,
+      "second": 28,
+      "teamId": "city",
+      "playerId": "mci-10",
+      "type": "Pass",
+      "x": 90,
+      "y": 75,
+      "outcome": "Completed",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-039",
+      "sequence": 39,
+      "minute": 39,
+      "second": 36,
+      "teamId": "city",
+      "playerId": "mci-9",
+      "type": "Shot",
+      "x": 87,
+      "y": 43,
+      "outcome": "Saved",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-040",
+      "sequence": 40,
+      "minute": 40,
+      "second": 11,
+      "teamId": "chelsea",
+      "playerId": "che-10",
+      "type": "Pass",
+      "x": 86,
+      "y": 68,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-041",
+      "sequence": 41,
+      "minute": 41,
+      "second": 46,
+      "teamId": "chelsea",
+      "playerId": "che-24",
+      "type": "Pass",
+      "x": 13,
+      "y": 34,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-042",
+      "sequence": 42,
+      "minute": 42,
+      "second": 13,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "Pass",
+      "x": 77,
+      "y": 43,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-043",
+      "sequence": 43,
+      "minute": 43,
+      "second": 22,
+      "teamId": "city",
+      "playerId": "mci-15",
+      "type": "Tackle",
+      "x": 27,
+      "y": 60,
+      "outcome": "Won",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-044",
+      "sequence": 44,
+      "minute": 44,
+      "second": 38,
+      "teamId": "city",
+      "playerId": "mci-10",
+      "type": "Pass",
+      "x": 42,
+      "y": 63,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-045",
+      "sequence": 45,
+      "minute": 45,
+      "second": 21,
+      "teamId": "city",
+      "playerId": "mci-9",
+      "type": "Pass",
+      "x": 19,
+      "y": 20,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-046",
+      "sequence": 46,
+      "minute": 46,
+      "second": 19,
+      "teamId": "chelsea",
+      "playerId": "che-10",
+      "type": "Pass",
+      "x": 55,
+      "y": 71,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-047",
+      "sequence": 47,
+      "minute": 47,
+      "second": 22,
+      "teamId": "chelsea",
+      "playerId": "che-24",
+      "type": "Pass",
+      "x": 77,
+      "y": 72,
+      "outcome": "Completed",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-048",
+      "sequence": 48,
+      "minute": 48,
+      "second": 55,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "PossessionChange",
+      "x": 14,
+      "y": 25,
+      "outcome": "Turnover",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-049",
+      "sequence": 49,
+      "minute": 49,
+      "second": 46,
+      "teamId": "city",
+      "playerId": "mci-15",
+      "type": "Recovery",
+      "x": 78,
+      "y": 56,
+      "outcome": "Won",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-050",
+      "sequence": 50,
+      "minute": 50,
+      "second": 36,
+      "teamId": "city",
+      "playerId": "mci-10",
+      "type": "PossessionChange",
+      "x": 14,
+      "y": 51,
+      "outcome": "Turnover",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-051",
+      "sequence": 51,
+      "minute": 51,
+      "second": 50,
+      "teamId": "city",
+      "playerId": "mci-9",
+      "type": "Pass",
+      "x": 36,
+      "y": 30,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-052",
+      "sequence": 52,
+      "minute": 52,
+      "second": 44,
+      "teamId": "chelsea",
+      "playerId": "che-10",
+      "type": "Pass",
+      "x": 25,
+      "y": 35,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-053",
+      "sequence": 53,
+      "minute": 53,
+      "second": 14,
+      "teamId": "chelsea",
+      "playerId": "che-24",
+      "type": "Recovery",
+      "x": 70,
+      "y": 51,
+      "outcome": "Won",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-054",
+      "sequence": 54,
+      "minute": 54,
+      "second": 4,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "PossessionChange",
+      "x": 59,
+      "y": 51,
+      "outcome": "Turnover",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-055",
+      "sequence": 55,
+      "minute": 55,
+      "second": 51,
+      "teamId": "city",
+      "playerId": "mci-15",
+      "type": "Tackle",
+      "x": 12,
+      "y": 62,
+      "outcome": "Lost",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-056",
+      "sequence": 56,
+      "minute": 56,
+      "second": 4,
+      "teamId": "city",
+      "playerId": "mci-10",
+      "type": "Pass",
+      "x": 26,
+      "y": 53,
+      "outcome": "Incomplete",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-057",
+      "sequence": 57,
+      "minute": 57,
+      "second": 18,
+      "teamId": "city",
+      "playerId": "mci-9",
+      "type": "Pressure",
+      "x": 37,
+      "y": 32,
+      "outcome": null,
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-058",
+      "sequence": 58,
+      "minute": 58,
+      "second": 23,
+      "teamId": "chelsea",
+      "playerId": "che-10",
+      "type": "Pass",
+      "x": 25,
+      "y": 63,
+      "outcome": "Completed",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-059",
+      "sequence": 59,
+      "minute": 59,
+      "second": 50,
+      "teamId": "chelsea",
+      "playerId": "che-24",
+      "type": "Pass",
+      "x": 16,
+      "y": 86,
+      "outcome": "Completed",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-060",
+      "sequence": 60,
+      "minute": 60,
+      "second": 9,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "Recovery",
+      "x": 68,
+      "y": 35,
+      "outcome": "Won",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-061",
+      "sequence": 61,
+      "minute": 61,
+      "second": 16,
+      "teamId": "city",
+      "playerId": "mci-15",
+      "type": "Recovery",
+      "x": 15,
+      "y": 34,
+      "outcome": "Won",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-062",
+      "sequence": 62,
+      "minute": 62,
+      "second": 30,
+      "teamId": "city",
+      "playerId": "mci-10",
+      "type": "Tackle",
+      "x": 77,
+      "y": 64,
+      "outcome": "Lost",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-063",
+      "sequence": 63,
+      "minute": 63,
+      "second": 6,
+      "teamId": "city",
+      "playerId": "mci-9",
+      "type": "Shot",
+      "x": 81,
+      "y": 36,
+      "outcome": "Saved",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-064",
+      "sequence": 64,
+      "minute": 64,
+      "second": 36,
+      "teamId": "chelsea",
+      "playerId": "che-10",
+      "type": "Recovery",
+      "x": 66,
+      "y": 64,
+      "outcome": "Won",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-065",
+      "sequence": 65,
+      "minute": 65,
+      "second": 30,
+      "teamId": "chelsea",
+      "playerId": "che-24",
+      "type": "Pass",
+      "x": 77,
+      "y": 74,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-066",
+      "sequence": 66,
+      "minute": 66,
+      "second": 9,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "Pass",
+      "x": 51,
+      "y": 66,
+      "outcome": "Completed",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-067",
+      "sequence": 67,
+      "minute": 67,
+      "second": 34,
+      "teamId": "city",
+      "playerId": "mci-15",
+      "type": "Pass",
+      "x": 74,
+      "y": 66,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-068",
+      "sequence": 68,
+      "minute": 68,
+      "second": 21,
+      "teamId": "city",
+      "playerId": "mci-10",
+      "type": "Tackle",
+      "x": 85,
+      "y": 37,
+      "outcome": "Lost",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-069",
+      "sequence": 69,
+      "minute": 69,
+      "second": 28,
+      "teamId": "city",
+      "playerId": "mci-9",
+      "type": "Recovery",
+      "x": 68,
+      "y": 20,
+      "outcome": "Won",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-070",
+      "sequence": 70,
+      "minute": 70,
+      "second": 25,
+      "teamId": "chelsea",
+      "playerId": "che-10",
+      "type": "Pressure",
+      "x": 49,
+      "y": 80,
+      "outcome": null,
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-071",
+      "sequence": 71,
+      "minute": 71,
+      "second": 53,
+      "teamId": "chelsea",
+      "playerId": "che-24",
+      "type": "Pass",
+      "x": 61,
+      "y": 88,
+      "outcome": "Incomplete",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-072",
+      "sequence": 72,
+      "minute": 72,
+      "second": 14,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "PossessionChange",
+      "x": 66,
+      "y": 43,
+      "outcome": "Turnover",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-073",
+      "sequence": 73,
+      "minute": 73,
+      "second": 32,
+      "teamId": "city",
+      "playerId": "mci-15",
+      "type": "Pass",
+      "x": 75,
+      "y": 58,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-074",
+      "sequence": 74,
+      "minute": 74,
+      "second": 55,
+      "teamId": "city",
+      "playerId": "mci-10",
+      "type": "Pass",
+      "x": 17,
+      "y": 41,
+      "outcome": "Completed",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-075",
+      "sequence": 75,
+      "minute": 75,
+      "second": 53,
+      "teamId": "city",
+      "playerId": "mci-9",
+      "type": "PossessionChange",
+      "x": 62,
+      "y": 67,
+      "outcome": "Turnover",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-076",
+      "sequence": 76,
+      "minute": 76,
+      "second": 59,
+      "teamId": "chelsea",
+      "playerId": "che-10",
+      "type": "Recovery",
+      "x": 58,
+      "y": 66,
+      "outcome": "Won",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-077",
+      "sequence": 77,
+      "minute": 77,
+      "second": 19,
+      "teamId": "chelsea",
+      "playerId": "che-24",
+      "type": "Pass",
+      "x": 48,
+      "y": 25,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-078",
+      "sequence": 78,
+      "minute": 78,
+      "second": 26,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "Pass",
+      "x": 73,
+      "y": 21,
+      "outcome": "Completed",
+      "underPressure": true,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-079",
+      "sequence": 79,
+      "minute": 79,
+      "second": 36,
+      "teamId": "city",
+      "playerId": "mci-15",
+      "type": "Tackle",
+      "x": 38,
+      "y": 35,
+      "outcome": "Lost",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-080",
+      "sequence": 80,
+      "minute": 80,
+      "second": 37,
+      "teamId": "city",
+      "playerId": "mci-10",
+      "type": "Pass",
+      "x": 57,
+      "y": 21,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-081",
+      "sequence": 81,
+      "minute": 81,
+      "second": 11,
+      "teamId": "city",
+      "playerId": "mci-9",
+      "type": "Recovery",
+      "x": 60,
+      "y": 70,
+      "outcome": "Won",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-082",
+      "sequence": 82,
+      "minute": 82,
+      "second": 59,
+      "teamId": "chelsea",
+      "playerId": "che-10",
+      "type": "Tackle",
+      "x": 24,
+      "y": 38,
+      "outcome": "Won",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-083",
+      "sequence": 83,
+      "minute": 83,
+      "second": 38,
+      "teamId": "chelsea",
+      "playerId": "che-24",
+      "type": "Pass",
+      "x": 56,
+      "y": 22,
+      "outcome": "Completed",
+      "underPressure": false,
+      "receiverOptions": []
+    },
+    {
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-084",
+      "sequence": 84,
+      "minute": 84,
+      "second": 19,
+      "teamId": "chelsea",
+      "playerId": "che-25",
+      "type": "Pass",
+      "x": 35,
+      "y": 28,
+      "outcome": "Incomplete",
+      "underPressure": false,
+      "receiverOptions": []
+    }
+  ],
+  "decisionSnapshots": [
+    {
+      "sceneId": "city-scene-002-a",
+      "matchContext": {
+        "minute": 9,
+        "score": {
+          "city": 0,
+          "chelsea": 0
+        },
+        "phase": "settled_attack",
+        "possessionId": "pos-003",
+        "second": 2
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "city": "left_to_right",
+          "chelsea": "right_to_left"
+        }
+      },
+      "decision": {
+        "playerId": "mci-9",
+        "selectedOptionId": "pass-mci-10",
+        "bodyPartUsed": "left_foot",
+        "options": [
+          {
+            "id": "pass-mci-10",
+            "type": "pass",
+            "receiverId": "mci-10",
+            "bodyPart": "left_foot"
+          },
+          {
+            "id": "shot",
+            "type": "shot",
+            "bodyPart": "right_foot"
+          },
+          {
+            "id": "carry",
+            "type": "dribble",
+            "bodyPart": "right_foot"
+          }
+        ]
+      },
+      "recordedOutcome": "Completed",
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-009",
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 45,
+          "y": 87
+        },
+        "players": [
+          {
+            "id": "mci-9",
+            "teamId": "city",
+            "x": 45,
+            "y": 87,
+            "role": "striker"
+          },
+          {
+            "id": "mci-10",
+            "teamId": "city",
+            "x": 39,
+            "y": 80,
+            "role": "defensive midfielder"
+          },
+          {
+            "id": "mci-15",
+            "teamId": "city",
+            "x": 51,
+            "y": 92,
+            "role": "centre-back"
+          },
+          {
+            "id": "che-25",
+            "teamId": "chelsea",
+            "x": 43,
+            "y": 82,
+            "role": "midfielder"
+          },
+          {
+            "id": "che-24",
+            "teamId": "chelsea",
+            "x": 41,
+            "y": 90,
+            "role": "defender"
+          }
+        ],
+        "bodySetup": "right_foot",
+        "ballHeight": "ground"
+      }
+    },
+    {
+      "sceneId": "city-scene-002-b",
+      "matchContext": {
+        "minute": 1,
+        "score": {
+          "city": 0,
+          "chelsea": 0
+        },
+        "phase": "defensive_duel",
+        "possessionId": "pos-001",
+        "second": 4
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "city": "left_to_right",
+          "chelsea": "right_to_left"
+        }
+      },
+      "decision": {
+        "playerId": "mci-15",
+        "selectedOptionId": "tackle",
+        "bodyPartUsed": "right_foot",
+        "options": [
+          {
+            "id": "tackle",
+            "type": "tackle"
+          }
+        ]
+      },
+      "recordedOutcome": "Lost",
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-001",
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 87,
+          "y": 30
+        },
+        "players": [
+          {
+            "id": "mci-15",
+            "teamId": "city",
+            "x": 87,
+            "y": 30,
+            "role": "centre-back"
+          },
+          {
+            "id": "mci-10",
+            "teamId": "city",
+            "x": 82,
+            "y": 25,
+            "role": "defensive midfielder"
+          },
+          {
+            "id": "mci-9",
+            "teamId": "city",
+            "x": 75,
+            "y": 35,
+            "role": "striker"
+          },
+          {
+            "id": "che-10",
+            "teamId": "chelsea",
+            "x": 88,
+            "y": 28,
+            "role": "attacking midfielder"
+          },
+          {
+            "id": "che-25",
+            "teamId": "chelsea",
+            "x": 90,
+            "y": 35,
+            "role": "midfielder"
+          }
+        ]
+      }
+    },
+    {
+      "sceneId": "city-sim-002-mci-10",
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-008",
+      "matchContext": {
+        "minute": 8,
+        "second": 14,
+        "score": {
+          "city": 0,
+          "chelsea": 0
+        },
+        "phase": "synthetic_action",
+        "possessionId": null
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "city": "left_to_right",
+          "chelsea": "right_to_left"
+        }
+      },
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 79,
+          "y": 47
+        },
+        "players": [
+          {
+            "id": "mci-10",
+            "teamId": "city",
+            "x": 79,
+            "y": 47,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "mci-15",
+            "teamId": "city",
+            "x": 65,
+            "y": 63,
+            "role": "Centre-back"
+          },
+          {
+            "id": "mci-9",
+            "teamId": "city",
+            "x": 71,
+            "y": 29,
+            "role": "Striker"
+          },
+          {
+            "id": "che-10",
+            "teamId": "chelsea",
+            "x": 88,
+            "y": 59,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "che-24",
+            "teamId": "chelsea",
+            "x": 94,
+            "y": 37,
+            "role": "Defender"
+          },
+          {
+            "id": "che-25",
+            "teamId": "chelsea",
+            "x": 98,
+            "y": 71,
+            "role": "Midfielder"
+          }
+        ],
+        "bodySetup": "right_foot",
+        "ballHeight": "low"
+      },
+      "decision": {
+        "playerId": "mci-10",
+        "selectedOptionId": "pass-mci-15",
+        "bodyPartUsed": "right_foot",
+        "options": [
+          {
+            "id": "pass-mci-15",
+            "type": "pass",
+            "receiverId": "mci-15",
+            "bodyPart": "right_foot"
+          },
+          {
+            "id": "pass-mci-9",
+            "type": "pass",
+            "receiverId": "mci-9",
+            "bodyPart": "right_foot"
+          },
+          {
+            "id": "shot",
+            "type": "shot",
+            "bodyPart": "right_foot"
+          },
+          {
+            "id": "carry",
+            "type": "dribble",
+            "bodyPart": "right_foot"
+          }
+        ]
+      },
+      "recordedOutcome": "Completed"
+    },
+    {
+      "sceneId": "city-sim-002-late-decision",
+      "matchId": "city-sim-002",
+      "eventId": "city-sim-002-evt-080",
+      "matchContext": {
+        "minute": 80,
+        "second": 37,
+        "score": {
+          "city": 0,
+          "chelsea": 1
+        },
+        "phase": "synthetic_action",
+        "possessionId": null
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "city": "left_to_right",
+          "chelsea": "right_to_left"
+        }
+      },
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 57,
+          "y": 21
+        },
+        "players": [
+          {
+            "id": "mci-10",
+            "teamId": "city",
+            "x": 57,
+            "y": 21,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "mci-15",
+            "teamId": "city",
+            "x": 43,
+            "y": 37,
+            "role": "Centre-back"
+          },
+          {
+            "id": "mci-9",
+            "teamId": "city",
+            "x": 49,
+            "y": 3,
+            "role": "Striker"
+          },
+          {
+            "id": "che-10",
+            "teamId": "chelsea",
+            "x": 66,
+            "y": 33,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "che-24",
+            "teamId": "chelsea",
+            "x": 72,
+            "y": 11,
+            "role": "Defender"
+          },
+          {
+            "id": "che-25",
+            "teamId": "chelsea",
+            "x": 76,
+            "y": 45,
+            "role": "Midfielder"
+          }
+        ],
+        "bodySetup": "right_foot",
+        "ballHeight": "ground"
+      },
+      "decision": {
+        "playerId": "mci-10",
+        "selectedOptionId": "pass-mci-15",
+        "bodyPartUsed": "left_foot",
+        "options": [
+          {
+            "id": "pass-mci-15",
+            "type": "pass",
+            "receiverId": "mci-15",
+            "bodyPart": "left_foot"
+          },
+          {
+            "id": "pass-mci-9",
+            "type": "pass",
+            "receiverId": "mci-9",
+            "bodyPart": "right_foot"
+          },
+          {
+            "id": "shot",
+            "type": "shot",
+            "bodyPart": "right_foot"
+          },
+          {
+            "id": "carry",
+            "type": "dribble",
+            "bodyPart": "right_foot"
+          }
+        ]
+      },
+      "recordedOutcome": "Completed"
+    }
+  ],
+  "rosterSource": "User-selected demonstration squad",
+  "goalLogComplete": true,
+  "goals": [
+    {
+      "eventId": "city-sim-002-evt-028",
+      "teamId": "chelsea",
+      "minute": 28,
+      "second": 42
+    }
+  ],
+  "result": {
+    "home": 0,
+    "away": 1
+  }
+}

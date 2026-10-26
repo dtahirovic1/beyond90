@@ -16,6 +16,7 @@ export function PixelJersey({ team, name, number, className = '' }: { team: stri
   const namePathId = useId()
   const leeds = team === 'leeds'
   const kits: Record<string, { base: string; light: string; dark: string; edge: string; sleeve: string; cuff: string }> = {
+    city: { base:'#87c8ec',light:'#b3e1f6',dark:'#60a8d0',edge:'#376e93',sleeve:'#87c8ec',cuff:'#ffffff' },
     leeds: { base:'#f4f3e9',light:'#ffffff',dark:'#e2e4dd',edge:'#e8e9df',sleeve:'#f4f3e9',cuff:'#174784' },
     arsenal: { base:'#cf2c39',light:'#ed4953',dark:'#a82032',edge:'#631d2b',sleeve:'#eee9df',cuff:'#17243c' },
     chelsea: { base:'#205ac6',light:'#3479e6',dark:'#17469d',edge:'#102a61',sleeve:'#205ac6',cuff:'#d7b555' },
