@@ -15,7 +15,10 @@ const digits: Record<string, string[]> = {
 export function PixelJersey({ team, name, number, className = '' }: { team: string; name: string; number: string; className?: string }) {
   const namePathId = useId()
   const leeds = team === 'leeds'
+  const spurs = team === 'tottenham'
+  const lightShirt = leeds || spurs
   const kits: Record<string, { base: string; light: string; dark: string; edge: string; sleeve: string; cuff: string }> = {
+    tottenham: { base:'#fafbfc',light:'#ffffff',dark:'#dce2e9',edge:'#18243a',sleeve:'#fafbfc',cuff:'#14213d' },
     city: { base:'#87c8ec',light:'#b3e1f6',dark:'#60a8d0',edge:'#376e93',sleeve:'#87c8ec',cuff:'#ffffff' },
     leeds: { base:'#f4f3e9',light:'#ffffff',dark:'#e2e4dd',edge:'#e8e9df',sleeve:'#f4f3e9',cuff:'#174784' },
     arsenal: { base:'#cf2c39',light:'#ed4953',dark:'#a82032',edge:'#631d2b',sleeve:'#eee9df',cuff:'#17243c' },
@@ -29,8 +32,8 @@ export function PixelJersey({ team, name, number, className = '' }: { team: stri
   )
   const unit = 2.6
   const numberX = (80 - (number.length > 1 ? 11 : 5) * unit) / 2
-  const surname = name.endsWith('van Dijk') ? 'VAN DIJK' : name.split(' ').at(-1)?.toUpperCase() ?? ''
-  return <svg className={`pixel-jersey ${className}`} viewBox="0 0 80 88" role="img" aria-label={`${name}, ${team === 'leeds' ? 'Leeds United' : team}${number ? `, number ${number}` : ''}`}>
+  const surname = name.endsWith('van de Ven') ? 'VAN DE VEN' : name.endsWith('van Dijk') ? 'VAN DIJK' : name.split(' ').at(-1)?.toUpperCase() ?? ''
+  return <svg className={`pixel-jersey ${className}`} viewBox="0 0 80 88" role="img" aria-label={`${name}, ${leeds ? 'Leeds United' : spurs ? 'Tottenham Hotspur' : team}${number ? `, number ${number}` : ''}`}>
     <g shapeRendering="crispEdges">
       <path d={silhouette} fill="#000" opacity={leeds ? .1 : .35} transform={leeds ? "translate(0 1)" : "translate(0 4)"} />
       <path d={silhouette} fill={leeds ? kit.base : kit.edge} stroke={kit.edge} strokeWidth={leeds ? .5 : 2} />
@@ -42,19 +45,20 @@ export function PixelJersey({ team, name, number, className = '' }: { team: stri
       <path d="M30 7H34V10H46V7H50V10H47V14H33V10H30Z" fill={leeds ? '#1d457a' : kit.cuff} />
       <path d="M34 7H46V10H34Z" fill="#0f141c" />
       {team === 'liverpool' && <g opacity=".22" fill="#f5f0df"><path d="M25 28h12l-8 12h8l-8 12h8L25 66ZM43 28h12l-8 12h8l-8 12h8L43 66Z" /></g>}
+      {spurs && <path d="M20 27h3v17h-3zm37 0h3v17h-3z" fill="#14213d" />}
       {leeds && <>
         {[21,30,39,48,57,66].map(y => <g key={y}><path d={`M24 ${y}H56`} stroke="#678ab4" strokeWidth=".5" /><path d={`M24 ${y+2}H56`} stroke="#d9bc55" strokeWidth=".5" /></g>)}
         {[0,4,8].map(x => <path key={x} d={`M${19+x} 12v7M${53+x} 12v7`} stroke="#214d85" strokeWidth="2" />)}
         <path d="M7 31h11v1H7zm55 0h11v1H62z" fill="#e4d43a" />
       </>}
       <g transform={`translate(${numberX} 33)`}>
-        {glyphs.map((p, i) => <rect key={`outline-${i}`} x={p.x * unit - .9} y={p.y * unit - .9} width={unit + 1.8} height={unit + 1.8} fill={leeds ? "#fffdf5" : "#10141c"} />)}
-        {glyphs.map((p, i) => <rect key={`shadow-${i}`} x={p.x * unit + 1.3} y={p.y * unit + 1.3} width={unit} height={unit} fill={leeds ? "#dfe2db" : "#9a9f9e"} />)}
-        {glyphs.map((p, i) => <rect key={i} x={p.x * unit} y={p.y * unit} width={unit} height={unit} fill={leeds ? "#163d70" : "#fff8e8"} />)}
+        {glyphs.map((p, i) => <rect key={`outline-${i}`} x={p.x * unit - .9} y={p.y * unit - .9} width={unit + 1.8} height={unit + 1.8} fill={lightShirt ? "#fffdf5" : "#10141c"} />)}
+        {glyphs.map((p, i) => <rect key={`shadow-${i}`} x={p.x * unit + 1.3} y={p.y * unit + 1.3} width={unit} height={unit} fill={lightShirt ? "#dfe2db" : "#9a9f9e"} />)}
+        {glyphs.map((p, i) => <rect key={i} x={p.x * unit} y={p.y * unit} width={unit} height={unit} fill={lightShirt ? (spurs ? "#14213d" : "#163d70") : "#fff8e8"} />)}
       </g>
     </g>
     <defs><path id={namePathId} d={surname.length >= 8 ? "M20 29 Q40 12 60 29" : "M23 24 Q40 21 57 24"} /></defs>
-    <text fill={leeds ? "#102344" : "#fffdf5"} stroke={leeds ? "#f4f3e9" : "#10141c"} strokeWidth=".35" paintOrder="stroke fill" fontFamily="Arial Narrow, Arial, sans-serif" fontWeight="900" fontSize="6.5" letterSpacing=".1">
+    <text fill={lightShirt ? "#102344" : "#fffdf5"} stroke={lightShirt ? "#f4f3e9" : "#10141c"} strokeWidth=".35" paintOrder="stroke fill" fontFamily="Arial Narrow, Arial, sans-serif" fontWeight="900" fontSize="6.5" letterSpacing=".1">
       <textPath href={`#${namePathId}`} startOffset="50%" textAnchor="middle" textLength={surname.length >= 8 ? 42 : undefined} lengthAdjust="spacingAndGlyphs">{surname}</textPath>
     </text>
   </svg>
