@@ -19,20 +19,92 @@
     {
       "id": "lee-5",
       "teamId": "leeds",
-      "name": "Tarik Muharemovic",
-      "position": "Centre-back"
+      "name": "Tarik Muharemović",
+      "position": "Centre-back",
+      "dominantFoot": "Right",
+      "overallRating": 74,
+      "potential": 80,
+      "weakFoot": 3,
+      "age": 25,
+      "pace": 70,
+      "acceleration": 68,
+      "sprintSpeed": 69,
+      "strength": 82,
+      "stamina": 78,
+      "shooting": 55,
+      "finishing": 50,
+      "passing": 68,
+      "vision": 65,
+      "dribbling": 60,
+      "ballControl": 64,
+      "defending": 78,
+      "interceptions": 76,
+      "composure": 72,
+      "minutesPlayed": 2700,
+      "goalsScored": 3,
+      "assists": 2,
+      "expectedGoals": 2.1,
+      "expectedAssists": 1.8
     },
     {
       "id": "lee-4",
       "teamId": "leeds",
       "name": "Ethan Ampadu",
-      "position": "Defensive midfielder"
+      "position": "Defensive midfielder",
+      "dominantFoot": "Right",
+      "overallRating": 78,
+      "potential": 84,
+      "weakFoot": 3,
+      "age": 24,
+      "pace": 75,
+      "acceleration": 72,
+      "sprintSpeed": 74,
+      "strength": 80,
+      "stamina": 82,
+      "shooting": 60,
+      "finishing": 52,
+      "passing": 75,
+      "vision": 72,
+      "dribbling": 65,
+      "ballControl": 70,
+      "defending": 80,
+      "interceptions": 82,
+      "composure": 78,
+      "minutesPlayed": 2900,
+      "goalsScored": 2,
+      "assists": 4,
+      "expectedGoals": 1.8,
+      "expectedAssists": 3.5
     },
     {
       "id": "lee-9",
       "teamId": "leeds",
       "name": "Dominic Calvert-Lewin",
-      "position": "Striker"
+      "position": "Striker",
+      "dominantFoot": "Right",
+      "overallRating": 76,
+      "potential": 78,
+      "weakFoot": 3,
+      "age": 29,
+      "pace": 72,
+      "acceleration": 70,
+      "sprintSpeed": 71,
+      "strength": 85,
+      "stamina": 75,
+      "shooting": 80,
+      "finishing": 78,
+      "passing": 55,
+      "vision": 58,
+      "dribbling": 62,
+      "ballControl": 68,
+      "defending": 45,
+      "interceptions": 40,
+      "composure": 75,
+      "minutesPlayed": 2500,
+      "goalsScored": 12,
+      "assists": 3,
+      "expectedGoals": 11.5,
+      "expectedAssists": 2.8
     },
     {
       "id": "tot-4",
@@ -132,10 +204,10 @@
       "second": 45,
       "teamId": "tottenham",
       "playerId": "tot-9",
-      "type": "Pressure",
+      "type": "Pass",
       "x": 70,
       "y": 60,
-      "outcome": null,
+      "outcome": "Completed",
       "underPressure": true
     },
     {
@@ -1724,6 +1796,299 @@
         ]
       },
       "recordedOutcome": "Goal"
+    },
+    {
+      "sceneId": "leeds-sim-004-tot-7",
+      "matchId": "leeds-sim-004",
+      "eventId": "leeds-sim-004-evt-002",
+      "matchContext": {
+        "minute": 2,
+        "second": 30,
+        "score": {
+          "leeds": 0,
+          "tottenham": 0
+        },
+        "phase": "synthetic_action",
+        "possessionId": null
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "tottenham": "right_to_left"
+        }
+      },
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 60,
+          "y": 45
+        },
+        "players": [
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 45,
+            "y": 55,
+            "role": "Defensive midfielder"
+          },
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 32,
+            "y": 40,
+            "role": "Centre-back"
+          },
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 60,
+            "y": 48,
+            "role": "Striker"
+          },
+          {
+            "id": "tot-4",
+            "teamId": "tottenham",
+            "x": 52,
+            "y": 52,
+            "role": "Centre-back"
+          },
+          {
+            "id": "tot-7",
+            "teamId": "tottenham",
+            "x": 60,
+            "y": 45,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "tot-9",
+            "teamId": "tottenham",
+            "x": 70,
+            "y": 58,
+            "role": "Striker"
+          }
+        ],
+        "bodySetup": "right_foot",
+        "ballHeight": "ground"
+      },
+      "decision": {
+        "playerId": "tot-7",
+        "selectedOptionId": "pass-lee-5",
+        "bodyPartUsed": "right_foot",
+        "options": [
+          {
+            "id": "pass-lee-5",
+            "type": "pass",
+            "receiverId": "tot-4",
+            "bodyPart": "right_foot"
+          },
+          {
+            "id": "pass-lee-9",
+            "type": "pass",
+            "receiverId": "tot-9",
+            "bodyPart": "right_foot"
+          },
+          {
+            "id": "carry",
+            "type": "dribble",
+            "bodyPart": "right_foot"
+          }
+        ]
+      },
+      "recordedOutcome": "Completed"
+    },
+    {
+      "sceneId": "leeds-sim-004-tot-4",
+      "matchId": "leeds-sim-004",
+      "eventId": "leeds-sim-004-evt-008",
+      "matchContext": {
+        "minute": 8,
+        "second": 30,
+        "score": {
+          "leeds": 0,
+          "tottenham": 0
+        },
+        "phase": "synthetic_action",
+        "possessionId": null
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "tottenham": "right_to_left"
+        }
+      },
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 25,
+          "y": 50
+        },
+        "players": [
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 45,
+            "y": 55,
+            "role": "Defensive midfielder"
+          },
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 26,
+            "y": 51,
+            "role": "Centre-back"
+          },
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 60,
+            "y": 48,
+            "role": "Striker"
+          },
+          {
+            "id": "tot-4",
+            "teamId": "tottenham",
+            "x": 25,
+            "y": 50,
+            "role": "Centre-back"
+          },
+          {
+            "id": "tot-7",
+            "teamId": "tottenham",
+            "x": 58,
+            "y": 42,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "tot-9",
+            "teamId": "tottenham",
+            "x": 70,
+            "y": 58,
+            "role": "Striker"
+          }
+        ],
+        "bodySetup": "right_foot",
+        "ballHeight": "ground"
+      },
+      "decision": {
+        "playerId": "tot-4",
+        "selectedOptionId": "tackle",
+        "bodyPartUsed": "right_foot",
+        "options": [
+          {
+            "id": "tackle",
+            "type": "tackle"
+          }
+        ]
+      },
+      "recordedOutcome": "Won"
+    },
+    {
+      "sceneId": "leeds-sim-004-tot-9",
+      "matchId": "leeds-sim-004",
+      "eventId": "leeds-sim-004-evt-006",
+      "matchContext": {
+        "minute": 6,
+        "second": 45,
+        "score": {
+          "leeds": 0,
+          "tottenham": 0
+        },
+        "phase": "synthetic_action",
+        "possessionId": null
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "leeds": "left_to_right",
+          "tottenham": "right_to_left"
+        }
+      },
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 70,
+          "y": 60
+        },
+        "players": [
+          {
+            "id": "lee-4",
+            "teamId": "leeds",
+            "x": 45,
+            "y": 55,
+            "role": "Defensive midfielder"
+          },
+          {
+            "id": "lee-5",
+            "teamId": "leeds",
+            "x": 32,
+            "y": 40,
+            "role": "Centre-back"
+          },
+          {
+            "id": "lee-9",
+            "teamId": "leeds",
+            "x": 60,
+            "y": 48,
+            "role": "Striker"
+          },
+          {
+            "id": "tot-4",
+            "teamId": "tottenham",
+            "x": 52,
+            "y": 52,
+            "role": "Centre-back"
+          },
+          {
+            "id": "tot-7",
+            "teamId": "tottenham",
+            "x": 58,
+            "y": 42,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "tot-9",
+            "teamId": "tottenham",
+            "x": 70,
+            "y": 60,
+            "role": "Striker"
+          }
+        ],
+        "bodySetup": "right_foot",
+        "ballHeight": "ground"
+      },
+      "decision": {
+        "playerId": "tot-9",
+        "selectedOptionId": "pass-lee-5",
+        "bodyPartUsed": "right_foot",
+        "options": [
+          {
+            "id": "pass-lee-5",
+            "type": "pass",
+            "receiverId": "tot-4",
+            "bodyPart": "right_foot"
+          },
+          {
+            "id": "pass-lee-9",
+            "type": "pass",
+            "receiverId": "tot-7",
+            "bodyPart": "right_foot"
+          },
+          {
+            "id": "carry",
+            "type": "dribble",
+            "bodyPart": "right_foot"
+          }
+        ]
+      },
+      "recordedOutcome": "Completed"
     }
   ],
   "rosterSource": "User-selected scenario roster; action data and positions are synthetic",

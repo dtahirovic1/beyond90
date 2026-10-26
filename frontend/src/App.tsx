@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
+import type { Player } from './player'
+import { PlayerProfile } from './PlayerProfile'
 import { PixelCrest } from './PixelCrest'
 import { PixelJersey } from './PixelJersey'
 import { DecisionPitch, type DecisionAnalysis } from './DecisionPitch'
@@ -13,7 +15,6 @@ function currentClub() { return location.hash.slice(1).split('/')[0] === 'city' 
 function clubLink(path = '') { return `#${currentClub().id}${path ? '/' + path : ''}` }
 
 type Audience = 'Player' | 'Coach'
-type Player = { id: string; teamId: string; name: string; position?: string }
 type Result = { home:number; away:number }
 type Team = { id: string; name: string }
 type MatchSummary = { id: string; homeTeam: string; awayTeam: string; scenarioLabel: string; eventCount: number }
@@ -95,11 +96,12 @@ function Welcome({ players, loading, error, retry }: { players: Player[]; loadin
 }
 function PlayerPicker({ players }: { players: Player[] }) {
   return <><section className="overview-heading"><span className="eyebrow">PLAYER / {currentClub().name.toUpperCase()}</span><h1>Choose your player.</h1><p>Start with a performance overview, then explore an individual match.</p></section>
-    <div className="player-picker">{players.map(p => <a className="player-card" href={clubLink(`player/${p.id}`)} key={p.id}><div className="player-card-top"><span>{p.position}</span><b>#{squadNumber(p.id)}</b></div><PixelJersey team={p.teamId} name={p.name} number={squadNumber(p.id)} /><h2>{p.name}</h2><div className="player-card-bottom"><span>View player overview</span><span>↗</span></div></a>)}</div></>
+    <div className="player-picker">{players.map(p => <a className="player-card" href={clubLink(`player/${p.id}`)} key={p.id}><div className="player-card-top"><span>{p.position}</span><b>#{squadNumber(p.id)}</b>{p.overallRating != null && <span className="player-overall">{p.overallRating} OVR</span>}</div><PixelJersey team={p.teamId} name={p.name} number={squadNumber(p.id)} /><h2>{p.name}</h2><div className="player-card-bottom"><span>View player overview</span><span>↗</span></div></a>)}</div></>
 }
 function Overview({ player, audience, players }: { player?: Player; audience: Audience; players: Player[] }) {
   return <><section className="overview-hero"><div><span className="eyebrow">{player ? 'PLAYER OVERVIEW' : 'COACH / CLUB OVERVIEW'} · {currentClub().name.toUpperCase()}</span><h1>{player ? player.name : currentClub().name}</h1><p>{player ? `${player.position} · #${squadNumber(player.id)} · 2026/27` : 'Performance across the available match scenarios'}</p></div>
     {player ? <PixelJersey team={currentClub().id} name={player.name} number={squadNumber(player.id)} /> : <div className="club-hero-shirts">{players.map(p => <PixelJersey key={p.id} team={currentClub().id} name={p.name} number={squadNumber(p.id)} />)}</div>}</section>
+    {player && <PlayerProfile player={player} squad={players} />}
     <Performance key={player?.id ?? 'club'} player={player} audience={audience} />
     {!player && <section className="tracked-section"><div className="section-title"><h2>Tracked players</h2><span>3 individual profiles</span></div><div className="tracked-grid">{players.map(p => <a href={clubLink(`player/${p.id}`)} key={p.id}><PixelJersey team={currentClub().id} name={p.name} number={squadNumber(p.id)} /><div><strong>{p.name}</strong><small>{p.position}</small></div><span>↗</span></a>)}</div></section>}
   </>

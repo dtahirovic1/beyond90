@@ -89,6 +89,119 @@
               "Both",
               null
             ]
+          },
+
+          "overallRating": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99
+          },
+          "potential": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99
+          },
+          "weakFoot": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 5
+          },
+
+          "age": {
+            "type": ["integer", "null"],
+            "minimum": 16,
+            "maximum": 45
+          },
+          "pace": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99
+          },
+          "acceleration": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99
+          },
+          "sprintSpeed": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99
+          },
+          "strength": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99
+          },
+          "stamina": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99
+          },
+
+          "shooting": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99
+          },
+          "finishing": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99
+          },
+          "passing": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99
+          },
+          "vision": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99
+          },
+          "dribbling": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99
+          },
+          "ballControl": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99
+          },
+          "defending": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99
+          },
+          "interceptions": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99
+          },
+          "composure": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 99
+          },
+          "minutesPlayed": {
+            "type": ["integer", "null"],
+            "minimum": 0
+          },
+          "goalsScored": {
+            "type": ["integer", "null"],
+            "minimum": 0
+          },
+          "assists": {
+            "type": ["integer", "null"],
+            "minimum": 0
+          },
+          "expectedGoals": {
+            "type": ["number", "null"],
+            "minimum": 0
+          },
+          "expectedAssists": {
+            "type": ["number", "null"],
+            "minimum": 0
           }
         },
         "additionalProperties": false

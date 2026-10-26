@@ -15,7 +15,8 @@ public class DecisionIntegrationTests
         var catalogue=MatchStore.LoadCatalog(Path.GetDirectoryName(Fixture)!);
         foreach(var match in catalogue.All)
         {
-            Assert.Equal(3,match.Decisions.Select(d=>d.Snapshot.Decision.PlayerId).Distinct().Count());
+            var trackedIds = match.Players.Where(p => p.TeamId == "leeds").Select(p => p.Id).ToHashSet();
+            Assert.Equal(3, match.Decisions.Select(d => d.Snapshot.Decision.PlayerId).Where(trackedIds.Contains).Distinct().Count());
             foreach(var d in match.Decisions) Assert.Contains(match.Events,e=>e.EventId==d.Snapshot.EventId && e.MatchId==d.Snapshot.MatchId);
             Assert.IsType<OkObjectResult>(new MatchesController(catalogue).Decisions(match.Id));
         }

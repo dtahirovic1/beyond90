@@ -53,7 +53,7 @@ public sealed class FoundryInsightProvider(HttpClient httpClient, string endpoin
                 A higher/lower completion rate in a tiny sample is a review signal, not proof of team ability. Do not invent professional benchmarks.
                 Goals divided by shots is conversion, NOT shooting accuracy; shots on target are not supplied.
                 Avoid 'perfect', 'strong defensive performance' or 'significant issue' from one or two actions. State sample counts neutrally.
-                Coach reports concern the tracked Leeds players, not all eleven players. Player reports concern the named individual.
+                Coach reports concern the tracked players in the selected club, not all eleven players. Player reports concern the named individual.
                 Never infer whole-team defensive organisation, pressing quality, possession share, xG or per-90 performance from these counts.
                 Use per-match comparisons only when supplied and distinguish raw counts from rates. Match results do not prove individual quality.
                 Recommend one specific training priority connected to the observed pattern; frame causal explanations as hypotheses.

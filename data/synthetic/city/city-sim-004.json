@@ -19,20 +19,92 @@
     {
       "id": "mci-15",
       "teamId": "city",
-      "name": "Tarik Muharemovic",
-      "position": "Centre-back"
+      "name": "Marc Guéhi",
+      "position": "Centre-back",
+      "overallRating": 82,
+      "potential": 86,
+      "weakFoot": 3,
+      "age": 26,
+      "pace": 76,
+      "acceleration": 73,
+      "sprintSpeed": 79,
+      "strength": 85,
+      "stamina": 82,
+      "shooting": 40,
+      "finishing": 35,
+      "passing": 76,
+      "vision": 68,
+      "dribbling": 66,
+      "ballControl": 74,
+      "defending": 86,
+      "interceptions": 85,
+      "composure": 82,
+      "minutesPlayed": 2680,
+      "goalsScored": 2,
+      "assists": 1,
+      "expectedGoals": 1.9,
+      "expectedAssists": 1.2,
+      "dominantFoot": "Right"
     },
     {
       "id": "mci-10",
       "teamId": "city",
       "name": "Rayan Cherki",
-      "position": "Attacking midfielder"
+      "position": "Attacking midfielder",
+      "overallRating": 83,
+      "potential": 90,
+      "weakFoot": 5,
+      "age": 23,
+      "pace": 80,
+      "acceleration": 85,
+      "sprintSpeed": 76,
+      "strength": 62,
+      "stamina": 76,
+      "shooting": 78,
+      "finishing": 75,
+      "passing": 87,
+      "vision": 91,
+      "dribbling": 91,
+      "ballControl": 92,
+      "defending": 38,
+      "interceptions": 35,
+      "composure": 85,
+      "minutesPlayed": 2180,
+      "goalsScored": 8,
+      "assists": 12,
+      "expectedGoals": 7.4,
+      "expectedAssists": 10.6,
+      "dominantFoot": "Left"
     },
     {
       "id": "mci-9",
       "teamId": "city",
       "name": "Erling Haaland",
-      "position": "Striker"
+      "position": "Striker",
+      "overallRating": 91,
+      "potential": 94,
+      "weakFoot": 3,
+      "age": 26,
+      "pace": 89,
+      "acceleration": 83,
+      "sprintSpeed": 94,
+      "strength": 94,
+      "stamina": 87,
+      "shooting": 94,
+      "finishing": 96,
+      "passing": 70,
+      "vision": 72,
+      "dribbling": 81,
+      "ballControl": 84,
+      "defending": 45,
+      "interceptions": 40,
+      "composure": 93,
+      "minutesPlayed": 2740,
+      "goalsScored": 29,
+      "assists": 6,
+      "expectedGoals": 26.8,
+      "expectedAssists": 4.9,
+      "dominantFoot": "Left"
     },
     {
       "id": "tot-4",
@@ -132,10 +204,10 @@
       "second": 45,
       "teamId": "tottenham",
       "playerId": "tot-9",
-      "type": "Pressure",
+      "type": "Pass",
       "x": 70,
       "y": 60,
-      "outcome": null,
+      "outcome": "Completed",
       "underPressure": true
     },
     {
@@ -1724,9 +1796,303 @@
         ]
       },
       "recordedOutcome": "Goal"
+    },
+    {
+      "sceneId": "city-sim-004-tot-7",
+      "matchId": "city-sim-004",
+      "eventId": "city-sim-004-evt-002",
+      "matchContext": {
+        "minute": 2,
+        "second": 30,
+        "score": {
+          "city": 0,
+          "tottenham": 0
+        },
+        "phase": "synthetic_action",
+        "possessionId": null
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "city": "left_to_right",
+          "tottenham": "right_to_left"
+        }
+      },
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 60,
+          "y": 45
+        },
+        "players": [
+          {
+            "id": "mci-10",
+            "teamId": "city",
+            "x": 45,
+            "y": 55,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "mci-15",
+            "teamId": "city",
+            "x": 32,
+            "y": 40,
+            "role": "Centre-back"
+          },
+          {
+            "id": "mci-9",
+            "teamId": "city",
+            "x": 60,
+            "y": 48,
+            "role": "Striker"
+          },
+          {
+            "id": "tot-4",
+            "teamId": "tottenham",
+            "x": 52,
+            "y": 52,
+            "role": "Centre-back"
+          },
+          {
+            "id": "tot-7",
+            "teamId": "tottenham",
+            "x": 60,
+            "y": 45,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "tot-9",
+            "teamId": "tottenham",
+            "x": 70,
+            "y": 58,
+            "role": "Striker"
+          }
+        ],
+        "bodySetup": "right_foot",
+        "ballHeight": "ground"
+      },
+      "decision": {
+        "playerId": "tot-7",
+        "selectedOptionId": "pass-mci-15",
+        "bodyPartUsed": "right_foot",
+        "options": [
+          {
+            "id": "pass-mci-15",
+            "type": "pass",
+            "receiverId": "tot-4",
+            "bodyPart": "right_foot"
+          },
+          {
+            "id": "pass-mci-9",
+            "type": "pass",
+            "receiverId": "tot-9",
+            "bodyPart": "right_foot"
+          },
+          {
+            "id": "carry",
+            "type": "dribble",
+            "bodyPart": "right_foot"
+          }
+        ]
+      },
+      "recordedOutcome": "Completed"
+    },
+    {
+      "sceneId": "city-sim-004-tot-4",
+      "matchId": "city-sim-004",
+      "eventId": "city-sim-004-evt-008",
+      "matchContext": {
+        "minute": 8,
+        "second": 30,
+        "score": {
+          "city": 0,
+          "tottenham": 0
+        },
+        "phase": "synthetic_action",
+        "possessionId": null
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "city": "left_to_right",
+          "tottenham": "right_to_left"
+        }
+      },
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 25,
+          "y": 50
+        },
+        "players": [
+          {
+            "id": "mci-10",
+            "teamId": "city",
+            "x": 45,
+            "y": 55,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "mci-15",
+            "teamId": "city",
+            "x": 26,
+            "y": 51,
+            "role": "Centre-back"
+          },
+          {
+            "id": "mci-9",
+            "teamId": "city",
+            "x": 60,
+            "y": 48,
+            "role": "Striker"
+          },
+          {
+            "id": "tot-4",
+            "teamId": "tottenham",
+            "x": 25,
+            "y": 50,
+            "role": "Centre-back"
+          },
+          {
+            "id": "tot-7",
+            "teamId": "tottenham",
+            "x": 58,
+            "y": 42,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "tot-9",
+            "teamId": "tottenham",
+            "x": 70,
+            "y": 58,
+            "role": "Striker"
+          }
+        ],
+        "bodySetup": "right_foot",
+        "ballHeight": "ground"
+      },
+      "decision": {
+        "playerId": "tot-4",
+        "selectedOptionId": "tackle",
+        "bodyPartUsed": "right_foot",
+        "options": [
+          {
+            "id": "tackle",
+            "type": "tackle"
+          }
+        ]
+      },
+      "recordedOutcome": "Won"
+    },
+    {
+      "sceneId": "city-sim-004-tot-9",
+      "matchId": "city-sim-004",
+      "eventId": "city-sim-004-evt-006",
+      "matchContext": {
+        "minute": 6,
+        "second": 45,
+        "score": {
+          "city": 0,
+          "tottenham": 0
+        },
+        "phase": "synthetic_action",
+        "possessionId": null
+      },
+      "pitch": {
+        "coordinateUnits": "normalized_0_100",
+        "lengthMeters": 105,
+        "widthMeters": 68,
+        "attackDirection": {
+          "city": "left_to_right",
+          "tottenham": "right_to_left"
+        }
+      },
+      "preDecision": {
+        "secondsBeforeAction": 0,
+        "ball": {
+          "x": 70,
+          "y": 60
+        },
+        "players": [
+          {
+            "id": "mci-10",
+            "teamId": "city",
+            "x": 45,
+            "y": 55,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "mci-15",
+            "teamId": "city",
+            "x": 32,
+            "y": 40,
+            "role": "Centre-back"
+          },
+          {
+            "id": "mci-9",
+            "teamId": "city",
+            "x": 60,
+            "y": 48,
+            "role": "Striker"
+          },
+          {
+            "id": "tot-4",
+            "teamId": "tottenham",
+            "x": 52,
+            "y": 52,
+            "role": "Centre-back"
+          },
+          {
+            "id": "tot-7",
+            "teamId": "tottenham",
+            "x": 58,
+            "y": 42,
+            "role": "Attacking midfielder"
+          },
+          {
+            "id": "tot-9",
+            "teamId": "tottenham",
+            "x": 70,
+            "y": 60,
+            "role": "Striker"
+          }
+        ],
+        "bodySetup": "right_foot",
+        "ballHeight": "ground"
+      },
+      "decision": {
+        "playerId": "tot-9",
+        "selectedOptionId": "pass-mci-15",
+        "bodyPartUsed": "right_foot",
+        "options": [
+          {
+            "id": "pass-mci-15",
+            "type": "pass",
+            "receiverId": "tot-4",
+            "bodyPart": "right_foot"
+          },
+          {
+            "id": "pass-mci-9",
+            "type": "pass",
+            "receiverId": "tot-7",
+            "bodyPart": "right_foot"
+          },
+          {
+            "id": "carry",
+            "type": "dribble",
+            "bodyPart": "right_foot"
+          }
+        ]
+      },
+      "recordedOutcome": "Completed"
     }
   ],
-  "rosterSource": "User-selected demonstration squad",
+  "rosterSource": "User-selected demonstration squad; synthetic profile attributes, not verified scouting data.",
+  "rosterSourceUrl": "https://www.cityunited.com/",
   "goalLogComplete": true,
   "goals": [
     {
