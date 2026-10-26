@@ -1,5 +1,9 @@
 # Deploy Beyond90 on Render
 
+**Live demo:** https://beyond90-ffjd.onrender.com
+
+Deployed and verified on 26 October 2026: homepage, health endpoint, both club squads and reports, all eight fixtures, and City decision scenes. The initial deployment leaves Azure AI disabled until the environment variables below are supplied.
+
 The root Dockerfile builds React and publishes the .NET 10 API into one service. Both the UI and `/api` use the same HTTPS origin. Match fixtures are bundled; no database or persistent disk is required.
 
 ## Create the service

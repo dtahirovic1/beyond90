@@ -2,6 +2,8 @@
 
 **The Game Doesn't End at Full Time.**
 
+**[Live demo — Beyond90](https://beyond90-ffjd.onrender.com)** · Hosted on Render Free; the first visit after inactivity may take about a minute. Azure AI reviews require the server environment variables described below.
+
 ## Deploy on Render
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://dashboard.render.com/select-repo?type=blueprint&repo=https://github.com/dtahirovic1/beyond90)
