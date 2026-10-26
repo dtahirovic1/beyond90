@@ -11,6 +11,7 @@ public sealed class SyntheticMatchFixtureTests
     {
         var path = Path.Combine(AppContext.BaseDirectory, "match-demo.json");
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        options.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
         var first = JsonSerializer.Deserialize<DemoFixture>(File.ReadAllText(path), options)!;
         var second = JsonSerializer.Deserialize<DemoFixture>(File.ReadAllText(path), options)!;
         var match = new Match

@@ -23,6 +23,7 @@ public sealed class MatchStore
         catch (Exception ex)
         {
             Console.WriteLine($"Warning: skipping synthetic match fixture '{path}': {ex.Message}");
+            Console.WriteLine($"STACK: {ex.StackTrace}");
         }
     }
         if (matches.Count == 0) throw new InvalidDataException("No match scenarios available.");

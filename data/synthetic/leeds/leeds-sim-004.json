@@ -132,10 +132,10 @@
                        "second":  45,
                        "teamId":  "tottenham",
                        "playerId":  "tot-9",
-                       "type":  "Pressure",
+                        "type":  "Pass",
                        "x":  70,
                        "y":  60,
-                       "outcome":  null,
+                        "outcome":  "Completed",
                        "underPressure":  true
                    },
                    {
@@ -1786,8 +1786,8 @@
                                                                       {
                                                                           "id":  "tot-7",
                                                                           "teamId":  "tottenham",
-                                                                          "x":  58,
-                                                                          "y":  42,
+                                                                          "x":  60,
+                                                                          "y":  45,
                                                                           "role":  "Attacking midfielder"
                                                                       },
                                                                       {
@@ -1809,13 +1809,13 @@
                                                                    {
                                                                        "id":  "pass-lee-5",
                                                                        "type":  "pass",
-                                                                       "receiverId":  "lee-5",
+                                                                       "receiverId":  "tot-4",
                                                                        "bodyPart":  "right_foot"
                                                                    },
                                                                    {
                                                                        "id":  "pass-lee-9",
                                                                        "type":  "pass",
-                                                                       "receiverId":  "lee-9",
+                                                                       "receiverId":  "tot-9",
                                                                        "bodyPart":  "right_foot"
                                                                    },
                                                                    {
@@ -1881,8 +1881,8 @@
                                                                       {
                                                                           "id":  "tot-4",
                                                                           "teamId":  "tottenham",
-                                                                          "x":  52,
-                                                                          "y":  52,
+                                                                          "x":  25,
+                                                                          "y":  50,
                                                                           "role":  "Centre-back"
                                                                       },
                                                                       {
@@ -1905,27 +1905,14 @@
                                                   },
                                   "decision":  {
                                                    "playerId":  "tot-4",
-                                                   "selectedOptionId":  "pass-lee-5",
+                                                    "selectedOptionId":  "tackle",
                                                    "bodyPartUsed":  "right_foot",
-                                                   "options":  [
-                                                                   {
-                                                                       "id":  "pass-lee-5",
-                                                                       "type":  "pass",
-                                                                       "receiverId":  "lee-5",
-                                                                       "bodyPart":  "right_foot"
-                                                                   },
-                                                                   {
-                                                                       "id":  "pass-lee-9",
-                                                                       "type":  "pass",
-                                                                       "receiverId":  "lee-9",
-                                                                       "bodyPart":  "right_foot"
-                                                                   },
-                                                                   {
-                                                                       "id":  "carry",
-                                                                       "type":  "dribble",
-                                                                       "bodyPart":  "right_foot"
-                                                                   }
-                                                               ]
+                                                    "options":  [
+                                                                    {
+                                                                        "id":  "tackle",
+                                                                        "type":  "tackle"
+                                                                    }
+                                                                ]
                                                },
                                   "recordedOutcome":  "Won"
                               },
@@ -1998,7 +1985,7 @@
                                                                           "id":  "tot-9",
                                                                           "teamId":  "tottenham",
                                                                           "x":  70,
-                                                                          "y":  58,
+                                                                          "y":  60,
                                                                           "role":  "Striker"
                                                                       }
                                                                   ],
@@ -2013,13 +2000,13 @@
                                                                    {
                                                                        "id":  "pass-lee-5",
                                                                        "type":  "pass",
-                                                                       "receiverId":  "lee-5",
+                                                                       "receiverId":  "tot-4",
                                                                        "bodyPart":  "right_foot"
                                                                    },
                                                                    {
                                                                        "id":  "pass-lee-9",
                                                                        "type":  "pass",
-                                                                       "receiverId":  "lee-9",
+                                                                       "receiverId":  "tot-7",
                                                                        "bodyPart":  "right_foot"
                                                                    },
                                                                    {

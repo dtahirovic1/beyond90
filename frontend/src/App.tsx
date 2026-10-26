@@ -5,7 +5,36 @@ import { DecisionPitch, type DecisionAnalysis } from './DecisionPitch'
 import { squadNumber } from './jerseyNumber'
 
 type Audience = 'Player' | 'Coach'
-type Player = { id: string; teamId: string; name: string; position?: string }
+type Player = {
+  id: string;
+  teamId: string;
+  name: string;
+  position?: string;
+  dominantFoot?: string | null;
+  overallRating?: number | null;
+  potential?: number | null;
+  weakFoot?: number | null;
+  age?: number | null;
+  pace?: number | null;
+  acceleration?: number | null;
+  sprintSpeed?: number | null;
+  strength?: number | null;
+  stamina?: number | null;
+  shooting?: number | null;
+  finishing?: number | null;
+  passing?: number | null;
+  vision?: number | null;
+  dribbling?: number | null;
+  ballControl?: number | null;
+  defending?: number | null;
+  interceptions?: number | null;
+  composure?: number | null;
+  minutesPlayed?: number | null;
+  goalsScored?: number | null;
+  assists?: number | null;
+  expectedGoals?: number | null;
+  expectedAssists?: number | null;
+}
 type Result = { home:number; away:number }
 type Team = { id: string; name: string }
 type MatchSummary = { id: string; homeTeam: string; awayTeam: string; scenarioLabel: string; eventCount: number }
@@ -77,11 +106,12 @@ function Welcome({ players, loading, error, retry }: { players: Player[]; loadin
 }
 function PlayerPicker({ players }: { players: Player[] }) {
   return <><section className="overview-heading"><span className="eyebrow">PLAYER / LEEDS UNITED</span><h1>Choose your player.</h1><p>Start with a performance overview, then explore an individual match.</p></section>
-    <div className="player-picker">{players.map(p => <a className="player-card" href={`#player/${p.id}`} key={p.id}><div className="player-card-top"><span>{p.position}</span><b>#{squadNumber(p.id)}</b></div><PixelJersey team={p.teamId} name={p.name} number={squadNumber(p.id)} /><h2>{p.name}</h2><div className="player-card-bottom"><span>View player overview</span><span>↗</span></div></a>)}</div></>
+    <div className="player-picker">{players.map(p => <a className="player-card" href={`#player/${p.id}`} key={p.id}><div className="player-card-top"><span>{p.position}</span><b>#{squadNumber(p.id)}</b><span>{p.overallRating !== null ? `OVR ${p.overallRating}` : '—'}</span></div><PixelJersey team={p.teamId} name={p.name} number={squadNumber(p.id)} /><h2>{p.name}</h2><div className="player-card-bottom"><span>View player overview</span><span>↗</span></div></a>)}</div></>
 }
 function Overview({ player, audience, players }: { player?: Player; audience: Audience; players: Player[] }) {
   return <><section className="overview-hero"><div><span className="eyebrow">{player ? 'PLAYER OVERVIEW' : 'COACH / CLUB OVERVIEW'} · LEEDS UNITED</span><h1>{player ? player.name : 'Leeds United'}</h1><p>{player ? `${player.position} · #${squadNumber(player.id)} · 2026/27` : 'Performance across the available match scenarios'}</p></div>
     {player ? <PixelJersey team="leeds" name={player.name} number={squadNumber(player.id)} /> : <div className="club-hero-shirts">{players.map(p => <PixelJersey key={p.id} team="leeds" name={p.name} number={squadNumber(p.id)} />)}</div>}</section>
+    {player && <PlayerProfile player={player} />}
     <Performance key={player?.id ?? 'club'} player={player} audience={audience} />
     {!player && <section className="tracked-section"><div className="section-title"><h2>Tracked players</h2><span>3 individual profiles</span></div><div className="tracked-grid">{players.map(p => <a href={`#player/${p.id}`} key={p.id}><PixelJersey team="leeds" name={p.name} number={squadNumber(p.id)} /><div><strong>{p.name}</strong><small>{p.position}</small></div><span>↗</span></a>)}</div></section>}
   </>
@@ -101,6 +131,44 @@ function Performance({ player, audience, matchId }: { player?: Player; audience:
   </>
 }
 function Stat({ label, value, detail }: { label: string; value: string | number; detail: string }) { return <div className="stat-tile"><span>{label}</span><strong>{value}</strong><small>{detail}</small></div> }
+function PlayerProfile({ player }: { player: Player }) {
+  const attrs = [
+    { group: 'Ocjene', items: [
+      { label: 'Ukupna ocjena', value: player.overallRating, key: 'overallRating' },
+      { label: 'Potencijal', value: player.potential, key: 'potential' },
+      { label: 'Slaba noga (1-5)', value: player.weakFoot, key: 'weakFoot' },
+    ]},
+    { group: 'Fizika', items: [
+      { label: 'Starost', value: player.age, key: 'age' },
+      { label: 'Brzina (Pace)', value: player.pace, key: 'pace' },
+      { label: 'Akceleracija', value: player.acceleration, key: 'acceleration' },
+      { label: 'Brzina sprinta', value: player.sprintSpeed, key: 'sprintSpeed' },
+      { label: 'Snaga', value: player.strength, key: 'strength' },
+      { label: 'Izdržljivost', value: player.stamina, key: 'stamina' },
+    ]},
+    { group: 'Tehnika', items: [
+      { label: 'Šutiranje', value: player.shooting, key: 'shooting' },
+      { label: 'Finishing', value: player.finishing, key: 'finishing' },
+      { label: 'Dodavanje', value: player.passing, key: 'passing' },
+      { label: 'Vid ikore (Vision)', value: player.vision, key: 'vision' },
+      { label: 'Drischenje lopte', value: player.dribbling, key: 'dribbling' },
+      { label: 'Kontrola lopte', value: player.ballControl, key: 'ballControl' },
+      { label: 'Odbrana', value: player.defending, key: 'defending' },
+      { label: 'Presijecanje', value: player.interceptions, key: 'interceptions' },
+      { label: 'Smirenost', value: player.composure, key: 'composure' },
+    ]},
+    { group: 'Sezona', items: [
+      { label: 'Minuta', value: player.minutesPlayed, key: 'minutesPlayed' },
+      { label: 'Golovi', value: player.goalsScored, key: 'goalsScored' },
+      { label: 'Asistencije', value: player.assists, key: 'assists' },
+      { label: 'xG', value: player.expectedGoals, key: 'expectedGoals' },
+      { label: 'xA', value: player.expectedAssists, key: 'expectedAssists' },
+    ]},
+  ]
+  return <section className="player-profile"><div className="section-title"><h2>Atributi igrača</h2><span>Sintetski podaci za AI analizu</span></div>
+    <div className="profile-grid">{attrs.map(group => <div key={group.group} className="attribute-group"><h3>{group.group}</h3><div className="attribute-list">{group.items.map(item => <div key={item.key} className="attribute-row"><span>{item.label}</span><strong>{item.value !== null ? item.value : '—'}</strong></div>)}</div></div>)}</div>
+    <div className="profile-footer"><p>Vrijednosti su simulativne i namijenjene samo za Beyond90 demo analizu. Nije stvarna statistika igrača.</p></div></section>
+}
 function AiInsight({ endpoint, body, title, label }: { endpoint: string; body: object; title: string; label: string }) {
   const [insight, setInsight] = useState<Insight | null>(null)
   const [unavailable, setUnavailable] = useState(false)
