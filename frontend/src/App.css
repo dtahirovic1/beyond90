@@ -271,5 +271,22 @@
 .decision-rating > strong small { display:inline; font-size:16px; margin-left:4px; }
 .decision-rating > span { font-size:17px; font-weight:600; }
 .ai-unavailable { padding:14px 0; font-size:15px; color:#d2d8d2; }
+.decision-evidence { border:1px solid #46534c; border-radius:8px; padding:22px; margin:8px 0 18px; background:#1c2623; }
+.evidence-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex-wrap:wrap; }
+.decision-evidence h3 { font-size:19px; line-height:1.4; margin:8px 0 16px; }
+.risk-tag { border:1px solid #87968c; border-radius:4px; padding:7px 10px; font-size:12px; font-weight:700; }
+.risk-high { color:#ffc79b; border-color:#bd8961; }.risk-medium { color:#ede0a8; }.risk-low { color:#d2ed83; }
+.evidence-metrics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.evidence-metrics > div { padding:14px; border:1px solid #3d4b43; border-radius:5px; }
+.evidence-metrics span,.evidence-metrics small { display:block; color:#bbc7bf; font-size:12px; line-height:1.5; }
+.evidence-metrics strong { display:block; font-size:22px; margin:9px 0; font-variant-numeric:tabular-nums; }
+.spatial-conclusion { font-size:14px; line-height:1.65; margin:14px 0; }
+.evidence-toggle { display:block; font:inherit; font-size:13px; font-weight:600; line-height:1.5; color:#d2ed83; background:transparent; padding:9px 12px; border:1px solid #8a9b69; border-radius:4px; cursor:pointer; margin:12px 0; }
+.evidence-toggle:focus-visible { outline:2px solid #d2ed83; outline-offset:4px; }.evidence-toggle[aria-pressed=true] { background:#34402c; }
+.evidence-limit { display:block; font-size:12px; line-height:1.65; color:#b4c1b8; }
+.execution-context { border-top:1px solid #46534c; margin-top:22px; padding-top:22px; }
+.execution-attributes { list-style:none; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; }
+.execution-attributes li { background:#26322c; padding:13px; border-radius:4px; }.execution-attributes li > div { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; font-size:13px; }.execution-attributes span { color:#d2ed83; }.execution-attributes p { font-size:12px; color:#c2ccc5; line-height:1.6; margin:8px 0 0; }.foot-context { font-size:13px; line-height:1.6; margin:14px 0 8px; }
+@media(max-width:600px) { .decision-evidence { padding:16px; }.evidence-metrics { grid-template-columns:1fr; }.evidence-metrics > div { display:grid; grid-template-columns:1fr auto; gap:4px 12px; }.evidence-metrics strong { margin:0; }.evidence-metrics small { grid-column:1/-1; } }
 .team-selection{padding:64px 0 72px;max-width:940px;margin:auto}.team-selection h1{font-size:clamp(44px,6vw,76px);line-height:1.04;letter-spacing:-3px;margin:24px 0}.team-selection h1 em{color:var(--cyan);font-style:normal}.team-selection>p{color:#acb8b9;line-height:1.7}.team-choices{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px}.team-choice{display:flex;flex-direction:column;align-items:center;padding:30px;border:1px solid #465150;border-radius:10px;background:#20272a;text-decoration:none;color:var(--ink);transition:transform .2s,border-color .2s}.team-choice:hover{transform:translateY(-5px);border-color:#e9bd38}.city-choice:hover{border-color:#87c8ec}.team-choice:focus-visible{outline:3px solid var(--cyan);outline-offset:5px}.pixel-crest{width:150px;height:170px;margin:28px 0 16px;image-rendering:pixelated;filter:drop-shadow(0 8px 0 #0003)}.team-choice h2{font-size:clamp(20px,3vw,30px);letter-spacing:-.8px;text-align:center}.team-choice-action{align-self:stretch;border-top:1px solid #465150;padding-top:20px;margin-top:14px;display:flex;justify-content:space-between;font-size:13px;color:#d8e6bd}.city-choice{background:linear-gradient(145deg,#213440,#1c252a)}.city-color{background:#87c8ec}.city-poster{border-color:#52829d}.city-poster .poster-title h2{font-size:clamp(28px,3.4vw,48px)}.edition-tag{color:inherit;text-decoration:none}
 @media(max-width:600px){.team-selection{padding:35px 0}.team-choices{grid-template-columns:1fr;gap:18px}.team-choice{padding:24px}.pixel-crest{width:120px;height:136px;margin:20px 0 10px}}

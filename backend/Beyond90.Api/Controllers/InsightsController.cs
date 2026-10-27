@@ -31,7 +31,7 @@ public sealed class InsightsController(MatchStore catalogue, IInsightProvider pr
         if(request.OptionId is not null && (snapshot is null || !snapshot.Decision.Options.Any(o=>o.Id==request.OptionId)))
             return BadRequest(new {error="Select an option belonging to this event."});
         var option=snapshot?.Decision.Options.Single(o=>o.Id==(request.OptionId??snapshot.Decision.SelectedOptionId));
-        var assessment=snapshot is not null && option is not null ? DecisionOptionCalculator.Calculate(snapshot,option.Id) : null;
+        var assessment=snapshot is not null && option is not null ? ExecutionProfiles.Attach(DecisionOptionCalculator.Calculate(snapshot,option.Id), store.Players) : null;
         var hypothetical=option is not null && option.Id!=snapshot!.Decision.SelectedOptionId;
         var optionName=option?.Type switch {
             "pass" => "Pass to "+store.Players.First(p=>p.Id==option.ReceiverId).Name,
@@ -88,7 +88,7 @@ public sealed class InsightsController(MatchStore catalogue, IInsightProvider pr
             return UnprocessableEntity(new { errors = new[] { "Insight evidence does not match the verified metrics." } });
         if(!validation.IsValid) return UnprocessableEntity(new { errors = validation.Errors });
         insight.DecisionReview=assessment is null ? null : new {optionId=option?.Id,optionName,isHypothetical=hypothetical,
-            rating=assessment?.Verdict?.Rating,ratingLabel=assessment?.Verdict?.RatingLabel??"Not enough data to rate",
+            label=assessment.Verdict?.Label, explanation=assessment.Verdict?.Explanation,
             confidence=assessment?.Verdict?.Confidence??"Limited",audience=request.Audience.ToString()};
         return Ok(insight);
     }

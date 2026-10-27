@@ -63,14 +63,20 @@ public sealed class FoundryInsightProvider(HttpClient httpClient, string endpoin
                 Return JSON with only a text field, using four short labelled paragraphs: Assessment, Strength, Trade-off, Coaching point.
                 EXCEPTION: if decisionContexts is empty, give only a two-sentence event summary. Describe recorded facts and say other player positions are unavailable.
                 In that case do not grade the choice, invent alternatives or prescribe a spatial coaching correction.
-                Analyse decisionFocus.optionId when present. The verdict and rating in decisionContexts evaluate THIS option.
+                Analyse decisionFocus.optionId when present. The verdict in decisionContexts evaluates THIS option.
                 The snapshot and selectedEvents preserve the actual recorded action; they are historical context, not the analysis target.
                 If decisionFocus.isHypothetical is true, describe what the player COULD do, never what they did.
                 The alternative has no recorded outcome: never transfer the original pass completion, shot result or body part to it.
                 Use decisionFocus.bodyPart for the evaluated technique. Identify the selected alternative by name in your first sentence.
-                The UI shows the backend rating: do not invent or recalculate a numeric rating.
-                Interpret verdict.rating and its components consistently: risk control, attacking value and selection versus available options.
-                If the rating is null, say that this action cannot be reliably rated; do not force a good/bad verdict.
+                Never give numeric decision grades, scores out of ten or success percentages.
+                Explain supplied qualitative riskLevel and measured geometry. Unknown risk means insufficient context, never safety.
+                Comparisons use uncalibrated rules and only visible options; never call an option objectively optimal.
+                Use the evaluated option's executionProfile separately from spatial evidence: name relevant supplied attributes and explain their relevance.
+                Attribute values are synthetic 0-100 profile ratings, not percentages, measurements or proof of successful execution.
+                Null attributes are unavailable. Do not infer them from player fame, position, overall or potential.
+                Follow executionProfile.footContext for the selected option, never transfer the played action's foot to alternatives.
+                Profiles do not change the spatial comparison. A strong profile cannot make a blocked corridor safe.
+                When verdict.label is Insufficient context, describe the limitation instead of forcing a good/bad verdict.
                 Explain what was gained and sacrificed, using 2-3 concrete facts from the scene and pre-action score/minute.
                 Name the better option and receiver when supplied, and explain why. Do not claim an alternative was played.
                 Technique: use preDecision.bodySetup, ballHeight, each option.bodyPart and techniqueNote only when present.

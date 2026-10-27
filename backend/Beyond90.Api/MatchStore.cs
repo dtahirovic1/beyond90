@@ -77,7 +77,7 @@ public sealed class MatchStore
         return new MatchStore(demo);
     }
 
-    public IReadOnlyList<DecisionAnalysis> Decisions => DecisionSnapshots.Select(DecisionOptionCalculator.Calculate).ToArray();
+    public IReadOnlyList<DecisionAnalysis> Decisions => DecisionSnapshots.Select(s => ExecutionProfiles.Attach(DecisionOptionCalculator.Calculate(s), Players)).ToArray();
     public string Id => _demo.MatchId;
     public IReadOnlyList<MatchTeam> Teams => _demo.Teams;
     public IReadOnlyList<MatchPlayer> Players => _demo.Players;

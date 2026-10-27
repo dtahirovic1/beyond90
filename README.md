@@ -15,7 +15,8 @@ All player ratings, season totals, match events and results in this demo are **s
 - **Coach view:** club reports, tracked-player profiles and comparisons across match scenarios.
 - **Attribute analysis:** horizontal skill bars and an eight-axis radar with an optional comparison against the tracked squad average. Exact radar values are available in a table; missing values remain unavailable instead of becoming zero.
 - **Match review:** recorded actions, outcomes, pressure, key decisions and partial player-position diagrams.
-- **Decision comparison:** inspect a played action and the available passing, shooting, carrying or tackling options where a snapshot supplies them. Geometric measurements and heuristic ratings explain the visible situation.
+- **Decision comparison:** inspect a played action and the available passing, shooting, carrying or tackling options where a snapshot supplies them. Qualitative risk, measured progression, defender distances and a pitch highlight explain the visible situation. No numerical decision grades are shown.
+- **Execution context:** each option shows relevant synthetic attributes (passing/vision, shooting/finishing/composure, dribbling/ball control/acceleration, or defending/strength) and available foot context. These inform the explanation without changing spatial measurements or predicting success. Heading ability is unavailable rather than inferred from finishing.
 - **Azure AI reviews:** generate player or coaching summaries, and analyse the selected played action or hypothetical alternative.
 - **Responsive interface:** the same player and match flows work on desktop and mobile.
 
@@ -140,7 +141,7 @@ Tests cover event validation, analytics, decision geometry, AI evidence handling
 ## Scope and limitations
 
 - Player attributes and season totals are supplied synthetic profiles; match metrics are calculated from synthetic recorded events.
-- Decision diagrams show partial action-time positions. Option paths illustrate alternatives rather than replaying observed movement. Heuristic ratings are not calibrated success probabilities or expert scouting grades.
+- Decision diagrams show partial action-time positions. Option paths illustrate alternatives rather than replaying observed movement. Qualitative risk and option comparisons use uncalibrated rules, not success probabilities or expert scouting grades. Internal comparison weights are not presented as player grades.
 - AI receives selected-event context, the available decision snapshot and option assessment, or backend-calculated report metrics. It does not watch match footage or reconstruct unseen positions.
 - Generated explanations can contain unsupported interpretation even when the response passes evidence checks. Earlier evaluations and limitations are recorded in the [evaluation report](docs/evaluations/2026-10-23-gpt-4.1-mini.md); see the [evaluation tool](tools/Beyond90.Evaluation/README.md) for repeatable checks.
 - Club emblems and jerseys are hand-drawn pixel-style SVG illustrations. No player photographs or Premier League match footage are bundled.

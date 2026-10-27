@@ -1,4 +1,5 @@
 using Beyond90.Domain;
+using System.Text.Json.Serialization;
 namespace Beyond90.Analytics;
 
 // Geometric descriptors of a partial static scene. These are not success probabilities.
@@ -7,20 +8,19 @@ public sealed record OptionAssessment(string OptionId, string Type, string? Rece
     decimal? SpaceAheadMeters, decimal? GoalOpeningDegrees, string Corridor, string Reason)
 {
     public decimal? ProgressionMeters { get; init; }
-    public decimal? Benefit { get; init; }
-    public decimal? Risk { get; init; }
-    public decimal? ComparativeValue { get; init; }
-    public decimal? SetupRiskAdjustment { get; init; }
+    [JsonIgnore] public decimal? Benefit { get; init; }
+    [JsonIgnore] public decimal? Risk { get; init; }
+    [JsonIgnore] public decimal? ComparativeValue { get; init; }
+    [JsonIgnore] public decimal? SetupRiskAdjustment { get; init; }
+    public string RiskLevel => Risk is null ? "Unknown" : Risk >= 55 ? "High" : Risk >= 30 ? "Medium" : "Low";
+    public ExecutionProfile? ExecutionProfile { get; init; }
+    public string Comparison { get; init; } = "Insufficient context to compare this option.";
     public string TechniqueNote { get; init; } = "Technique context unavailable.";
 }
-public sealed record RatingComponents(decimal RiskControl, decimal AttackingValue, decimal OptionSelection);
 public sealed record DecisionVerdict(string Label, string? PreferredOptionId, string Explanation, string MatchSituation)
 {
-    public decimal? Rating { get; init; }
-    public string RatingLabel { get; init; } = "Not enough data to rate";
     public string Confidence { get; init; } = "Limited";
-    public RatingComponents? Components { get; init; }
-    public string RatingMethod { get; init; } = "Heuristic v1; not calibrated against expert ratings.";
+    public string RatingMethod { get; init; } = "Rule-based comparison of visible options; not an expert grade or success probability.";
 }
 public sealed record DecisionAnalysis(DecisionSnapshot Snapshot, IReadOnlyList<OptionAssessment> Options,
     int VisiblePlayers, int VisibleOpponents, string Coverage)
@@ -128,21 +128,19 @@ public static class DecisionOptionCalculator
         var sufficient=chosen.ComparativeValue.HasValue && ranked.Length>=2;
         var best=ranked.FirstOrDefault();
         var gap=sufficient ? best!.ComparativeValue!.Value-chosen.ComparativeValue!.Value : 0;
-        RatingComponents? components=sufficient ? new(
-            Math.Round(Math.Clamp(10-chosen.Risk!.Value*riskWeight/10,0,10),1),
-            Math.Round(Math.Clamp(chosen.Benefit!.Value/8,0,10),1),
-            Math.Round(Math.Clamp(10-gap/8,0,10),1)) : null;
-        decimal? rating=components is null ? null : Math.Round(Math.Clamp(.35m*components.RiskControl+.25m*components.AttackingValue+.4m*components.OptionSelection,1,9.5m),1);
         var label=!sufficient ? "Insufficient context" : gap>=15 ? "Better visible alternative" : chosen.Risk>=55 ? "High-risk choice" : "Reasonable choice";
         var explanation=!sufficient ? "At least two assessable options are needed for a comparative verdict. The recorded outcome alone cannot establish decision quality." :
             $"Evaluated option: {chosen.Corridor.ToLowerInvariant()} corridor" +
             (chosen.Type=="shot" ? $", {chosen.DistanceMeters} m from goal and {chosen.GoalOpeningDegrees}° goal opening." : $", {chosen.ProgressionMeters} m forward progress.") +
             (gap>=15 ? " Another supplied option offers a better balance of progression, space and visible risk." : " No supplied option has a clearly stronger balance of benefit and risk.") +
             " This is a provisional comparison of visible options, not a proven optimal decision.";
+        options = options.Select(o => o with { Comparison = !o.ComparativeValue.HasValue || ranked.Length < 2
+            ? "Insufficient context to compare this option."
+            : best!.ComparativeValue!.Value - o.ComparativeValue.Value >= 15
+                ? "Another visible option offers a more favourable spatial trade-off under these rules."
+                : "Among the more favourable visible options under these rules; no clear advantage established." }).ToArray();
         return new(snapshot,options,snapshot.PreDecision.Players.Count,opponents.Length,
             "Synthetic partial snapshot. Unseen players, offside, movement and ball speed remain unknown. Comparison scores are uncalibrated rules, not success probabilities. The recorded outcome does not affect the verdict.")
-            { Verdict=new(label,sufficient && gap>=15 ? best!.OptionId : null,explanation,situation) {
-                Rating=rating,Components=components,RatingLabel=rating is null ? "Not enough data to rate" : rating>=8 ? "Strong choice" : rating>=7 ? "Good choice" : rating>=5 ? "Mixed choice" : "Poor choice"
-            } };
+            { Verdict=new(label,sufficient && gap>=15 ? best!.OptionId : null,explanation,situation) };
     }
 }
